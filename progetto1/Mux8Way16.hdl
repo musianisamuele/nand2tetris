@@ -1,0 +1,51 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux8Way16.hdl
+
+/**
+ * 8-way 16-bit multiplexor:
+ * out = a if sel == 000
+ *       b if sel == 001
+ *       etc.
+ *       h if sel == 111
+ */
+
+CHIP Mux8Way16 {
+    IN a[16], b[16], c[16], d[16],
+       e[16], f[16], g[16], h[16],
+       sel[3];
+    OUT out[16];
+
+    PARTS:
+    Not(in=sel[0], out=notSel0);
+    Not(in=sel[1], out=notSel1);
+    Not(in=sel[2], out=notSel2);
+
+    And16(a[0]=notSel2, a[1]=notSel2, a[2]=notSel2, a[3]=notSel2, a[4]=sel[2], a[5]=sel[2], a[6]=sel[2], a[7]=sel[2],
+   	  b[0]=notSel1,  b[1]=notSel1,  b[2]=sel[1],  b[3]=sel[1], b[4]=notSel1,  b[5]=notSel1,  b[6]=sel[1],  b[7]=sel[1],
+	  out[0]=fAnd0, out[1]=fAnd1, out[2]=fAnd2, out[3]=fAnd3, out[4]=fAnd4, out[5]=fAnd5, out[6]=fAnd6, out[7]=fAnd7);
+
+    And16(a[0]=fAnd0, a[1]=fAnd1, a[2]=fAnd2, a[3]=fAnd3, a[4]=fAnd4, a[5]=fAnd5, a[6]=fAnd6, a[7]=fAnd7, 
+    	  b[0]=notSel0, b[1]=sel[0], b[2]=notSel0, b[3]=sel[0], b[4]=notSel0, b[5]=sel[0], b[6]=notSel0, b[7]=sel[0],
+	  out[0]=and0, out[1]=and1, out[2]=and2, out[3]=and3, out[4]=and4, out[5]=and5, out[6]=and6, out[7]=and7);
+
+    And16(a=a, b[0]=and0, b[1]=and0, b[2]=and0, b[3]=and0, b[4]=and0, b[5]=and0, b[6]=and0, b[7]=and0, b[8]=and0, b[9]=and0, b[10]=and0, b[11]=and0, b[12]=and0, b[13]=and0, b[14]=and0, b[15]=and0, out=out0);
+    And16(a=b, b[0]=and1, b[1]=and1, b[2]=and1, b[3]=and1, b[4]=and1, b[5]=and1, b[6]=and1, b[7]=and1, b[8]=and1, b[9]=and1, b[10]=and1, b[11]=and1, b[12]=and1, b[13]=and1, b[14]=and1, b[15]=and1, out=out1);
+    And16(a=c, b[0]=and2, b[1]=and2, b[2]=and2, b[3]=and2, b[4]=and2, b[5]=and2, b[6]=and2, b[7]=and2, b[8]=and2, b[9]=and2, b[10]=and2, b[11]=and2, b[12]=and2, b[13]=and2, b[14]=and2, b[15]=and2, out=out2);
+    And16(a=d, b[0]=and3, b[1]=and3, b[2]=and3, b[3]=and3, b[4]=and3, b[5]=and3, b[6]=and3, b[7]=and3, b[8]=and3, b[9]=and3, b[10]=and3, b[11]=and3, b[12]=and3, b[13]=and3, b[14]=and3, b[15]=and3, out=out3);
+    And16(a=e, b[0]=and4, b[1]=and4, b[2]=and4, b[3]=and4, b[4]=and4, b[5]=and4, b[6]=and4, b[7]=and4, b[8]=and4, b[9]=and4, b[10]=and4, b[11]=and4, b[12]=and4, b[13]=and4, b[14]=and4, b[15]=and4, out=out4);
+    And16(a=f, b[0]=and5, b[1]=and5, b[2]=and5, b[3]=and5, b[4]=and5, b[5]=and5, b[6]=and5, b[7]=and5, b[8]=and5, b[9]=and5, b[10]=and5, b[11]=and5, b[12]=and5, b[13]=and5, b[14]=and5, b[15]=and5, out=out5);
+    And16(a=g, b[0]=and6, b[1]=and6, b[2]=and6, b[3]=and6, b[4]=and6, b[5]=and6, b[6]=and6, b[7]=and6, b[8]=and6, b[9]=and6, b[10]=and6, b[11]=and6, b[12]=and6, b[13]=and6, b[14]=and6, b[15]=and6, out=out6);
+    And16(a=h, b[0]=and7, b[1]=and7, b[2]=and7, b[3]=and7, b[4]=and7, b[5]=and7, b[6]=and7, b[7]=and7, b[8]=and7, b[9]=and7, b[10]=and7, b[11]=and7, b[12]=and7, b[13]=and7, b[14]=and7, b[15]=and7, out=out7);
+
+    Or16(a=out0, b=out1, out=or00);
+    Or16(a=out2, b=out3, out=or01);
+    Or16(a=out4, b=out5, out=or02);
+    Or16(a=out6, b=out7, out=or03);
+
+    Or16(a=or00, b=or01, out=or10);
+    Or16(a=or02, b=or03, out=or11);
+
+    Or16(a=or10, b=or11, out=out);
+}

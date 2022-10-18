@@ -1,0 +1,36 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux4Way16.hdl
+
+/**
+ * 4-way 16-bit multiplexor:
+ * out = a if sel == 00
+ *       b if sel == 01
+ *       c if sel == 10
+ *       d if sel == 11
+ */
+
+CHIP Mux4Way16 {
+    IN a[16], b[16], c[16], d[16], sel[2];
+    OUT out[16];
+
+    PARTS:
+    Not(in=sel[0], out=notSel0);
+    Not(in=sel[1], out=notSel1);
+
+    And(a=notSel1, b=notSel0, out=and0);
+    And(a=notSel1, b=sel[0], out=and1);
+    And(a=sel[1], b=notSel0, out=and2);
+    And(a=sel[1], b=sel[0], out=and3);
+
+    And16(a=a, b[0]=and0, b[1]=and0, b[2]=and0, b[3]=and0, b[4]=and0, b[5]=and0, b[6]=and0, b[7]=and0, b[8]=and0, b[9]=and0, b[10]=and0, b[11]=and0, b[12]=and0, b[13]=and0, b[14]=and0, b[15]=and0, out=out0);
+    And16(a=b, b[0]=and1, b[1]=and1, b[2]=and1, b[3]=and1, b[4]=and1, b[5]=and1, b[6]=and1, b[7]=and1, b[8]=and1, b[9]=and1, b[10]=and1, b[11]=and1, b[12]=and1, b[13]=and1, b[14]=and1, b[15]=and1, out=out1);
+    And16(a=c, b[0]=and2, b[1]=and2, b[2]=and2, b[3]=and2, b[4]=and2, b[5]=and2, b[6]=and2, b[7]=and2, b[8]=and2, b[9]=and2, b[10]=and2, b[11]=and2, b[12]=and2, b[13]=and2, b[14]=and2, b[15]=and2, out=out2);
+    And16(a=d, b[0]=and3, b[1]=and3, b[2]=and3, b[3]=and3, b[4]=and3, b[5]=and3, b[6]=and3, b[7]=and3, b[8]=and3, b[9]=and3, b[10]=and3, b[11]=and3, b[12]=and3, b[13]=and3, b[14]=and3, b[15]=and3, out=out3);
+
+    Or16(a=out0, b=out1, out=or0);
+    Or16(a=out2, b=out3, out=or1);
+
+    Or16(a=or0, b=or1, out=out);
+}
