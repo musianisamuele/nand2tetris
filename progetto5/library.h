@@ -1,4 +1,6 @@
+#include <stdio.h>
+#include <string.h>
 
-int pippo ();
 
-int castoro ();
+int traduci (FILE* fileI, FILE* fileO);
+
