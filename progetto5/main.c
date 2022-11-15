@@ -31,7 +31,7 @@ int main ()  {
 			printf ("ERRORE: Qualcosa è andato storto con il file di OUTPUT\n");
 		} else {
 
-			if (traduci (fileI, fileO) == 0) {
+			if (traduci_file (fileI, fileO) == 0) {
 				printf ("ERRORE duranta la traduzione del file\n");
 			}
 			
