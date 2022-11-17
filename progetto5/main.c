@@ -1,45 +1,55 @@
 // FILE MAIN
 #include "library.h"
 
-char pathI[] = "asm/Add.asm";
-char pathO[] = "hack/Add.hack";
 
-FILE* fileI;
-FILE* fileO;
+int main (int argc, char *argv[]) {
 
+	if (argc == 2) {
+		
+		char pathI[1000];
+		strcpy(pathI, argv[1]); //argv[0] è il nome del programma. Copio l'input nella stringa path
+		
+		FILE* fileI;
+		FILE* fileO;
+		
+		//Apro il file di INPUT
+		fileI = fopen (pathI, "r");
 
-int main ()  {
-	
-	// Prendo in input il path del file da tradurre
-	//char path[50];
-	//scanf ("%s", &path);		//DA DECOMMENTARE IN FUTURO!!
-	
-	//Apro il file di INPUT
-	fileI = fopen (pathI, "r");
+		//Se il file è aperto il puntatore è diverso da NULL
+		if (fileI != NULL) {
 
-	//Se il file non è aperto il puntatore è NULL
-	if (fileI == NULL) {
-		printf ("ERRORE: Impossibile aprire il file di input o file di input non esistente\n");
-		printf ("Controllare il path inserito (%s)", pathI);
-	
-	} else {
-		//Sono riuscito ad aprire il file :)
-	
-		fileO = fopen (pathO, "w");
+			char pathO[1000];
+			//Cambiare l'estenzione!!	
 
-		if (fileO == NULL) {
-			printf ("ERRORE: Qualcosa è andato storto con il file di OUTPUT\n");
-		} else {
+			fileO = fopen (pathO, "w");
 
-			if (traduci_file (fileI, fileO) == 0) {
-				printf ("ERRORE duranta la traduzione del file\n");
+			if (fileO == NULL) {
+				printf ("ERRORE: Qualcosa è andato storto con il file di OUTPUT\n");
+			} else {
+
+				if (traduci_file (fileI, fileO) == 0) {
+					printf ("ERRORE duranta la traduzione del file\n");
+				}
+				
 			}
+
 			
+			fclose (fileI); //Chiusura del FILE di input
+
+		} else {
+			
+			printf ("ERRORE: Impossibile aprire il file di input o file di input non esistente\n");
+			printf ("Controllare il path inserito (%s)", pathI);
+
 		}
 
-		
-		fclose (fileI); //Chiusura del FILE di input
+	} else if (argc > 1) {
+		printf ("Troppi argomenti inseriti!\n");
+	} else {
+		printf ("Non abbastanza argoneti\n");
 	}
+
+	
 
 	return(0);
 }
