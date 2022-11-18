@@ -19,6 +19,7 @@ int main (int argc, char *argv[]) {
 		if (fileI != NULL) {
 
 			char pathO[1000];
+			strcpy (pathO, "hack/test.hack");
 			//Cambiare l'estenzione!!	
 
 			fileO = fopen (pathO, "w");

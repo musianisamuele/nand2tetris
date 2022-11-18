@@ -3,22 +3,29 @@
 int traduci_file (FILE* fileI, FILE* fileO) {
 	int global_check = 1; //0 -> false, N\{0} -> True
 
-	int MAX_RIGA = 100;
+	int MAX_RIGA = 50;
 
-	char tmp[MAX_RIGA];
+	char I[MAX_RIGA];
 
 	while (!feof (fileI)) {		//Finché posso leggere -> feof(...) = True quando il file è finito
-		fgets (tmp, 100, fileI);
+		fgets (I, MAX_RIGA, fileI);
 
 		//printf ("LEN: %d\n", strlen(tmp));
 		//printf ("tmp: %s\n", tmp);
 
 		if (1) { //Dovrei controllare che la stringa non sia vuota
-			int instruction_type = detect_instruction_type (tmp);
+			int instruction_type = detect_instruction_type (I);
+
+			char O[17];
+			O[16] = '\0';
 
 			if (instruction_type == 0) {
-				//traduci_A_instruction (tmp);
+
+				traduci_A_instruction (I, O);
+				
 				printf ("A isntruction rilevata\n");
+				printf ("\t %s = %s\n", I, O);
+
 			} else if (instruction_type == 1) {
 				//traduci_C_instruction (tmp);
 				printf ("C isntruction rilevata\n");
@@ -31,7 +38,7 @@ int traduci_file (FILE* fileI, FILE* fileO) {
 				printf ("ERRORE: Qualcosa è andato storto durante la detection dell'instruction\n");
 			}
 
-			fprintf (fileO, "%s", tmp);
+			fprintf (fileO, "%s", I);
 		}
 	}
 
@@ -56,4 +63,42 @@ int detect_instruction_type (char I[]) {
 	return (return_value);
 }
 
+void traduci_A_instruction (char I[], char O[]) {
+	O[0] = '0'; //Essendo una A in. inizia sempre con uno zero
 
+	int len = strlen (I);
+
+	//traduco in numero da stringa:
+	int i = 1;
+	int n = 0;
+
+	while (I[i] != '\n' && I[i] != '\0' && I[i] != '\r') {
+		n = n * 10;
+		n = n + (int) I[i] - (int) '0';
+		i = i + 1;
+	}
+
+	dec_to_stringBin (n, O);
+
+}
+
+void dec_to_stringBin (int n, char O[]) {
+	int tmp = (1 << 14); //2^14;
+
+	int indice = 1;
+	
+	while (indice < 16) {
+		//printf ("\nindice: %d\nn: %d\ntmp: %d\nO[]: %s\n", indice, n, tmp, O);
+		
+		if (n >= tmp) {
+			n = n - tmp;
+			O[indice] = '1';
+		} else {
+			O[indice] = '0';
+		}
+
+		tmp = (tmp >> 1);
+		indice = indice + 1;
+	}
+	
+}
