@@ -14,3 +14,6 @@ library.o: library.c library.h
 
 clean:
 	@rm -f *.o
+
+deb:
+	@gcc library.h library.c main.c -g -o assembler
