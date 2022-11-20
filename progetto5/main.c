@@ -4,6 +4,7 @@
 
 int main (int argc, char *argv[]) {
 
+
 	if (argc == 2) {
 		
 		char pathI[1000];
@@ -19,8 +20,11 @@ int main (int argc, char *argv[]) {
 		if (fileI != NULL) {
 
 			char pathO[1000];
-			strcpy (pathO, "hack/test.hack");
-			//Cambiare l'estenzione!!	
+			
+			//Creo il path di output
+			strcpy (pathO, pathI);
+			pathO[ strlen(pathO) - 3] = '\0';
+			strcat (pathO, "hack");
 
 			fileO = fopen (pathO, "w");
 

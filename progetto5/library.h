@@ -24,9 +24,17 @@ int traduci_file (FILE* fileI, FILE* fileO);
 // -1 -> Errore
 int detect_instruction_type (char I[]);
 
+//Traduzione della A instruction contenuta in I e restituzione dell'output su O
 void traduci_A_instruction (char I[], char O[]);
+
+//Converte un numero decimale in una stringa binaria
 void dec_to_stringBin (int n, char O[]);
 
-void traduci_C_instruction (char I[], char O[]);
+//Traduzione della C instruction contenuta in I e restituzione dell'output su O
+void traduci_C_instruction (char I[], char O[], coppiaS* CONV);
 
-void genera_conversioni (coppiaS *COMP, coppiaS *DEST, coppiaS *JUMP);
+//Funzione che dati 4 puntatori ad array di coppiaS genere le tabelle di conversione
+coppiaS* genera_conversioni ();
+
+//Cerca la stringa f in s. Se la trova restituisce 1, altrimenti 0
+int is_in_string (char s[], char f[], int a, int b);
