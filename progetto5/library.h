@@ -2,17 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifndef PAIR_STRING
-#define PAIR_STRING
-
 struct pair_string {
 	char first[10];
 	char second[10];
 };
 
 typedef struct pair_string coppiaS;
-
-#endif
 
 #define MAX_LABEL 200
 
@@ -63,3 +58,7 @@ plista insert (plista h, char L[], int R);
 
 void print_lista (plista h);
 
+/* PREDEFINED */
+coppiaS* genera_conversioni();
+
+plista predefined_labels (plista h);

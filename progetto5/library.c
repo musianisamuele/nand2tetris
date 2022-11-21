@@ -1,22 +1,10 @@
 #include "library.h"
 
-#ifndef PAIR_STRING
-#define PAIR_STRING
-
-struct pair_string {
-	char first[10];
-	char second[10];
-};
-
-typedef struct pair_string coppiaS;
-
-#endif
-
 plista get_labels (plista h, FILE* fileI) {
 	int MAX_RIGA = 200;
 	char I[MAX_RIGA];
 
-	h = predefined_labels ( h);
+	h = predefined_labels (h);
 	
 	int riga = 0;
 
