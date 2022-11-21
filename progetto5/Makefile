@@ -3,8 +3,8 @@
 main=main
 out=assembler
 
-all: ${main}.o library.o list.o predefined.o
-	@gcc -o ${out} ${main}.o library.o list.o predefined.o library.h
+all: ${main}.o library.o list.o predefined.o string.o
+	@gcc -o ${out} ${main}.o library.o list.o predefined.o string.o library.h
 
 ${main}.o: ${main}.c library.h
 	@gcc -c ${main}.c
@@ -17,6 +17,9 @@ list.o: list.c library.h
 
 predefined.o: predefined.c library.h
 	@gcc -c predefined.c
+
+string.o: string.c library.h
+	@gcc -c string.c
 
 clean:
 	@rm -f *.o
