@@ -25,4 +25,4 @@ clean:
 	@rm -f *.o
 
 deb:
-	@gcc library.h library.c main.c -g -o assembler
+	@gcc library.h library.c list.c predefined.c string.c main.c -g -o assembler
