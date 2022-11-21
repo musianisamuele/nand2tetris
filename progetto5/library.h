@@ -30,7 +30,7 @@ int traduci_file (FILE* fileI, FILE* fileO);
 int detect_instruction_type (char I[]);
 
 //Traduzione della A instruction contenuta in I e restituzione dell'output su O
-plista traduci_A_instruction (char I[], char O[], plista LABELS, plista VARIABLES);
+plista traduci_A_instruction (char I[], char O[], plista LABELS, plista VARIABLES, int* var_counter);
 
 //Converte un numero decimale in una stringa binaria
 void dec_to_stringBin (int n, char O[]);

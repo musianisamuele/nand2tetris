@@ -19,7 +19,7 @@ plista get_labels (plista h, FILE* fileI) {
 			riga = riga + 1;
 	}
 
-	print_lista (h);
+	//print_lista (h);
 
 	return (h);
 }
@@ -38,13 +38,15 @@ int traduci_file (FILE* fileI, FILE* fileO) {
 	int MAX_RIGA = 200;
 	char I[MAX_RIGA];
 
+	int var_counter = 16;
+
+	coppiaS* CONV = genera_conversioni (); //Puntatore con tutte le conversioni
+	
 	while (fgets (I, MAX_RIGA - 1, fileI) != NULL) {		//Finché posso leggere
 		
-
 		//printf ("LEN: %d\n", strlen(tmp));
 		//printf ("tmp: %s\n", tmp);
 		
-		coppiaS* CONV = genera_conversioni (); //Puntatore con tutte le conversioni
 
 		if (1) { //Dovrei controllare che la stringa non sia vuota
 			int instruction_type = detect_instruction_type (I);
@@ -56,19 +58,18 @@ int traduci_file (FILE* fileI, FILE* fileO) {
 
 			if (instruction_type == 0) {
 
-				VARIABLES = traduci_A_instruction (I, O, LABELS, VARIABLES);
+				VARIABLES = traduci_A_instruction (I, O, LABELS, VARIABLES, &var_counter);
 				
 			} else if (instruction_type == 1) {
 				
 				traduci_C_instruction (I, O, CONV);
 
 			} else if (instruction_type == 2) {
-				printf ("Labels rilevata\n");
+				//printf ("Labels rilevata\n");
 			} else if (instruction_type == 3) {
-				//Qui non dovrei neanche stampare la riga...come faccio?
-				printf ("Commento rilevato\n");
+				//printf ("Commento rilevato\n");
 			} else {
-				printf ("ERRORE: Qualcosa è andato storto durante la detection dell'instruction\n");
+				//printf ("ERRORE: Qualcosa è andato storto durante la detection dell'instruction\n");
 			}
 			
 			if (O[0] != '2')
@@ -103,7 +104,7 @@ int detect_instruction_type (char I[]) {
 	return (return_value);
 }
 
-plista traduci_A_instruction (char I[], char O[], plista LABELS, plista VARIABLES) {
+plista traduci_A_instruction (char I[], char O[], plista LABELS, plista VARIABLES, int* var_counter) {
 	O[0] = '0'; //Essendo una A in. inizia sempre con uno zero
 
 	int len = strlen (I);
@@ -125,12 +126,39 @@ plista traduci_A_instruction (char I[], char O[], plista LABELS, plista VARIABLE
 			n = n + (int) I[i] - (int) '0';
 			i = i + 1;
 		}
-
-		dec_to_stringBin (n, O);
 	} else {
 		//Devo cercare nelle labels se trovo quella corrispondente, se no è una variabile e le devo risolvere
-		//get_val() GIÀ IMPLEMENTATA
+		int j = i;
+
+		char tmp[MAX_LABEL];
+		tmp[0] = '\0';
+
+		//Calcolo dove finisce la labels o la variabile
+		while (I[j] != ' ' && I[j] != '\t' && I[j] != '\r' && I[j] != '\n')
+			j = j + 1;
+
+		strcat (tmp, I); //Concatena l'istruzione con tmp
+		tmp[j] = '\0'; //Faccio in modo che la fine della stringa coincida con la fine della labels
+
+		for (int j = 0; j < strlen(I) - i; j++) //Tolgo tutti i caratteri prima della labels
+			tmp[j] = tmp[j + i];
+
+		//printf ("tmp: %s\n", tmp);
+
+		n = get_val(LABELS, tmp); //Controllo se la label è un JMP o è predefinita
+		
+		if (n == -1)
+			n = get_val(VARIABLES, tmp); //Controllo se l'ho già definita come variabile
+		
+		if (n == -1) {
+			n = *var_counter;
+			*var_counter = *var_counter + 1;
+
+			VARIABLES = insert (VARIABLES, tmp, n);
+		}
 	}
+		
+	dec_to_stringBin (n, O);
 
 	return (VARIABLES);
 }
@@ -154,11 +182,15 @@ void traduci_C_instruction (char I[], char O[], coppiaS* CONV) {
 	int i = 0;
 
 		//trovo la posizione dell'=
-		while (i < strlen (I)) {
+		int flag = 0;
+
+		while (i < strlen (I) && flag == 0) {
 			if (I[i] == '=')
 				lim_equal = i;
-			else if (I[i] == ';')
+			else if (I[i] == ';' || I[i] == '/') {
+				flag = 1;
 				lim_semicolon = i;
+			}
 			i++;
 		}
 		//lim_equal mi dice la posizione dell'=
