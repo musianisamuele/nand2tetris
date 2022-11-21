@@ -20,16 +20,16 @@ coppiaS* genera_conversioni () {
 		
 	//COMP
 	strcpy ((*p).first, "0"); strcpy ((*p).second, "0101010");		p++;
-	strcpy ((*p).first, "1"); strcpy ((*p).second, "0111111"); 	p++;
-	strcpy ((*p).first, "-1"); strcpy ((*p).second, "0111010");	p++;
+	strcpy ((*p).first, "1"); strcpy ((*p).second, "0111111"); 		p++;
+	strcpy ((*p).first, "-1"); strcpy ((*p).second, "0111010");		p++;
 	strcpy ((*p).first, "D"); strcpy ((*p).second, "0001100");		p++;
 	strcpy ((*p).first, "A"); strcpy ((*p).second, "0110000");		p++;
 	strcpy ((*p).first, "M"); strcpy ((*p).second, "1110000");		p++;
-	strcpy ((*p).first, "!D"); strcpy ((*p).second, "0001101");	p++;
-	strcpy ((*p).first, "!A"); strcpy ((*p).second, "0110001");	p++;
-	strcpy ((*p).first, "!M"); strcpy ((*p).second, "1110001");	p++;
-	strcpy ((*p).first, "-D"); strcpy ((*p).second, "0001111");	p++;
-	strcpy ((*p).first, "-A"); strcpy ((*p).second, "0110011");	p++;
+	strcpy ((*p).first, "!D"); strcpy ((*p).second, "0001101");		p++;
+	strcpy ((*p).first, "!A"); strcpy ((*p).second, "0110001");		p++;
+	strcpy ((*p).first, "!M"); strcpy ((*p).second, "1110001");		p++;
+	strcpy ((*p).first, "-D"); strcpy ((*p).second, "0001111");		p++;
+	strcpy ((*p).first, "-A"); strcpy ((*p).second, "0110011");		p++;
 	strcpy ((*p).first, "D+1"); strcpy ((*p).second, "0011111");	p++;
 	strcpy ((*p).first, "A+1"); strcpy ((*p).second, "0110111");	p++;
 	strcpy ((*p).first, "M+1"); strcpy ((*p).second, "1110111");	p++;
@@ -40,12 +40,12 @@ coppiaS* genera_conversioni () {
 	strcpy ((*p).first, "D-A"); strcpy ((*p).second, "0010011");	p++;
 	strcpy ((*p).first, "A-D"); strcpy ((*p).second, "0000111");	p++;
 	strcpy ((*p).first, "D&A"); strcpy ((*p).second, "0000000");	p++;
-	strcpy ((*p).first, "D|A"); strcpy ((*p).second, "0010101"); p++;
+	strcpy ((*p).first, "D|A"); strcpy ((*p).second, "0010101"); 	p++;
 	strcpy ((*p).first, "D+M"); strcpy ((*p).second, "1000010");	p++;
 	strcpy ((*p).first, "D-M"); strcpy ((*p).second, "1010011");	p++;
 	strcpy ((*p).first, "M-D"); strcpy ((*p).second, "1000111");	p++;
 	strcpy ((*p).first, "D&M"); strcpy ((*p).second, "1000000");	p++;
-	strcpy ((*p).first, "D|M"); strcpy ((*p).second, "1010101"); p++;
+	strcpy ((*p).first, "D|M"); strcpy ((*p).second, "1010101"); 	p++;
 
 	//DEST
 
@@ -72,13 +72,79 @@ coppiaS* genera_conversioni () {
 	return (head);
 }
 
+plista predefined_labels (plista h) {
+	char I[100];
+	
+	strcpy (I, "SP"); h = insert (h, I, 0);
+	strcpy (I, "LCL"); h = insert (h, I, 1);
+	strcpy (I, "ARG"); h = insert (h, I, 2);
+	strcpy (I, "THIS"); h = insert (h, I, 3);
+	strcpy (I, "THAT"); h = insert (h, I, 4);
+	strcpy (I, "SCREEN"); h = insert (h, I, 16384);
+	strcpy (I, "KDB"); h = insert (h, I, 24576);
 
+	for (int i = 0; i <= 9; i++) {
+		strcpy (I, "R");
+		char N[2]; N[0] = (char) i + '0'; N[1] = '\0';
+
+		strcat (I, N);
+		h = insert (h, I, i);	
+	}
+	
+	for (int i = 0; i <= 5; i++) {
+		strcpy (I, "R");
+		char N[3]; N[0] = '1'; N[1] = (char) i + '0'; N[2] = '\0';
+
+		strcat (I, N);
+		h = insert (h, I, i + 10);	
+	}
+
+	return (h);
+}
+
+plista get_labels (plista h, FILE* fileI) {
+	int MAX_RIGA = 200;
+	char I[MAX_RIGA];
+
+	h = predefined_labels ( h);
+	
+	int riga = 0;
+
+	while (fgets (I, MAX_RIGA - 1, fileI) != NULL) {		//Finché posso leggere
+		int instruction_type = detect_instruction_type (I);
+
+		if (instruction_type == 2) {
+			rimuovi_parentesi (I);
+
+			h = insert (h, I, riga);
+		} else if (instruction_type == 0 || instruction_type == 1)
+			riga = riga + 1;
+	}
+
+	print_lista (h);
+
+	return (h);
+}
+
+void rimuovi_parentesi (char I[]) {
+	for (int i = 0; i < strlen (I) - 1; i++) {
+		I[i] = I[i + 1];
+	}
+
+	I[ strlen (I) - 4] = '\0';
+}
 
 int traduci_file (FILE* fileI, FILE* fileO) {
 	int global_check = 1; //0 -> false, N\{0} -> True
 
-	int MAX_RIGA = 50;
+	plista LABELS, VARIABLES;
+	LABELS = NULL;
+	VARIABLES = NULL;
+	
+	LABELS = get_labels (LABELS, fileI);
+	rewind(fileI); //Ritorno a legegre dall'inzio del file
 
+	int MAX_RIGA = 200;
 	char I[MAX_RIGA];
 
 	while (fgets (I, MAX_RIGA - 1, fileI) != NULL) {		//Finché posso leggere
@@ -99,14 +165,14 @@ int traduci_file (FILE* fileI, FILE* fileO) {
 
 			if (instruction_type == 0) {
 
-				traduci_A_instruction (I, O);
+				VARIABLES = traduci_A_instruction (I, O, LABELS, VARIABLES);
 				
 			} else if (instruction_type == 1) {
 				
 				traduci_C_instruction (I, O, CONV);
 
 			} else if (instruction_type == 2) {
-				printf ("Labels rilevata");
+				printf ("Labels rilevata\n");
 			} else if (instruction_type == 3) {
 				//Qui non dovrei neanche stampare la riga...come faccio?
 				printf ("Commento rilevato\n");
@@ -124,39 +190,58 @@ int traduci_file (FILE* fileI, FILE* fileO) {
 
 // 0 -> A, 1 -> C, 2 -> Labels, 3 -> Commento, -1 -> Errore
 int detect_instruction_type (char I[]) {
-	char t = I[0];
 	int return_value = -1;
+	char t;
+	int i = 0;
 
-	if (t == '@') {
-		return_value = 0;
-	} else if (t == 'A' || t == 'M' || t == 'D' || t == '0') {
-		return_value = 1;
-	} else if (t == '(') {
-		return_value = 2;
-	} else if (t == '/') {
-		return_value = 3;
+	while (return_value == -1 && i < strlen (I)) {
+		t = I[i];
+
+		if (t == '@') {
+			return_value = 0;
+		} else if (t == 'A' || t == 'M' || t == 'D' || t == '0') {
+			return_value = 1;
+		} else if (t == '(') {
+			return_value = 2;
+		} else if (t == '/') {
+			return_value = 3;
+		}
+		i = i + 1;
 	}
 
 	return (return_value);
 }
 
-void traduci_A_instruction (char I[], char O[]) {
+plista traduci_A_instruction (char I[], char O[], plista LABELS, plista VARIABLES) {
 	O[0] = '0'; //Essendo una A in. inizia sempre con uno zero
 
 	int len = strlen (I);
 
 	//traduco in numero da stringa:
-	int i = 1;
+	int i = 0;
 	int n = 0;
-
-	while (I[i] != '\n' && I[i] != '\0' && I[i] != '\r') {
-		n = n * 10;
-		n = n + (int) I[i] - (int) '0';
+ 
+	//Trovo la posizione dell'inzio dell'istruzione
+	while (I[i] != '@')
 		i = i + 1;
+
+	i = i + 1;
+
+	if (I[i] >= '0' && I[i] <= '9') { //Se è una semplice a instrution e non una labels
+
+		while (I[i] != '\n' && I[i] != '\0' && I[i] != '\r') {
+			n = n * 10;
+			n = n + (int) I[i] - (int) '0';
+			i = i + 1;
+		}
+
+		dec_to_stringBin (n, O);
+	} else {
+		//Devo cercare nelle labels se trovo quella corrispondente, se no è una variabile e le devo risolvere
+		//get_val() GIÀ IMPLEMENTATA
 	}
 
-	dec_to_stringBin (n, O);
-
+	return (VARIABLES);
 }
 
 void traduci_C_instruction (char I[], char O[], coppiaS* CONV) {
@@ -290,4 +375,53 @@ int is_in_string (char s[], char f[], int a, int b) {
 	}
 
 	return (found);
+}
+
+
+ /* FUNZIONI PER LE LISTE */
+
+//Postcondition: Ritorna -1 se non trova L in h. Se lo trova invece ritorna il valore corrispondente 
+int get_val (plista h, char L[]) {
+	int found;
+	found = 0; //1 -> trovato
+
+	while (h != NULL && found == 0) {
+		if (strcmp (h->label, L) == 0)
+			found = 1;
+		else h = h->next;
+	}
+
+	if (found == 1)
+		return (h->val);
+	else
+		return (-1);
+}
+
+plista insert (plista h, char L[], int R) {
+	if (h == NULL) {
+		h = (plista) malloc (sizeof (struct lista));
+		strcpy(h->label, L);
+		h->val = R;
+	} else {
+		plista tmp = h;
+
+		while (tmp->next != NULL) tmp = tmp->next;
+
+		tmp->next = (plista) malloc (sizeof (struct lista));
+		tmp = tmp->next;
+
+		strcpy(tmp->label, L);
+		tmp->val = R;
+		tmp->next = NULL;
+
+	}
+	return (h);
+}
+
+void print_lista (plista h) {
+	while (h != NULL) {
+		printf ("[%s, %d]->", h->label, h->val);
+		h = h->next;
+	}
+	printf ("NULL\n");
 }

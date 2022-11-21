@@ -14,6 +14,16 @@ typedef struct pair_string coppiaS;
 
 #endif
 
+#define MAX_LABEL 200
+
+struct lista {
+	char label[MAX_LABEL];
+	int val;
+	struct lista* next;
+};
+
+typedef struct lista* plista;
+
 
 int traduci_file (FILE* fileI, FILE* fileO);
 
@@ -25,7 +35,7 @@ int traduci_file (FILE* fileI, FILE* fileO);
 int detect_instruction_type (char I[]);
 
 //Traduzione della A instruction contenuta in I e restituzione dell'output su O
-void traduci_A_instruction (char I[], char O[]);
+plista traduci_A_instruction (char I[], char O[], plista LABELS, plista VARIABLES);
 
 //Converte un numero decimale in una stringa binaria
 void dec_to_stringBin (int n, char O[]);
@@ -38,3 +48,18 @@ coppiaS* genera_conversioni ();
 
 //Cerca la stringa f in s. Se la trova restituisce 1, altrimenti 0
 int is_in_string (char s[], char f[], int a, int b);
+
+
+plista get_labels (plista h, FILE* fileI);
+void rimuovi_parentesi (char I[]);
+
+
+/* FUNZIONI PER LE LISTE */
+
+//Postcondition: Ritorna -1 se non trova L in h. Se lo trova invece ritorna il valore corrispondente 
+int get_val (plista h, char L[]);
+
+plista insert (plista h, char L[], int R);
+
+void print_lista (plista h);
+
