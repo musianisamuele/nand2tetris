@@ -1,10 +1,6 @@
 #include "global.h"
 
-struct lista {
-	char* val;
-	char* translated;
-	plista next;
-};
+
 
 plista insert (plista h, char* val, char* translated) {
 	plista tmp = (plista) malloc (sizeof (struct lista));
@@ -38,10 +34,64 @@ char* get_val (plista h, char* val) {
 	}
 }
 
-plista insert_predefined (plista h) {
-	char* val = (char*) malloc (1000 * sizeof(char));
+plista insert_predefined_ARITHM (plista ARITHM) {
+	char* val = (char*) malloc (4 * sizeof(char));	
 	val[0] = '\0';
 
-	h = insert (h, val, NULL);
-	return (h);
+	strcpy (val, "add");
+	ARITHM = insert (ARITHM, val, val);
+	strcpy (val, "sub");
+	ARITHM = insert (ARITHM, val, val);
+	strcpy (val, "neq");
+	ARITHM = insert (ARITHM, val, val);
+	strcpy (val, "eq");
+	ARITHM = insert (ARITHM, val, val);
+	strcpy (val, "gt");
+	ARITHM = insert (ARITHM, val, val);
+	strcpy (val, "lt");
+	ARITHM = insert (ARITHM, val, val);
+	strcpy (val, "and");
+	ARITHM = insert (ARITHM, val, val);
+	strcpy (val, "or");
+	ARITHM = insert (ARITHM, val, val);
+	strcpy (val, "not");
+	ARITHM = insert (ARITHM, val, val);
+	return (ARITHM);
+}
+
+plista insert_predefined_MEMORY (plista MEMORY) {
+	char* val = (char*) malloc (5 * sizeof(char));	
+	val[0] = '\0';
+
+	strcpy (val, "push");
+	MEMORY = insert (MEMORY, val, val);
+	strcpy (val, "pop");
+	MEMORY = insert (MEMORY, val, val);
+	return (MEMORY);
+}
+
+plista insert_predefined_PROGRAM (plista PROGRAM) {
+	char* val = (char*) malloc (8 * sizeof(char));	
+	val[0] = '\0';
+
+	strcpy (val, "label");
+	PROGRAM = insert (PROGRAM, val, val);
+	strcpy (val, "goto");
+	PROGRAM = insert (PROGRAM, val, val);
+	strcpy (val, "if-goto");
+	PROGRAM = insert (PROGRAM, val, val);
+	return (PROGRAM);
+}
+
+plista insert_predefined_FUNCTION (plista FUNCTION) {
+	char* val = (char*) malloc (9 * sizeof(char));	
+	val[0] = '\0';
+
+	strcpy (val, "function");
+	FUNCTION = insert (FUNCTION, val, val);
+	strcpy (val, "call");
+	FUNCTION = insert (FUNCTION, val, val);
+	strcpy (val, "return");
+	FUNCTION = insert (FUNCTION, val, val);
+	return (FUNCTION);
 }

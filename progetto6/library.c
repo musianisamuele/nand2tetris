@@ -1,5 +1,16 @@
 #include "global.h"
 
+plista ARITHM, MEMORY, PROGRAM, FUNCTION;
+
+
+void print_lista (plista h) {
+	while (h != NULL) {
+		printf ("%s->", h->val);
+		h = h->next;
+	}
+	printf ("NULL\n");
+}
+
 void traduci (FILE* fileI, FILE* fileO) {
 
 	int const MAX_INST_LEN = 1000;
@@ -7,6 +18,16 @@ void traduci (FILE* fileI, FILE* fileO) {
 	char* I;
 	I = (char*) malloc (MAX_INST_LEN * sizeof(char));
 
+
+	ARITHM = insert_predefined_ARITHM (ARITHM); 
+	MEMORY = insert_predefined_MEMORY (MEMORY); 
+	PROGRAM = insert_predefined_PROGRAM (PROGRAM); 
+	FUNCTION = insert_predefined_FUNCTION (FUNCTION);
+
+	print_lista (ARITHM);
+	print_lista (MEMORY);
+	print_lista (PROGRAM);
+	print_lista (FUNCTION);
 
 	while (fgets (I, MAX_INST_LEN , fileI) != NULL) {
 		printf("I: %s", I);
