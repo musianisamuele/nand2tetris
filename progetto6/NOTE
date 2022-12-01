@@ -1,0 +1,27 @@
+
+COMANDI:
+	Aritmetic:
+		add
+		sub
+		neg
+		eq
+		gt
+		lt
+		and
+		or
+		not
+	
+	Memory access:
+		pop x
+		push y
+
+	Program flow:
+		label (declaration)
+		goto (label)
+		if-goto (label)
+	
+	Function:
+		function (declaration)
+		call (a function)
+		return
+

@@ -1,0 +1,37 @@
+int fun (int i, int j) {
+	int k = 5;
+
+	while (j < i) {
+	k = k -1;
+	j = j+3;
+	}
+
+	return k;
+}
+
+function fun 1
+	push constant 5
+	pop local 0
+	
+	label WHILE
+	push argument 1
+	push argument 0
+	lq
+	if-goto END_WHILE
+	push local 0
+	push constant 1
+	sub
+	pop k
+
+	push argument 1
+	push constant 3
+	add
+	pop argument 1
+	
+	goto WHILE
+
+	label END_WHILE
+
+	push local 0
+	return
+
