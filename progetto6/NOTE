@@ -1,4 +1,3 @@
-
 COMANDI:
 	Aritmetic:
 		add
@@ -25,3 +24,123 @@ COMANDI:
 		call (a function)
 		return
 
+SEGMENTI:
+	argument 	-> argometi di una funzione (per ogni singola funzione)
+	local 		-> variabili locali (per ogni singola funzione)
+
+	static 		-> variabili globali (condivisio da tutte le funzioni)
+
+	constant 	-> non esiste, serve solo per fare l'input di costanti
+
+
+MEMORIA:
+	[0]: SP 	-> stack pointer
+	[1]: LCL 	-> local segment pointer
+	[2]: ARG 	-> argument segment pointer
+	[3]: THIS -> ?
+	[4]: THAT -> ?
+	[5-12]: TEMP -> ?
+	[13-15]: General porpuse -> Posso farci quello che voglio
+	[16-255]: Statics
+	[256-2047]: stack + argument e local	
+	[2048+]: Heap -> ?
+
+
+TRADUZIONE VM:
+															ASM / VM
+	Aritmetic:
+		add
+		sub
+		neg
+		eq
+		gt
+		lt
+		and
+		or
+		not
+	
+	Memory access:
+		pop x
+		push y
+
+	Program flow:
+		label PIPPO =							(PIPPO)
+		
+		goto PIPPO =							@PIPPO
+															jmp;0
+		
+		if-goto PIPPO =		 				if M[SP - 1] == true
+																@PIPPO
+																jmp;0
+	
+	Function:
+		function (declaration) =	(f)
+															n times: push constat 0	 (inzializzo gli argomenti a 0)
+
+		call (a function) =				push return-address
+															push LCL
+															push ARG
+															push THIS
+															push THAT
+															ARG = SP - n - 5 (n : number of args)
+															LCL = SP
+															goto f
+															(return-address)
+
+		return =									FRAME = LCL				(FRAME è temporanea)
+															RET = *(FRAME - 5)
+															*ARG = pop()
+															SP = ARG + 1
+															THAT *(FRAME - 1)
+															THIS *(FRAME - 2)
+															ARG *(FRAME - 3)
+															LCL *(FRAME - 4)
+															goto RET
+
+
+NOTE GENERICHE:
+	CHE CAVOLO FA STATIC?????
+	
+	Per passare parametri alle funzioni devo pusharli nello stack
+	Il valore di ritorno di una funzione spunterà nello stack al posto di quelli passati
+
+	Quando la funzione f() chiama g():
+		1) Devo salvare il return address, cioè l'indirizzo in ROM a cui ritornare (quello dopo la call)
+		2) Salvare i puntatori local e argument di f
+		3) Inizializzare i puntatori local e argument di g
+		4) Passare il controllo all'implementazione di g
+	
+	Quando la funzione g() inzia ad eseguire:
+		1) L'implementazione della VM deve inizializzare tutte le variabili in local a 0
+	
+	Quando g() termina e devo ritornare ad f():
+		1) Devo eliminare i segmenti local e argument lasciandi sullo stack solamente il valore di ritorno
+		2) Ripristinare i segmenti local e argument di f
+		3) Restituire il controllo ad f saltando al return address
+
+	TIPICO STACK PER UNA CHIAMATA DI FUNZIONE:
+			-------------
+			.............
+			-------------
+ARG->	argument 0
+			------------
+			argument 1
+			------------
+			return add.
+			------------
+			LCL
+			------------
+			ARG
+			------------
+			THIS
+			------------
+			THAT
+			------------
+LCL->	local 0
+			------------
+			local 1
+			------------
+SP->
+			------------
+			............
+			------------
