@@ -13,6 +13,7 @@ void traduci (FILE* fileI, FILE* fileO);
 void clean_string (char* s);
 	
 int detect_instruction (char* I);
+void traduci_arithm (char* I, char* O);
 
 	/* LISTE */
 

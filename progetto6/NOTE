@@ -49,19 +49,123 @@ MEMORIA:
 TRADUZIONE VM:
 															ASM / VM
 	Aritmetic:
-		add
-		sub
-		neg
-		eq
-		gt
-		lt
-		and
-		or
-		not
-	
+		add =											@SP				//@0
+															M=M-1			//A = M[0] - 1
+															A=M
+															D=M				//D = M[M[0] - 1]
+															A=A-1			//A = A - 1 = M[0] - 2
+															M=D+M;		//M = D + M[M[0] - 2];
+		
+		sub =											@SP				//@0
+															M=M-1			//A = M[0] - 1
+															A=M
+															D=M				//D = M[M[0] - 1]
+															A=A-1			//A = A - 1 = M[0] - 2			
+															M=M-D;		//M = -D + M[M[0] - 2];
+		
+		neg	=											@SP
+															A=M-1
+															M=-M
+
+		eq =											Faccio la sottrazione tra i due valori nello stack
+															e poi se è uguale a zero facci un jmp ad un'istruzione che mi
+															mette -1 (true) nello stack. Se no faccio un jmp ad un'istruzione che
+															mi mette 0 (false) nello stack. È un po' lunga però... :(
+															
+															@SP
+															M=M-1
+															A=M
+															D=M
+															A=A-1
+															D=M-D
+															@TRUE_N							//Devo indicizzare bene in base al programma
+															D;JEQ
+
+															@SP
+															A=M-1;
+															M=0;
+															@END_N
+															0;JMP
+															
+															(TRUE_N)
+															@SP
+															A=M-1
+															M=-1;
+															@END_N
+															0;JMP
+
+															(END_N)
+
+		gt = 											@SP
+															M=M-1
+															A=M
+															D=M
+															A=A-1
+															D=M-D
+															@TRUE_N							//Devo indicizzare bene in base al programma
+															D;JGT
+
+															@SP
+															A=M-1;
+															M=0;
+															@END_N
+															0;JMP
+															
+															(TRUE_N)
+															@SP
+															A=M-1
+															M=-1;
+															@END_N
+															0;JMP
+
+															(END_N)
+
+		lt =  										@SP
+															M=M-1
+															A=M
+															D=M
+															A=A-1
+															D=M-D
+															@TRUE_N							//Devo indicizzare bene in base al programma
+															D;JGT
+
+															@SP
+															A=M-1;
+															M=0;
+															@END_N
+															0;JLT
+															
+															(TRUE_N)
+															@SP
+															A=M-1
+															M=-1;
+															@END_N
+															0;JMP
+
+															(END_N)
+
+
+		and =											@SP				//@0
+															M=M-1			//A = M[0] - 1
+															A=M
+															D=M				//D = M[M[0] - 1]
+															A=A-1			//A = A - 1 = M[0] - 2
+															M=D&M;		//M = D + M[M[0] - 2];
+		
+		or =											@SP				//@0
+															M=M-1			//A = M[0] - 1
+															A=M
+															D=M				//D = M[M[0] - 1]
+															A=A-1			//A = A - 1 = M[0] - 2
+															M=D|M;		//M = D + M[M[0] - 2];
+
+		not	=											@SP
+															A=M-1
+															M=!M
+
 	Memory access:
-		pop x
-		push y
+		pop segment x
+		push segment y
 
 	Program flow:
 		label PIPPO =							(PIPPO)
@@ -99,6 +203,10 @@ TRADUZIONE VM:
 
 
 NOTE GENERICHE:
+
+	0 -> FALSE
+	-1 -> TRUE
+
 	CHE CAVOLO FA STATIC?????
 	
 	Per passare parametri alle funzioni devo pusharli nello stack

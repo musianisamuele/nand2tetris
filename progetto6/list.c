@@ -37,25 +37,44 @@ char* get_val (plista h, char* val) {
 plista insert_predefined_ARITHM (plista ARITHM) {
 	char* val = (char*) malloc (4 * sizeof(char));	
 	val[0] = '\0';
+	
+	char* translated = (char*) malloc (1000 * sizeof (char));
+	translated[0] = '\0';
 
 	strcpy (val, "add");
-	ARITHM = insert (ARITHM, val, val);
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D+M\n");
+	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "sub");
-	ARITHM = insert (ARITHM, val, val);
-	strcpy (val, "neq");
-	ARITHM = insert (ARITHM, val, val);
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=M-D\n");
+	ARITHM = insert (ARITHM, val, translated);
+	strcpy (val, "neg");
+	strcpy (translated, "@SP\nA=M-1\nM=-M\n");
+	ARITHM = insert (ARITHM, val, translated);
+
+
+
+//Provo l'uguaglianza
+
+
+
 	strcpy (val, "eq");
-	ARITHM = insert (ARITHM, val, val);
+	strpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JEQ\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
+	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "gt");
-	ARITHM = insert (ARITHM, val, val);
+	strpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JGT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
+	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "lt");
-	ARITHM = insert (ARITHM, val, val);
+	strpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JLT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
+	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "and");
-	ARITHM = insert (ARITHM, val, val);
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D&M\n");
+	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "or");
-	ARITHM = insert (ARITHM, val, val);
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D|M\n");
+	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "not");
-	ARITHM = insert (ARITHM, val, val);
+	strcpy (translated, "@SP\nA=M-1\nM=!M\n");
+	ARITHM = insert (ARITHM, val, translated);
 	return (ARITHM);
 }
 
