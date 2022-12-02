@@ -51,20 +51,14 @@ plista insert_predefined_ARITHM (plista ARITHM) {
 	strcpy (translated, "@SP\nA=M-1\nM=-M\n");
 	ARITHM = insert (ARITHM, val, translated);
 
-
-
-//Provo l'uguaglianza
-
-
-
 	strcpy (val, "eq");
-	strpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JEQ\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JEQ\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "gt");
-	strpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JGT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JGT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "lt");
-	strpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JLT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JLT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "and");
 	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D&M\n");

@@ -104,10 +104,10 @@ void traduci_arithm (char* I, char* O) {
 
 	strcpy (O, tmp->translated);
 
-	if (strcpm (I, "eq") == 0 || strcpm (I, "gt") == 0 || strcpm (I, "lt") == 0) {
+	if (strcmp (I, "eq") == 0 || strcmp (I, "gt") == 0 || strcmp (I, "lt") == 0) {
 		for (int i = 1; i < strlen(I); i++) {
 			if (I[i] == 'N' && I[i - 1] == '_')
-				I[i] = boolJMP;
+				I[i] = (char) boolJMP;
 		}
 			boolJMP = boolJMP + 1;
 	}
@@ -142,4 +142,5 @@ void clean_string (char* s) {
 	if (found == 1)
 		s[i] = '\0';
 	else
-		s[strlen(s) - 2] = '\0';|}
+		s[strlen(s) - 2] = '\0';
+}
