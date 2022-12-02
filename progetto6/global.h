@@ -12,6 +12,7 @@ typedef struct lista* plista;
 void traduci (FILE* fileI, FILE* fileO);
 void clean_string (char* s);
 	
+int detect_instruction (char* I);
 
 	/* LISTE */
 

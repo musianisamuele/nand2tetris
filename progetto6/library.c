@@ -30,17 +30,22 @@ void traduci (FILE* fileI, FILE* fileO) {
 	print_lista (FUNCTION);
 
 	while (fgets (I, MAX_INST_LEN , fileI) != NULL) {
-		printf("I: %s", I);
 		clean_string (I);
-		printf("I_post: %s\n", I);
 
-		fprintf (fileO, "%s", I);
+		int I_type = detect_instruction (I);
+		printf("I: %s\t--> %d\n", I, I_type);
+
+		if (strlen (I) != 0)
+			fprintf (fileO, "%s\n", I);
 	}
 
 	free (I);
 }
 
 int detect_instruction (char* I) {
+
+	int type = -1;
+
 	char* tmp = (char*) malloc (100 * sizeof (char));
 	tmp[0] = '\0';
 	strcpy (tmp, I);
@@ -56,9 +61,20 @@ int detect_instruction (char* I) {
 	}
 	tmp[i] = '\0';
 
-	//is_in(tmp, list);
+	if (is_in (ARITHM, tmp) == 1)
+		type = 1;
+	else if (is_in (MEMORY, tmp) == 1)
+		type = 2;
+	else if (is_in (PROGRAM, tmp) == 1)
+		type = 3;
+	else if (is_in (FUNCTION, tmp) == 1)
+		type = 4;
+	else
+		type = -1; //Non trovata l'istruzione
 
 	free (tmp);
+
+	return (type);
 	
 }
 
@@ -89,4 +105,6 @@ void clean_string (char* s) {
 
 	if (found == 1)
 		s[i] = '\0';
+	else
+		s[strlen(s) - 2] = '\0';
 }
