@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern char* file_name;
+
 struct lista {
 	char* val;
 	char* translated;
@@ -11,9 +13,11 @@ typedef struct lista* plista;
 
 void traduci (FILE* fileI, FILE* fileO);
 void clean_string (char* s);
+char* estrai_nome (char* path);
 	
 int detect_instruction (char* I);
 void traduci_arithm (char* I, char* O);
+void traduci_memory (char* I, char* O);
 
 	/* LISTE */
 

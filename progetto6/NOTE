@@ -164,18 +164,45 @@ TRADUZIONE VM:
 															M=!M
 
 	Memory access:
-		pop segment x
-		push segment y
+		pop segment x =						@x				//offset da calcolare
+															D=A
+															@segment 	//Qui devo prendere il puntatore in base al segmento
+															D=D+M			//Ora D punta all'elemento a cui devo assegnare il valore
+															@R13
+															M=D				//Salvo l'indirizzo
+															@SP
+															M=M-1
+															A=M
+															D=M				//Salvo il valore in D
+															@R13 			//Registro in cui ho salvato l'indirzzo di pop
+															A=M				//Punto all'indirizzo di pop
+															M=D				//Salvo il valore che avevo memorizzato in D
+
+		push segment y =					@y
+															D=A
+															@segment 	//Per constant è DIVERSO
+															A=D+M
+															D=M
+															@SP
+															M=M+1
+															A=M-1
+															M=D
+															
 
 	Program flow:
 		label PIPPO =							(PIPPO)
 		
-		goto PIPPO =							@PIPPO
+		goto PIPPO =							@SP
+															M=M-1
+															@PIPPO
 															jmp;0
 		
-		if-goto PIPPO =		 				if M[SP - 1] == true
-																@PIPPO
-																jmp;0
+		if-goto PIPPO =						@SP
+															M=M-1
+															A=M
+															D=M-1
+															@PIPPO
+															D;JEQ
 	
 	Function:
 		function (declaration) =	(f)
@@ -203,6 +230,9 @@ TRADUZIONE VM:
 
 
 NOTE GENERICHE:
+
+	DA TESTARE TUTTI I COMANDI BOOLEANI DI ARITHM, SOPRATUTTO IL CAMBIO DI NOME 
+	SULLE LABEL PER DISTINGUERE LE VARIE ETICHETTE
 
 	0 -> FALSE
 	-1 -> TRUE

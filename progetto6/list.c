@@ -42,32 +42,32 @@ plista insert_predefined_ARITHM (plista ARITHM) {
 	translated[0] = '\0';
 
 	strcpy (val, "add");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D+M\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D+M");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "sub");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=M-D\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=M-D");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "neg");
-	strcpy (translated, "@SP\nA=M-1\nM=-M\n");
+	strcpy (translated, "@SP\nA=M-1\nM=-M");
 	ARITHM = insert (ARITHM, val, translated);
 
 	strcpy (val, "eq");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JEQ\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JEQ\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "gt");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JGT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JGT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "lt");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JLT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JLT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "and");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D&M\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D&M");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "or");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D|M\n");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D|M");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "not");
-	strcpy (translated, "@SP\nA=M-1\nM=!M\n");
+	strcpy (translated, "@SP\nA=M-1\nM=!M");
 	ARITHM = insert (ARITHM, val, translated);
 	return (ARITHM);
 }

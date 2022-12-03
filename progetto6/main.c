@@ -5,6 +5,8 @@ int main(int argc, char** argv) {
 		char file_pathI[1000];
 		strcpy (file_pathI, *(argv + 1));
 		
+		file_name = estrai_nome (file_pathI);
+
 		FILE* fileI;
 
 		fileI = fopen (file_pathI, "r");

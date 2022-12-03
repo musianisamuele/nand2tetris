@@ -1,16 +1,17 @@
-@50
-D=A
-@256
-M=D
+push constant 1
+push constant 2
+push constant 3
+push constant 4
+pop local 0
+pop local 1
+pop argument 0
+pop argument 1
 
-@37
-D=A
-@257
-M=D
-
-@258
-D=A
-@SP
-M=D
-
+push local 0
+push local 1
 add
+push argument 0
+push argument 1
+add
+add
+pop static 0
