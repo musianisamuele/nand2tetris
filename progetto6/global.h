@@ -21,6 +21,7 @@ void int_to_string (char s[], int n);
 int detect_instruction (char* I);
 void traduci_arithm (char* I, char* O);
 void traduci_memory (char* I, char* O);
+void traduci_program (char* I, char* O);
 
 	/* LISTE */
 

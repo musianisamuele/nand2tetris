@@ -88,11 +88,11 @@ plista insert_predefined_PROGRAM (plista PROGRAM) {
 	val[0] = '\0';
 
 	strcpy (val, "label");
-	PROGRAM = insert (PROGRAM, val, val);
+	PROGRAM = insert (PROGRAM, val, "(_)");
 	strcpy (val, "goto");
-	PROGRAM = insert (PROGRAM, val, val);
+	PROGRAM = insert (PROGRAM, val, "@_\n0;JMP");
 	strcpy (val, "if-goto");
-	PROGRAM = insert (PROGRAM, val, val);
+	PROGRAM = insert (PROGRAM, val, "@SP\nM=M-1\nA=M\nD=M+1\n@_\nD;JNE");
 	return (PROGRAM);
 }
 

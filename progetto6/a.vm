@@ -1,3 +1,5 @@
+label PIPPO
+push constant 5
+push constant 5
 eq
-gt
-lt
+if-goto PIPPO

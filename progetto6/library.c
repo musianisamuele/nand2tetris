@@ -54,6 +54,8 @@ void traduci (FILE* fileI, FILE* fileO) {
 			traduci_arithm (I, O);
 		else if (I_type == 2)
 			traduci_memory (I, O);
+		else if (I_type == 3)
+			traduci_program (I, O);
 
 		if (strlen (O) != 0)
 			fprintf (fileO, "%s\n", O);
@@ -92,8 +94,6 @@ int detect_instruction (char* I) {
 		type = 4;
 	else
 		type = -1; //Non trovata l'istruzione
-
-	free (tmp);
 
 	return (type);
 	
@@ -203,6 +203,45 @@ void traduci_memory (char* I, char* O) {
 
 	free (segment);
 	free (number);
+}
+
+void traduci_program (char* I, char* O) {
+	int i = 0;
+	char command[10];
+	char name[1000];
+
+	for (i = 0; i < 10; i++)
+		command[i] = I[i];
+
+	i = 0;
+	while (I[i] != ' ')
+		i = i + 1;
+
+	command[i] = '\0';
+
+	int offset = i;
+	i = i + 1;
+
+	while (i <= strlen (I)) {
+		name [i - offset - 1] = I[i];
+		i = i + 1;
+	}
+
+	name [i - offset] = '\0';
+
+	plista tmp = PROGRAM;
+	
+	while (strcmp (tmp->val, command) != 0)
+		tmp = tmp->next;
+
+	strcpy (O, tmp->translated);
+
+	for (i = 0; i < strlen (O); i++) {
+		if (O[i] == '_') {
+			insert_in_string (O, name, i);
+			i = i + strlen (name); //LOOP INFINITO SE CI SONO DEI _ NE name
+		}
+	}
 }
 
 
