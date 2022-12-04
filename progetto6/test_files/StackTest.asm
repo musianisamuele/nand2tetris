@@ -2,14 +2,6 @@
 D=A
 @SP
 M=D
-@300
-D=A
-@LCL
-M=D
-@400
-D=A
-@ARG
-M=D
 @17
 D=A
 @SP

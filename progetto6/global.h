@@ -17,11 +17,14 @@ char* estrai_nome (char* path);
 void insert_in_string (char* s, char* in, int pos);
 int my_log10 (int n);
 void int_to_string (char s[], int n);
+void ex_next_word (char* s, char* d, int pos);
+int next_space (char* s, int i);
 	
 int detect_instruction (char* I);
 void traduci_arithm (char* I, char* O);
 void traduci_memory (char* I, char* O);
 void traduci_program (char* I, char* O);
+void traduci_function (char* I, char* O);
 
 	/* LISTE */
 

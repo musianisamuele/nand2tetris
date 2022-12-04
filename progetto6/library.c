@@ -4,6 +4,7 @@
 plista ARITHM, MEMORY, PROGRAM, FUNCTION;
 int boolJMP = 0;
 char* file_name;
+char function_name [200] = ""; //Nome della funzione in cui sono attualmente
 
 void print_lista (plista h) {
 	while (h != NULL) {
@@ -39,8 +40,8 @@ void traduci (FILE* fileI, FILE* fileO) {
 
 	// INIZIALIZZAZIONI NECESARIE
 	fprintf(fileO, "@256\nD=A\n@SP\nM=D\n");	//SP = 256;
-	fprintf(fileO, "@300\nD=A\n@LCL\nM=D\n");	//LCL = 5; // MOMENTANEO
-	fprintf(fileO, "@400\nD=A\n@ARG\nM=D\n");	//ARG = 9; // MOMENTANEO
+	//fprintf(fileO, "@300\nD=A\n@LCL\nM=D\n");	//LCL = 5; // MOMENTANEO
+	//fprintf(fileO, "@400\nD=A\n@ARG\nM=D\n");	//ARG = 9; // MOMENTANEO
 
 	// TRADUZIONE
 	while (fgets (I, MAX_INST_LEN , fileI) != NULL) {
@@ -56,6 +57,8 @@ void traduci (FILE* fileI, FILE* fileO) {
 			traduci_memory (I, O);
 		else if (I_type == 3)
 			traduci_program (I, O);
+		else if (I_type == 4)
+			traduci_function (I, O);
 
 		if (strlen (O) != 0)
 			fprintf (fileO, "%s\n", O);
@@ -142,24 +145,15 @@ void traduci_memory (char* I, char* O) {
 	else
 		pop_or_push = 1;
 
-	int offset = i;
+	ex_next_word (I, segment, i);
+
 	i = i + 1;
 
-	while (I[i] != ' ') {
-		segment[i - offset - 1] = I[i];
+	while (I[i] != ' ')
 		i = i + 1;
-	}
-	segment[i - offset - 1] = '\0';
+	
+	ex_next_word (I, number, i);
 
-	offset = i;
-	i = i + 1;
-	
-	while (i < strlen(I)) {
-		number[i - offset - 1] = I[i];
-		i = i + 1;
-	}
-	number[i - offset - 1] = '\0';
-	
 	strcat (O, "@"); strcat (O, number);
 	strcat (O, "\nD=A\n");
 
@@ -219,15 +213,7 @@ void traduci_program (char* I, char* O) {
 
 	command[i] = '\0';
 
-	int offset = i;
-	i = i + 1;
-
-	while (i <= strlen (I)) {
-		name [i - offset - 1] = I[i];
-		i = i + 1;
-	}
-
-	name [i - offset] = '\0';
+	ex_next_word (I, name, i);
 
 	plista tmp = PROGRAM;
 	
@@ -238,12 +224,70 @@ void traduci_program (char* I, char* O) {
 
 	for (i = 0; i < strlen (O); i++) {
 		if (O[i] == '_') {
-			insert_in_string (O, name, i);
+			int len = strlen (function_name);
+			strcat (function_name, "$");
+			strcat (function_name, name);
+			insert_in_string (O, function_name, i);
+			function_name[len] = '\0';
 			i = i + strlen (name); //LOOP INFINITO SE CI SONO DEI _ NE name
 		}
 	}
 }
 
+void traduci_function (char* I, char* O) {
+	int i = 0;
+
+	while (I[i] != ' ')
+		i = i + 1;
+
+	if (i == 8) {					//I = function ...
+		char str_lcl[5]; str_lcl[0] = '\0';
+		int int_lcl = 0;
+
+		ex_next_word (I, function_name, i);
+		i = next_space (I, i);
+
+		ex_next_word (I, str_lcl, i);
+		int_lcl = atoi (str_lcl);
+
+		strcat (O, "(");
+		strcat (O, function_name);
+		strcat (O, ")\n@");
+		strcat (O, str_lcl);
+		strcat (O, "\nD=A\n@SP\nM=M+D\nA=M-D");
+
+		for (i = 0; i < int_lcl; i++)
+			strcat (O, "\nM=0\nA=A+1");
+
+	} else if (i == 4){		//I = call ...
+		char name[200]; name[0] = '\0';
+		char str_arg [5]; str_arg[0] = '\0';
+		
+		ex_next_word (I, name, i);
+		
+		i = next_space (I, i);
+
+		ex_next_word (I, str_arg, i);
+
+		strcpy (O, "@5\nD=A\n@SP\nM=M+D\nD=M-1\n@R14\nM=D\n");
+		strcat (O, "@THAT\nD=M\n@R14\nA=M\nM=D\n");
+		strcat (O, "@THIS\nD=M\n@R14\nAM=M-1\nM=D\n");
+		strcat (O, "@ARG\nD=M\n@R14\nAM=M-1\nM=D\n");
+		strcat (O, "@LCL\nD=M\n@R14\nAM=M-1\nM=D\n");
+		strcat (O, "@"); strcat (O, function_name); strcat (O, ".return\n");
+		strcat (O, "D=A\n@R14\nAM=M-1\nM=D\n");
+		strcat (O, "@SP\nD=M\n@LCL\nM=D\n");
+		strcat (O, "@"); strcat (O, str_arg); strcat (O, "\n");
+		strcat (O, "D=A\n@R14\nD=M-D\n@ARG\nM=D\n");
+		strcat (O, "@"); strcat (O, name); strcat (O, "\n0;JMP\n");
+		strcat (O, "("); strcat (O, function_name); strcat (O, ".return)\n");
+
+
+	} else {							//I = return
+		//DA FINIRE
+		strcpy (O, I);
+	}
+}
 
 //Funzione che elimina gli spazi prima di un'istruzione e i commenti successivi ad essa
 void clean_string (char* s) {
@@ -285,17 +329,14 @@ char* estrai_nome (char* path) {
 	while (i >= 0 && path[i] != '/')
 		i = i - 1;
 
+	
 	if (i != 0)
 		i = i + 1;
 
-	int off_set = i;
-
-	while (i < strlen (path)) {
-		name [i - off_set] = path[i];
-		i = i + 1;
-	}
-	name [i - off_set - 3] = '\0';
-
+	ex_next_word (path, name, i);
+	
+	name [strlen (name) - 3] = '\0';
+	
 	return (name);
 }
 
@@ -349,4 +390,29 @@ void int_to_string (char s[], int n) {
 		s[i] = tmp;
 		i = i + 1;
 	}
+}
+
+void ex_next_word (char* s, char* d, int pos) {
+	int j = 0;
+	
+	if (s[pos] == ' ') {
+		pos = pos + 1;
+	}
+
+	while (s[pos] != ' ' && pos < strlen (s)) {
+		d[j] = s[pos];
+		pos = pos + 1;
+		j = j + 1;
+	}
+	d[j] = '\0';
+}
+
+int next_space (char* s, int i) {
+	if (s[i] == ' ')
+		i = i + 1;
+
+	while (s[i] != ' ')
+		i = i + 1;
+
+	return (i);
 }

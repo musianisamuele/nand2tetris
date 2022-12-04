@@ -190,7 +190,7 @@ TRADUZIONE VM:
 															
 
 	Program flow:
-		label PIPPO =							(PIPPO)
+		label PIPPO =							(PIPPO) //QUANDO SONO DENTRO UNA FUNZIONE f$PIPPO
 		
 		goto PIPPO =							@PIPPO
 															0;JMP
@@ -203,10 +203,20 @@ TRADUZIONE VM:
 															D;JNE
 	
 	Function:
-		function (declaration) =	(f)
+		function f n =						(f)
 															n times: push constat 0	 (inzializzo gli argomenti a 0)
 
-		call (a function) =				push return-address
+															ASSEMBLY:
+															(f)
+															@n			//Numero di variabili locali
+															D=A
+															@SP
+															M=M+D
+															A=M-D
+															M=0			//Da RIPETERE
+															A=A+1		//Da RIPETERE
+
+		call (f) =								push return-address
 															push LCL
 															push ARG
 															push THIS
@@ -216,15 +226,119 @@ TRADUZIONE VM:
 															goto f
 															(return-address)
 
+															ASSEMBLY:
+															@5			//Devo fare la push di 5 valori (lo so a priori)
+															D=A			
+															@SP
+															M=M+D		//Aumento lo stack pointer di 5 (tanto lo so a priori)
+															D=M-1		//Vado al contrario per salvare i valori (è più comodo).
+															@R14		//Indirizzo di supporto in cui salvo gli indirizzi in cui scrivere
+															M=D
+															
+															@THAT		//Prendo il valore di that
+															D=M
+															@R14
+															A=M
+															M=D			//Inserisco THAT nello stack
+															
+															@THIS
+															D=M
+															@R14
+															AM=M-1
+															M=D			//Inserisco THIS
+
+
+															@ARG
+															D=M
+															@R14
+															AM=M-1
+															M=D			//Inserisco THIS
+
+															@LCL
+															D=M
+															@R14
+															AM=M-1
+															M=D			//Inserisco THIS
+
+															@f_acctual.return		//Inserisco il valore di return
+															D=A
+															@R14
+															AM=M-1
+															M=D
+
+															@SP				//LCL = SP
+															D=M
+															@LCL
+															M=D
+
+															@n					//ARG = SP - n - 5. MODIFICARE n IN RUNTIME -> NUMERO ARGOMENTI
+															D=A
+															@R14
+															D=M-D
+															@ARG
+															M=D
+
+															@f
+															0;JMP
+
+															(f_actual.return) //Label di ritorno (f è il nome della funzione)
+
+
 		return =									FRAME = LCL				(FRAME è temporanea)
 															RET = *(FRAME - 5)
 															*ARG = pop()
 															SP = ARG + 1
-															THAT *(FRAME - 1)
-															THIS *(FRAME - 2)
-															ARG *(FRAME - 3)
-															LCL *(FRAME - 4)
+															THAT = *(FRAME - 1)
+															THIS = *(FRAME - 2)
+															ARG = *(FRAME - 3)
+															LCL = *(FRAME - 4)
 															goto RET
+
+															ASSEMBLY:
+															@SP
+															A=M-1				//Punto alla return-value
+															D=M					//Salvo la ret-value in D
+															@ARG
+															M=D					//Salvo la return-value nel primo posto di argument (è giusto?)
+
+															D=A+1				//Inizializzazione di SP
+															@SP
+															M=D
+
+															@LCL				//Implementazione di FRAME su R14
+															D=M
+															@R14
+															AM=D-1			//A = M[R14] = M[LCL] - 1
+
+															//A punta a LCL - 1
+
+															D=M
+															@THAT
+															M=D
+
+															@R14
+															AM=M-1
+															D=M
+															@THIS
+															M=D
+														
+															@R14
+															AM=M-1
+															D=M
+															@ARG
+															M=D
+															
+															@R14
+															AM=M-1
+															D=M
+															@LCL
+															M=D
+
+															@R14
+															AM=M-1
+															A=M
+															0;JMP
+
 
 
 NOTE GENERICHE:
