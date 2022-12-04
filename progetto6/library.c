@@ -112,11 +112,15 @@ void traduci_arithm (char* I, char* O) {
 	strcpy (O, tmp->translated);
 
 	if (strcmp (I, "eq") == 0 || strcmp (I, "gt") == 0 || strcmp (I, "lt") == 0) {
-		for (int i = 1; i < strlen(O); i++) {
-			if (O[i] == 'N' && O[i - 1] == '_')
-				O[i] = (char) boolJMP;
+		char boolJMP_s[30];
+		
+		for (int i = 0; i < strlen(O); i++) {
+			if (O[i] == '_') {
+				int_to_string (boolJMP_s, boolJMP);
+				insert_in_string (O, boolJMP_s, i);
+			}
 		}
-			boolJMP = boolJMP + 1;
+		boolJMP = boolJMP + 1;
 	}
 }
 
@@ -256,3 +260,54 @@ char* estrai_nome (char* path) {
 	return (name);
 }
 
+void insert_in_string (char* s, char* in, int pos) {
+	char tmp[1000];
+
+	int i = 0;
+	for (i = pos + 1; i < strlen (s); i++)
+		tmp [i - pos - 1] = s[i];
+
+	tmp [i - pos - 1] = '\0';
+
+	s[pos] = '\0';
+	strcat (s, in);
+	strcat (s, tmp);
+}
+
+int my_log10 (int n) {
+	int i = 0;
+
+	while (n >= 1) {
+		n = n / 10;
+		i = i + 1;
+	}
+	return (i - 1);
+}
+
+void int_to_string (char s[], int n) {
+	int dim;
+
+	if (n == 0)
+		dim = 1;
+	else
+		dim = my_log10 (n) + 1;
+	
+	int i = 0;
+
+	int power = 1;
+
+	for (i = 0; i < dim - 1; i++) power = power * 10;
+
+	i = 0;
+
+	while (power > 0) {
+		char tmp = '0';
+
+		tmp = tmp + (n / power);
+		n = n % power;
+		power = power / 10;
+
+		s[i] = tmp;
+		i = i + 1;
+	}
+}

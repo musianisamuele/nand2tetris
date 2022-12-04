@@ -52,13 +52,13 @@ plista insert_predefined_ARITHM (plista ARITHM) {
 	ARITHM = insert (ARITHM, val, translated);
 
 	strcpy (val, "eq");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JEQ\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_\nD;JEQ\n@SP\nA=M-1\nM=0\n@END_\n0;JMP\n(TRUE_)\n@SP\nA=M-1\nM=-1\n@END_\n0;JMP\n(END_)");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "gt");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JGT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_\nD;JGT\n@SP\nA=M-1\nM=0\n@END_\n0;JMP\n(TRUE_)\n@SP\nA=M-1\nM=-1\n@END_\n0;JMP\n(END_)");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "lt");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_N\nD;JLT\n@SP\nA=M-1\nM=0\n@END_N\n0;JMP\n(TRUE_N)\n@SP\nA=M-1\nM=-1\n@END_N\n0;JMP\n(END_N)");
+	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_\nD;JLT\n@SP\nA=M-1\nM=0\n@END_\n0;JMP\n(TRUE_)\n@SP\nA=M-1\nM=-1\n@END_\n0;JMP\n(END_)");
 	ARITHM = insert (ARITHM, val, translated);
 	strcpy (val, "and");
 	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D&M");
