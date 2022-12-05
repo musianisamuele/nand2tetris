@@ -4,7 +4,7 @@
 plista ARITHM, MEMORY, PROGRAM, FUNCTION;
 int boolJMP = 0;
 char* file_name;
-char function_name [200] = ""; //Nome della funzione in cui sono attualmente
+char function_name [400] = ""; //Nome della funzione in cui sono attualmente
 
 void print_lista (plista h) {
 	while (h != NULL) {
@@ -16,7 +16,7 @@ void print_lista (plista h) {
 
 void traduci (FILE* fileI, FILE* fileO) {
 
-	int const MAX_INST_LEN = 1000;
+	int const MAX_INST_LEN = 2000;
 
 	char* I;
 	I = (char*) malloc (MAX_INST_LEN * sizeof(char));
@@ -285,7 +285,7 @@ void traduci_function (char* I, char* O) {
 
 	} else {							//I = return
 		//DA FINIRE
-		strcpy (O, I);
+		strcpy (O, "@SP\nA=M-1\nD=M\n@ARG\nA=M\nM=D\nD=A+1\n@SP\nM=D\n@LCL\nD=M\n@R14\nAM=D-1\nD=M\n@THAT\nM=D\n@R14\nAM=M-1\nD=M\n@THIS\nM=D\n@R14\nAM=M-1\nD=M\n@ARG\nM=D\n@R14\nAM=M-1\nD=M\n@LCL\nM=D\n@R14\nAM=M-1\nA=M\n0;JMP");
 	}
 }
 

@@ -299,6 +299,7 @@ TRADUZIONE VM:
 															A=M-1				//Punto alla return-value
 															D=M					//Salvo la ret-value in D
 															@ARG
+															A=M
 															M=D					//Salvo la return-value nel primo posto di argument (è giusto?)
 
 															D=A+1				//Inizializzazione di SP
