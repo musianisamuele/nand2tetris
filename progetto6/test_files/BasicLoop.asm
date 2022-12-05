@@ -105,7 +105,7 @@ M=D
 @SP
 M=M-1
 A=M
-D=M+1
+D=M
 @$LOOP_START
 D;JNE
 @0

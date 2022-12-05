@@ -1,1 +1,3 @@
-return
+function FibonacciElement.fibonacci 0
+call FibonacciElement.fibonacci 1  // compute fib(n-2)
+call FibonacciElement.fibonacci 1  // compute fib(n-1)

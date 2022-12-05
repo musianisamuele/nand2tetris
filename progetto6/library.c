@@ -5,6 +5,7 @@ plista ARITHM, MEMORY, PROGRAM, FUNCTION;
 int boolJMP = 0;
 char* file_name;
 char function_name [400] = ""; //Nome della funzione in cui sono attualmente
+int index_return = 0;
 
 void print_lista (plista h) {
 	while (h != NULL) {
@@ -49,7 +50,7 @@ void traduci (FILE* fileI, FILE* fileO) {
 		O[0] = '\0';
 
 		int I_type = detect_instruction (I);
-		printf("I: %s\t--> %d\n", I, I_type);
+		//printf("I: %s\t--> %d\n", I, I_type);
 
 		if (I_type == 1)
 			traduci_arithm (I, O);
@@ -229,7 +230,7 @@ void traduci_program (char* I, char* O) {
 			strcat (function_name, name);
 			insert_in_string (O, function_name, i);
 			function_name[len] = '\0';
-			i = i + strlen (name); //LOOP INFINITO SE CI SONO DEI _ NE name
+			i = i + len + 1 + strlen (name); //LOOP INFINITO SE CI SONO DEI _ NE name
 		}
 	}
 }
@@ -247,6 +248,8 @@ void traduci_function (char* I, char* O) {
 		ex_next_word (I, function_name, i);
 		i = next_space (I, i);
 
+		index_return = 0;
+
 		ex_next_word (I, str_lcl, i);
 		int_lcl = atoi (str_lcl);
 
@@ -262,6 +265,9 @@ void traduci_function (char* I, char* O) {
 	} else if (i == 4){		//I = call ...
 		char name[200]; name[0] = '\0';
 		char str_arg [5]; str_arg[0] = '\0';
+		char str_index_return[5]; str_index_return[0] = '\0'; 
+
+		int_to_string (str_index_return, index_return); 
 		
 		ex_next_word (I, name, i);
 		
@@ -274,13 +280,15 @@ void traduci_function (char* I, char* O) {
 		strcat (O, "@THIS\nD=M\n@R14\nAM=M-1\nM=D\n");
 		strcat (O, "@ARG\nD=M\n@R14\nAM=M-1\nM=D\n");
 		strcat (O, "@LCL\nD=M\n@R14\nAM=M-1\nM=D\n");
-		strcat (O, "@"); strcat (O, function_name); strcat (O, ".return\n");
+		strcat (O, "@"); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, "\n");
 		strcat (O, "D=A\n@R14\nAM=M-1\nM=D\n");
 		strcat (O, "@SP\nD=M\n@LCL\nM=D\n");
 		strcat (O, "@"); strcat (O, str_arg); strcat (O, "\n");
 		strcat (O, "D=A\n@R14\nD=M-D\n@ARG\nM=D\n");
 		strcat (O, "@"); strcat (O, name); strcat (O, "\n0;JMP\n");
-		strcat (O, "("); strcat (O, function_name); strcat (O, ".return)\n");
+		strcat (O, "("); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, ")\n");
+
+		index_return = index_return + 1;
 
 
 	} else {							//I = return
@@ -293,7 +301,8 @@ void traduci_function (char* I, char* O) {
 void clean_string (char* s) {
 	int i = 0;
 	int found = 0;
-	
+
+	//Tolgo gli spazi iniziali
 	while (i < strlen(s) && found == 0) {
 		if (s[i] != ' ' && s[i] != '\t')
 			found = 1;
@@ -301,10 +310,14 @@ void clean_string (char* s) {
 			i = i + 1;
 	}
 
-	for (int k = 0; k < strlen(s) - i; k++) {
-		s[k] = s[k + i];
+	if (i != 0) {
+		for (int k = 0; k < strlen(s) - i; k++) {
+			s[k] = s[k + i];
+		}
 	}
 
+
+	//Tolgo i commenti
 	found = 0;
 	i = 0;
 	while (i < strlen(s) && found == 0) {
@@ -318,6 +331,14 @@ void clean_string (char* s) {
 		s[i] = '\0';
 	else
 		s[strlen(s) - 2] = '\0';
+
+	//Tolgo spazi finali
+	i = strlen(s) - 1;
+	if (s[i] == ' ') {
+		while (s[i] == ' ')
+			i = i - 1;
+		s[i + 1] = '\0';
+	}
 }
 
 char* estrai_nome (char* path) {
@@ -390,6 +411,8 @@ void int_to_string (char s[], int n) {
 		s[i] = tmp;
 		i = i + 1;
 	}
+
+	s[dim] = '\0';
 }
 
 void ex_next_word (char* s, char* d, int pos) {

@@ -19,9 +19,6 @@ int main(int argc, char** argv) {
 			file_pathO[ strlen(file_pathO) - 2 ] = '\0';
 			strcat (file_pathO, "asm");
 
-			printf("path: %s\n", file_pathI);
-			printf("path: %s\n", file_pathO);
-
 			fileO = fopen (file_pathO, "w");
 
 			if (fileO != NULL) {

@@ -282,6 +282,7 @@ TRADUZIONE VM:
 															0;JMP
 
 															(f_actual.return) //Label di ritorno (f è il nome della funzione)
+															ATTENZIONE: SE CHIAMO PIÙ VOLTE LA FUNZIONE I RETURN SONO UGUALI
 
 
 		return =									FRAME = LCL				(FRAME è temporanea)
