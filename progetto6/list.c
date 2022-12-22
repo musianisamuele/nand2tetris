@@ -1,110 +1,109 @@
 #include "global.h"
 
+struct lista {
+	char* val;
+	int instruction_type;
+	struct lista* next;
+};
 
 
-plista insert (plista h, char* val, char* translated) {
+//Precondizione: Prende un puntatore ad un lista, e i valori che devono
+//esere inseriti ed esegue una head insert sulla lista.
+//
+//Postcondizione: Ritorna un puntatore alla lista con il nuovo elemento inserito
+
+plista insert (plista h, char* val, int instruction_type) {
 	plista tmp = (plista) malloc (sizeof (struct lista));
+
+	//Alloco dinamicamente la grandezza di val in modo da risparmiare spazio
 	tmp->val = (char*) malloc ((strlen(val) + 1 ) * sizeof(char));
 	strcpy (tmp->val, val);
-	tmp->translated = (char*) malloc ((strlen(translated) + 1 ) * sizeof(char));
-	strcpy (tmp->translated, translated);
+	tmp->instruction_type = instruction_type;
 	tmp->next = h;
 	return (tmp);
 }
 
-int is_in (plista h, char* val) {
+
+//Precondizione: Prende un puntatore ad una lista e una stringa e controlla
+//che la stringa sia contenuta nella lista.
+//
+//Postcondizione: Se trova la stringa presa in input restituisce il relativo
+//valore dell'istruzione ad essa associata associata (instruction_type), se no ritorna -1;
+
+int get_type (plista h, char* val) {
 	if (h == NULL)
-		return (0);		//false
+		return (-1);		//L'istruzione non è stata trovata o la lista è vuota
 	else {
 		if (strcmp (h->val, val) == 0)
-			return 1;
+			return (h->instruction_type);
 		else
-			return (is_in (h->next, val));
+			return (get_type (h->next, val));
 	}
 }
 
-char* get_val (plista h, char* val) {
-	if (h == NULL)
-		return (NULL);		//false
-	else {
-		if (strcmp (h->val, val) == 0)
-			return (h->val);
-		else
-			return (get_val (h->next, val));
-	}
-}
+//Precondizione: Prende un puntatore ad una lista.
+//
+//Postcondizione: Restituisce una lista in cui sono inseriti tutti i 
+//comandi che la VM puo' gestire insieme al loro tipo:
+//		0 -> arithm
+//		1 -> memory
+//		2 -> program
+//		3 -> function
 
-plista insert_predefined_ARITHM (plista ARITHM) {
-	char* val = (char*) malloc (4 * sizeof(char));	
+plista insert_predefined (plista h) {
+	char val[10];
+	int instruction_type;
+
 	val[0] = '\0';
-	
-	char* translated = (char*) malloc (1000 * sizeof (char));
-	translated[0] = '\0';
+	instruction_type = 0;
 
 	strcpy (val, "add");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D+M");
-	ARITHM = insert (ARITHM, val, translated);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "sub");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=M-D");
-	ARITHM = insert (ARITHM, val, translated);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "neg");
-	strcpy (translated, "@SP\nA=M-1\nM=-M");
-	ARITHM = insert (ARITHM, val, translated);
+	h = insert (h, val, instruction_type);
 
 	strcpy (val, "eq");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_\nD;JEQ\n@SP\nA=M-1\nM=0\n@END_\n0;JMP\n(TRUE_)\n@SP\nA=M-1\nM=-1\n@END_\n0;JMP\n(END_)");
-	ARITHM = insert (ARITHM, val, translated);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "gt");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_\nD;JGT\n@SP\nA=M-1\nM=0\n@END_\n0;JMP\n(TRUE_)\n@SP\nA=M-1\nM=-1\n@END_\n0;JMP\n(END_)");
-	ARITHM = insert (ARITHM, val, translated);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "lt");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE_\nD;JLT\n@SP\nA=M-1\nM=0\n@END_\n0;JMP\n(TRUE_)\n@SP\nA=M-1\nM=-1\n@END_\n0;JMP\n(END_)");
-	ARITHM = insert (ARITHM, val, translated);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "and");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D&M");
-	ARITHM = insert (ARITHM, val, translated);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "or");
-	strcpy (translated, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D|M");
-	ARITHM = insert (ARITHM, val, translated);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "not");
-	strcpy (translated, "@SP\nA=M-1\nM=!M");
-	ARITHM = insert (ARITHM, val, translated);
-	return (ARITHM);
-}
+	h = insert (h, val, instruction_type);
 
-plista insert_predefined_MEMORY (plista MEMORY) {
-	char* val = (char*) malloc (5 * sizeof(char));	
 	val[0] = '\0';
-
+	instruction_type = 1;
+	
 	strcpy (val, "push");
-	MEMORY = insert (MEMORY, val, val);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "pop");
-	MEMORY = insert (MEMORY, val, val);
-	return (MEMORY);
-}
+	h = insert (h, val, instruction_type);
 
-plista insert_predefined_PROGRAM (plista PROGRAM) {
-	char* val = (char*) malloc (8 * sizeof(char));	
 	val[0] = '\0';
-
+	instruction_type = 2;
+	
 	strcpy (val, "label");
-	PROGRAM = insert (PROGRAM, val, "(_)");
+	h = insert (h, val, instruction_type);
 	strcpy (val, "goto");
-	PROGRAM = insert (PROGRAM, val, "@_\n0;JMP");
+	h = insert (h, val, instruction_type);
 	strcpy (val, "if-goto");
-	PROGRAM = insert (PROGRAM, val, "@SP\nM=M-1\nA=M\nD=M\n@_\nD;JNE");
-	return (PROGRAM);
-}
+	h = insert (h, val, instruction_type);
 
-plista insert_predefined_FUNCTION (plista FUNCTION) {
-	char* val = (char*) malloc (9 * sizeof(char));	
 	val[0] = '\0';
-
+	instruction_type = 3;
+	
 	strcpy (val, "function");
-	FUNCTION = insert (FUNCTION, val, val);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "call");
-	FUNCTION = insert (FUNCTION, val, val);
+	h = insert (h, val, instruction_type);
 	strcpy (val, "return");
-	FUNCTION = insert (FUNCTION, val, val);
-	return (FUNCTION);
+	h = insert (h, val, instruction_type);
+	
+	return (h);
 }
