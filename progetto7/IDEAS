@@ -1,0 +1,35 @@
+Questo file contiene varie idee che potrei implemetare per risolvereil progetto7 di nand2tetris
+
+Considerazioni:
+	0) Non tutte le funzioni che sono presenti nella libreria dell'OS sono chiamate effettivamente. (Non ne ho la certezza però)
+
+	1) C'è sicuramente un codice "statico" che viene eseguito sempre uguale tutte le volte indipendentemente dall'input dato dal player
+
+	2) I comandi asm che ho inserito come traduzione non sono i più ottimizzati in assoluto
+
+	3) Nonostante alcune parti di codice non siano statiche è probabile che lo stack pointer sia quasi sempre determinato e con lui altri valori. Dovrei
+		 effettivamente verificare questa mia tesi, ma se così fosse sarebbe possibile evitare molte istruzioni inutili 
+
+
+Idee:
+	0) Invece che tradurre tutto a "cervello spento" faccio una considerazione: traduco solo quello che viene effettivamente chiamato.
+		 Parto dalla funzione primaria (Sys.vm ?) e poi eseguo Main.vm e da lì in poi inserisco e traduco soltanto le funzioni che vengono effettivamente richieste.
+		 Per fare questo devo avere tutti i file inizialmente, poi tengo una queue delle funzioni da tradurre. Inserisco nella queue Sys.vm (?) e Main.vm e inizio a tradurle.
+		 Appena incontro una "call" controllo che la funzione chiamata non sia già presente nella queue, e se non lo è la aggiungo. Finisco la traduzione quando la queue è vuota.
+
+	1) Tutta l'inzializzazione del sistema (prima quindi che effettivamente parta il gioco) sicuramente è statica, cioè non prende input dall'esterno e quindi esegue sempre lo stesso codice.
+		 Eseguendo sempre lo stesso codice è molto probabile che tutte le push e le pop si possano evitare sapendo a priori i valori da pushare e poppare. Il codice statico finisce quando
+		 si incontra la prima istruzione che controlla l'input da tastiera.
+		 Non so ancora bene come approcciare la cosa:
+		 		0) Potrei crearmi un mio simulatore e vedere quali sono i valori sempre uguali e poi riscrivere un codice asm dedicato solo per quelli
+				1) Oppure potrei tenere traccia dei valore al momento della traduzione vm -> asm e inserirli direttamente (tanto un istruzione di push si può rimpiazzare con 4 istruzioni
+					 asm conoscendo a priori il valore e l'indirizzo di destinazione: @val;D=A;@indirizzo;M=D). Teoricamente anche gli if-goto sono molto più facili da scrivere e ogni operazine
+					 può essere pre-calcolata. Non credo però che nell'inizilizzazione di sistema ci siano if e calcoli da fare
+
+	2) Non credo che l'ottimizzazione del codice asm scritto da me porti una riduzione sostanziale del codice in output. Nonostante ciò è sicuramente qualcosa da poter fare, sopratutto
+		 perché la condizione di if-goto ha due istruzioni inutili alla fine e quindi è possibile che ache altre istruzioni siano inutili.
+
+	3) Per verificare il punto 3 l'unica cosa possibile sarebbe giocare più volte a pong e tenere traccia tutte le volte dei valori in ram e dopo aver raccolto abbastanza partitre fare un
+		 confronto tra di loro per vedere quali valori sono sempre gli stessi. Fatto questo potrei fare un backtracking per cercare di capire quali istruzioni causano quei valori e sostituirle.
+		 La cosa effettivamente potrebbe salvare istruzioni ma, se fatta a manom, richiederebbe un tempo considerevole. Un programma per automatizzare la cosa per il momento però non mi viene in mente. 
+
