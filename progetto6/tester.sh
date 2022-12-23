@@ -1,4 +1,6 @@
 #!/bin/bash
+rm test_files/*.asm
+
 for file in test_files/*.vm
 do
 	./VMtranslator ${file}

@@ -2,36 +2,43 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern char* file_name;
-
-struct lista {
-	char* val;
-	char* translated;
-	struct lista* next;
-};
+struct lista;
 typedef struct lista* plista;
 
+#define MAX_INST_LEN 2000
+
+//VARIABILI GLOBALI
+extern plista list_of_command;
+extern int JMP_counter; 					
+extern char* file_name;						
+extern char function_name [400]; 	
+extern int index_return;	
+
+	/* LIBRARY */
+
 void traduci (FILE* fileI, FILE* fileO);
-void clean_string (char* s);
-char* estrai_nome (char* path);
-void insert_in_string (char* s, char* in, int pos);
 int my_log10 (int n);
-void int_to_string (char s[], int n);
-void ex_next_word (char* s, char* d, int pos);
-int next_space (char* s, int i);
-	
+
+
+	/* TRANSLATER */
+
 int detect_instruction (char* I);
 void traduci_arithm (char* I, char* O);
 void traduci_memory (char* I, char* O);
 void traduci_program (char* I, char* O);
 void traduci_function (char* I, char* O);
 
+
 	/* LISTE */
 
-plista insert (plista h, char* val, char* translated); 
-int is_in (plista h, char* val); 
-char* get_val (plista h, char* val); 
-plista insert_predefined_ARITHM (plista ARITHM); 
-plista insert_predefined_MEMORY (plista MEMORY); 
-plista insert_predefined_PROGRAM (plista PROGRAM); 
-plista insert_predefined_FUNCTION (plista FUNCTION); 
+plista insert (plista h, char* val, int instruction_type); 
+int get_type (plista h, char* val); 
+plista insert_predefined (plista h); 
+
+
+	/* STRINGE */
+
+void clean_string (char* s);
+char* estrai_nome (char* path);
+void int_to_string (char s[], int n);
+void ex_next_word (char* s, char* d, int pos);
