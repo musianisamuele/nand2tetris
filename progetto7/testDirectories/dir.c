@@ -1,5 +1,7 @@
 #include "global.h"
 
+plistaf list_of_function;
+
 int is_a_dir (char* s) {
 	int len = strlen (s);
 
@@ -21,6 +23,61 @@ void genera_path_to_file (char* d, char* s1, char* s2) {
 	strcat (d, s2);
 }
 
+int is_a_function (char* s) {
+	if (strlen (s) < 10) return 0; //false
+	else {
+		char tmp[9];
+
+		int i = 0;
+
+		while (i < 9 && i < strlen (s)) {
+			tmp[i] = s[i];
+			i++;
+		}
+
+		tmp [8] = '\0';
+
+		if ( strcmp (tmp, "function") == 0 ) return 1; //true
+		else return 0;
+	}
+}
+
+int get_function_name (char* d, char* s) {
+	char tmp [600];
+
+	while (*s != ' ') s++;
+	s++;
+
+	strcpy (tmp, s);
+
+	int i = 0;
+
+	while (tmp[i] != ' ') i++;
+
+	tmp[i] = '\0';
+
+	strcpy (d, tmp);
+}
+
+int is_a_return (char* s) {
+	if (strlen (s) < 6) return 0; //false
+	else {
+		char tmp[7];
+
+		int i = 0;
+
+		while (i < 7 && i < strlen (s)) {
+			tmp[i] = s[i];
+			i++;
+		}
+
+		tmp [6] = '\0';
+
+		if ( strcmp (tmp, "return") == 0 ) return 1; //true
+		else return 0;
+	}
+}
+
 void read_file (char* path) {
 	FILE* file = NULL;
 	file = fopen (path, "r");
@@ -37,13 +94,26 @@ void read_file (char* path) {
 	char I[1000];
 
 	while ( fgets (I, 1000, file) != NULL ) {
-		printf ("\t%s", I);
+		//printf ("\t%s", I);
+
+		if ( is_a_function (I) == 1 ) {
+			char name[100];
+			get_function_name (name, I);
+			list_of_function = insert_function (list_of_function, name, NULL);
+			//printf ("-----> FUNCTION: %s\n", name);
+		}
+
+		//if ( is_a_return (I) == 1 ) printf ("-----> RETURN\n");
+
 	}
 
 	fclose (file);
 }
 
 void read_dir (char* path) {
+	//Inizializzo la lista di funzioni globale a vuota
+	list_of_function = NULL;
+
 	DIR* dir = NULL;
 	dir = opendir (path);
 
@@ -77,6 +147,9 @@ void read_dir (char* path) {
 
 		printf("\n");
 	}
+
+	printf ("\n\nFUNZIONI:\n");
+	print_lista (list_of_function);
 
 	closedir (dir);
 }
