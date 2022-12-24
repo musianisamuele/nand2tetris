@@ -8,6 +8,33 @@ Devo implementare nuove funzioni sulla VM, in particolare:
 	- static fa quello che dico io
 	- invocazione su directories e non su file singoli
 
+
+Implementazione su directories:
+	Quando chiamo il VMtranslator su una directory e non su un file (lo capisco perché non ha estensione)
+	devo chiamare Sys.init e poi chiamare Main. Da Main qualsiasi altra funzione che viene chiamata deve
+	essere trovata e tradotta.
+
+
+	FLOW:
+		- La mia idea è di leggere tutti i file nella cartella, trovare solo quelli con estensione .vm e
+			inserirli in una struttura.
+
+		- Successivamente li leggo tutti e memorizzo qualsiasi funzione che è stata definita insieme alla 
+			sua posizione e al nome del file in cui è definita.
+		
+		- Per la traduzione traduco ogni funzione per volta. In pratica inserisco le funzioni che devo
+			tradurre in una coda e termino il programma quando non ho più funzioni da tradurre. Se durante
+			la traduzione di una funzione ne incontro un'altra NON ancora tradotta (ciclo infinito?) la inserisco
+			in coda e continuo la mia traduzione. In questo modo dovrei essere in grado di tradurre solo le funzioni
+			strettamente necessarie e salvare spazio.
+
+		- Prima dela traduzione devo inserire nella lista Sys.init e Main
+
+	
+	Lookup delle funzioni:
+		Quando ho una nuova funzione da tradurre vado a vedere in che file si trova, grazia alla scansione fatta
+		inizialmente. Se non la trovo blocco tutto.
+
 Implementazione segmenti:
 	- this, that:
 			General-purpose segments. Can be made to correspond to different areas in the heap.
