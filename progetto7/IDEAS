@@ -10,6 +10,11 @@ Considerazioni:
 	3) Nonostante alcune parti di codice non siano statiche è probabile che lo stack pointer sia quasi sempre determinato e con lui altri valori. Dovrei
 		 effettivamente verificare questa mia tesi, ma se così fosse sarebbe possibile evitare molte istruzioni inutili 
 
+<<<<<<< HEAD
+	4) In alcuni programmi ci sono tantissime call alla stassa funzione. Forse con dei jmp posso ottimizzare per evitare di ripetere sempre tutte le istruzioni
+
+=======
+>>>>>>> 40e2b9f (First commit)
 
 Idee:
 	0) Invece che tradurre tutto a "cervello spento" faccio una considerazione: traduco solo quello che viene effettivamente chiamato.
