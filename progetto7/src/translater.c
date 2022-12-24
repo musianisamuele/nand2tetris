@@ -68,45 +68,122 @@ void traduci_memory (char* I, char* O) {
 	ex_next_word (I, number, strlen (command) + strlen (segment) + 1 ); //Aggiungo 1 per lo spazio tra il comando
 																																			//e il nome del segmento
 
-	strcat (O, "@"); strcat (O, number);
-	strcat (O, "\nD=A\n");
+	//Nonostante i codici siano simili e ci siano delle stringhe
+	//ripetute, per una pulizia del codice preferisco dividere pop e push
 
 	if ( strcmp (command, "pop") == 0 ) {	
-		if (strcmp (segment, "argument") == 0) {
-			strcat (O, "@ARG\n");
-			strcat (O, "D=D+M\n");
-		} else if (strcmp (segment, "local") == 0) {
-			strcat (O, "@LCL\n");
-			strcat (O, "D=D+M\n");
-		} else if (strcmp (segment, "static") == 0) {
-			strcpy (O, "@");
-			strcat (O, file_name);
-			strcat (O, ".");
-			strcat (O, number);
+		//Per i segmento argument, local, static, this e that
+		//l'implementazione è praticamete uguale quindi faccio solo una piccola
+		//distinzione per sapere a che indirizzo devo puntare, ma il codice
+		//si ripete quindi alcune istruzioni le ho rese "generali"
+		//
+		//Per il segmento pointer e il segmento temp invece l'implementazione differisce
+		//abbastanza e quindi lo traduco in maniera diversa
+
+		if ( strcmp (segment, "pointer") == 0 ) {
+			strcat (O, "@SP\nAM=M-1\nD=M\n");
+
+			//Per una piccola ottimizzazione del codice, essendo che pointer può avere solo
+			//due "valori" come numero che lo seguono faccio il caso e così riparimio qualche istruzione
+			
+			if ( strcmp (number, "0") == 0 )
+				strcat (O, "@THIS\n");
+			else 
+				strcat (O, "@THAT\n");
+
+			strcat (O, "M=D");
+
+		} else if ( strcmp (segment, "temp") == 0 ) {
+			//Per ottimizzare il codice faccio un precalcolo sull'indirizzo in cui
+			//dovro' scrivere il risultato. In pratica essendo il segmento temp compreso 
+			//tra RAM[5] e RAM[12], il numero dopo il comando vm sarò compreso per forza tra 0
+			//e 7 (12 - 5). Quindi posso calcolare gia' l'indirizzo di in cui scrivere il valore
+			//della pop semplicemente scrivendo (x + 5) e facendo gia' io il calcolo
+
+			strcat (O, "@SP\nAM=M-1\nD=M\n@");
+
+			char tmp[3]; tmp[0] = '\0';
+			int_to_string (tmp, atoi (number) + 5);
+
+			strcat (O, tmp);
+			strcat (O, "\nM=D");
+		} else {
+			strcat (O, "@"); strcat (O, number);
 			strcat (O, "\nD=A\n");
-		}
 
-		strcat (O, "@R13\nM=D\n@SP\nM=M-1\nA=M\nD=M\n@R13\nA=M\nM=D");
-
-	} else if ( strcmp (command, "push") == 0 ) {
-		if (strcmp (segment, "constant") != 0) {
 			if (strcmp (segment, "argument") == 0) {
 				strcat (O, "@ARG\n");
-				strcat (O, "A=D+M\n");
+				strcat (O, "D=D+M\n");
 			} else if (strcmp (segment, "local") == 0) {
 				strcat (O, "@LCL\n");
-				strcat (O, "A=D+M\n");
+				strcat (O, "D=D+M\n");
 			} else if (strcmp (segment, "static") == 0) {
 				strcpy (O, "@");
 				strcat (O, file_name);
 				strcat (O, ".");
 				strcat (O, number);
 				strcat (O, "\nD=A\n");
+			} else if (strcmp (segment, "this") == 0) {
+				strcat (O, "@THIS\n");
+				strcat (O, "D=D+M\n");
+			} else if (strcmp (segment, "that") == 0) {
+				strcat (O, "@THAT\n");
+				strcat (O, "D=D+M\n");
 			}
 
-			strcat (O, "D=M\n");
+			strcat (O, "@R13\nM=D\n@SP\nM=M-1\nA=M\nD=M\n@R13\nA=M\nM=D");
 		}
-		strcat (O, "@SP\nM=M+1\nA=M-1\nM=D");
+
+	} else if ( strcmp (command, "push") == 0 ) {
+		if ( strcmp (segment, "pointer") == 0 ) {
+
+			if ( strcmp (number, "0") == 0 )
+				strcat (O, "@THIS\n");
+			else
+				strcat (O, "@THAT\n");
+
+			strcat (O, "D=M\n@SP\nM=M+1\nA=M-1\nM=D");
+
+		} else if ( strcmp (segment, "temp") == 0 ) {
+			strcat (O, "@");
+
+			char tmp[3]; tmp[0] = '\0';
+			int_to_string (tmp, atoi (number) + 5);
+			strcat (O, tmp);
+
+			strcat (O, "\nD=M\n@SP\nM=M+1\nA=M-1\nM=D");
+		} else {
+			strcat (O, "@"); strcat (O, number);
+			strcat (O, "\nD=A\n");
+
+			if (strcmp (segment, "constant") != 0) {
+				if (strcmp (segment, "argument") == 0) {
+					strcat (O, "@ARG\n");
+					strcat (O, "A=D+M\n");
+				} else if (strcmp (segment, "local") == 0) {
+					strcat (O, "@LCL\n");
+					strcat (O, "A=D+M\n");
+				} else if (strcmp (segment, "static") == 0) {
+					strcpy (O, "@");
+					strcat (O, file_name);
+					strcat (O, ".");
+					strcat (O, number);
+					strcat (O, "\nD=A\n");
+				} else if (strcmp (segment, "this") == 0) {
+					strcat (O, "@THIS\n");
+					strcat (O, "D=D+M\n");
+				} else if (strcmp (segment, "that") == 0) {
+					strcat (O, "@THAT\n");
+					strcat (O, "D=D+M\n");
+				} else if (strcmp (segment, "temp") == 0) {
+					strcat (O, "@R5\n");
+					strcat (O, "D=D+M\n");
+				}
+
+				strcat (O, "D=M\n");
+			}
+			strcat (O, "@SP\nM=M+1\nA=M-1\nM=D");
+		}
 	} else {
 		printf ("ERROR: istruzione di tipo memory non riconosciuta!\n");
 		printf ("Istruzione: %s\n", I);

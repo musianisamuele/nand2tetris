@@ -1,0 +1,14 @@
+push constant 2300
+push constant 2400
+pop pointer 0
+pop pointer 1
+push pointer 0
+push pointer 1
+push pointer 0
+push pointer 1
+push pointer 0
+push pointer 1
+push pointer 0
+push pointer 1
+push pointer 0
+push pointer 1
