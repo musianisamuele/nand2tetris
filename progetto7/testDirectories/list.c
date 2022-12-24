@@ -50,9 +50,19 @@ plistaf remove_function (plistaf h) {
 	}
 }
 
+void print_lista_string (plistas h) {
+	while (h != NULL) {
+		printf ("\t%s", h->val);
+		h = h->next;
+	}
+
+	printf ("NULL\n");
+}
+
 void print_lista (plistaf h) {
 	while (h != NULL) {
 		printf ("%s->\n", h->name);
+		print_lista_string (h->val);
 		h = h->next;
 	}
 

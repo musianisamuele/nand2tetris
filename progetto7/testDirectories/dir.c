@@ -93,18 +93,29 @@ void read_file (char* path) {
 	
 	char I[1000];
 
+	char name[100];
+	int inside_a_function = 0; //false
+	
+	plistas function_body = NULL;
+
 	while ( fgets (I, 1000, file) != NULL ) {
-		//printf ("\t%s", I);
 
 		if ( is_a_function (I) == 1 ) {
-			char name[100];
+			inside_a_function = 1;
+
 			get_function_name (name, I);
-			list_of_function = insert_function (list_of_function, name, NULL);
-			//printf ("-----> FUNCTION: %s\n", name);
+
+			function_body = NULL;
 		}
 
-		//if ( is_a_return (I) == 1 ) printf ("-----> RETURN\n");
+		if (inside_a_function == 1) {
+			function_body = insert_instruction (function_body, I);
+		}
 
+		if ( is_a_return (I) == 1 && inside_a_function == 1 ) {
+			list_of_function = insert_function (list_of_function, name, function_body);
+			inside_a_function = 0;
+		}
 	}
 
 	fclose (file);
