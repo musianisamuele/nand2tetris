@@ -13,8 +13,8 @@ void multi_file_translater (plistaf functions, FILE* file) {
 
 	plistas da_tradurre = NULL;		//Coda in cui inserisco le funzioni da tradurre
 	
-//	da_tradurre = tail_insert (da_tradurre, "Sys.init");
-	da_tradurre = tail_insert (da_tradurre, "Main.main");
+  da_tradurre = tail_insert (da_tradurre, "Sys.init");
+	//da_tradurre = tail_insert (da_tradurre, "Main.main");
 
 	while (da_tradurre != NULL) {
 		int status = is_already_translated (functions, da_tradurre->val);
@@ -64,8 +64,11 @@ plistas traduci_function (plistas funzione_corrente, plistas dependencies, FILE*
 	
 		printf ("\t%s", funzione_corrente->val);
 		strcpy (O, funzione_corrente->val);
-		O [strlen (O) - 1] = '\0';
-		O [strlen (O) - 1] = '\n';
+		if ( O [strlen (O) - 2] == '\r' )
+			O [strlen (O) - 2] = '\n';
+
+		if ( O [strlen (O) - 1] == '\n' && O [strlen (O) - 2] == '\n' )
+			O [strlen (O) - 1] = '\0';
 		fprintf (file, O);
 		//Per adesso mi preoccupo solo di inserire le dipendenze
 
