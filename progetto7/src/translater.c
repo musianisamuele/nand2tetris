@@ -1,6 +1,6 @@
 #include "global.h"
 
-void traduci_arithm (char* I, char* O) {
+void translate_instruction_of_type_arithm (char* I, char* O) {
 	if ( strcmp (I, "add") == 0 ) {
 		strcpy (O, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D+M");
 	} else if ( strcmp (I, "sub") == 0 ) {
@@ -56,7 +56,7 @@ void traduci_arithm (char* I, char* O) {
 	}
 }
 
-void traduci_memory (char* I, char* O) {
+void translate_instruction_of_type_memory (char* I, char* O) {
 	char command [100]; command[0] = '\0';
 	char segment [100]; segment[0] = '\0';
 	char number [100]; number[0] = '\0';
@@ -191,7 +191,7 @@ void traduci_memory (char* I, char* O) {
 	}
 }
 
-void traduci_program (char* I, char* O) {
+void translate_instruction_of_type_program (char* I, char* O) {
 	int i = 0;
 	char command[10]; command [0] = '\0';
 	char name[1000];
@@ -226,7 +226,7 @@ void traduci_program (char* I, char* O) {
 	}
 }
 
-void traduci_function (char* I, char* O) {
+void translate_instruction_of_type_function (char* I, char* O) {
 	int i = 0;
 	
 	char command[10]; command [0] = '\0';

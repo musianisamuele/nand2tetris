@@ -37,13 +37,13 @@ void traduci (FILE* fileI, FILE* fileO) {
 		int I_type = detect_instruction (I);
 
 		if (I_type == 0)
-			traduci_arithm (I, O);
+			translate_instruction_of_type_arithm (I, O);
 		else if (I_type == 1)
-			traduci_memory (I, O);
+			translate_instruction_of_type_memory (I, O);
 		else if (I_type == 2)
-			traduci_program (I, O);
+			translate_instruction_of_type_program (I, O);
 		else if (I_type == 3)
-			traduci_function (I, O);
+			translate_instruction_of_type_function (I, O);
 
 		//Se ho riconosciuto l'istruzione e non ci sono stati problemi 
 		//durante la traduzione la scrivo sul file

@@ -23,10 +23,10 @@ int my_log10 (int n);
 	/* TRANSLATER */
 
 int detect_instruction (char* I);
-void traduci_arithm (char* I, char* O);
-void traduci_memory (char* I, char* O);
-void traduci_program (char* I, char* O);
-void traduci_function (char* I, char* O);
+void translate_instruction_of_type_arithm (char* I, char* O);
+void translate_instruction_of_type_memory (char* I, char* O);
+void translate_instruction_of_type_program (char* I, char* O);
+void translate_instruction_of_type_function (char* I, char* O);
 
 
 	/* LISTE */

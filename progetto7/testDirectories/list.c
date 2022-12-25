@@ -1,15 +1,6 @@
 #include "global.h"
 
-struct string_list {
-	char* val;
-	struct string_list* next;
-};
 
-struct lista_function {
-	char* name;
-	struct string_list* val;
-	struct lista_function* next;
-};
 
 plistaf insert_function (plistaf h, char* name, plistas val) {
 	if (h == NULL) {
@@ -41,13 +32,25 @@ plistas insert_instruction (plistas h, char* val) {
 	}
 }
 
-plistaf remove_function (plistaf h) {
+//Rimuove la testa
+plistas remove_function (plistas h) {
 	if (h == NULL) return NULL;
 	else {
-		plistaf tmp = h->next;
+		plistas tmp = h->next;
 		free (h);
 		return tmp;
 	}
+}
+
+//Funzione che faccio solo per avere una pulizia dei nomi
+plistas tail_insert (plistas s, char* val) {
+	return ( insert_instruction (s, val) );
+}
+
+plistas get_function_body (plistaf h, char* name) {
+	if (h == NULL) return NULL;
+	else if ( strcmp (h->name, name) == 0 ) return h->val;
+	else return (get_function_body (h->next, name));
 }
 
 void print_lista_string (plistas h) {
