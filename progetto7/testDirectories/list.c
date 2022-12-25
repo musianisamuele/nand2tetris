@@ -1,7 +1,5 @@
 #include "global.h"
 
-
-
 plistaf insert_function (plistaf h, char* name, plistas val) {
 	if (h == NULL) {
 		h = malloc ( sizeof (struct lista_function) );
@@ -9,6 +7,7 @@ plistaf insert_function (plistaf h, char* name, plistas val) {
 		strcpy (h->name, name);
 
 		h->val = val;
+		h->translated = 0;
 		h->next = NULL;
 		return h;
 	} else {
@@ -49,8 +48,17 @@ plistas tail_insert (plistas s, char* val) {
 
 plistas get_function_body (plistaf h, char* name) {
 	if (h == NULL) return NULL;
-	else if ( strcmp (h->name, name) == 0 ) return h->val;
+	else if ( strcmp (h->name, name) == 0 ) {
+		h->translated = 1;
+		return h->val;
+	}
 	else return (get_function_body (h->next, name));
+}
+
+int is_already_translated (plistaf f, char* name) {
+	if (f == NULL) return -1;
+	else if ( strcmp (f->name, name) == 0 ) return (f->translated);
+	else return (is_already_translated (f->next, name));
 }
 
 void print_lista_string (plistas h) {

@@ -20,6 +20,7 @@ typedef struct string_list* plistas;
 struct lista_function {
 	char* name;
 	struct string_list* val;
+	int translated;			//0 -> flase, 1 -> true
 	struct lista_function* next;
 };
 typedef struct lista_function* plistaf;
@@ -31,6 +32,7 @@ plistas insert_instruction (plistas h, char* val);
 plistas remove_function (plistas h); 
 plistas tail_insert (plistas s, char* val);
 plistas get_function_body (plistaf h, char* name);
+int is_already_translated (plistaf f, char* name);
 void print_lista_string (plistas h);
 void print_lista (plistaf h); 
 
