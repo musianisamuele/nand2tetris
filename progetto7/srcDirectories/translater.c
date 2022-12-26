@@ -64,21 +64,60 @@ plistas traduci_function (plistas funzione_corrente, plistas dependencies, FILE*
 	
 		printf ("\t%s", funzione_corrente->val);
 		strcpy (O, funzione_corrente->val);
+		
+		//Rimuovo spiacevoli '\r' e '\n'
 		if ( O [strlen (O) - 2] == '\r' )
 			O [strlen (O) - 2] = '\n';
 
 		if ( O [strlen (O) - 1] == '\n' && O [strlen (O) - 2] == '\n' )
 			O [strlen (O) - 1] = '\0';
-		fprintf (file, O);
-		//Per adesso mi preoccupo solo di inserire le dipendenze
 
+		//Stampo su file l'istruzione
+		if ( is_a_function (O) == 1 ) {
+			char tmp[1000];
+			strcpy (tmp, "\nfunction OS_PONG.");
+			char name[1000];
+			get_function_name (name, O);
+
+			int i = 0;
+			while (name[i] != '.') i++;
+
+			name[i] = '_';
+
+			strcat (tmp, name);
+
+			strcat (tmp, O + 1 + 8 + strlen (name));
+			strcpy (O, tmp);
+		} 
+
+		if ( is_a_call (O) == 1 ) {
+			char tmp[1000];
+			strcpy (tmp, "call OS_PONG.");
+			char name[1000];
+			get_function_name (name, O);
+
+			int i = 0;
+			while (name[i] != '.') i++;
+
+			name[i] = '_';
+
+			strcat (tmp, name);
+
+			strcat (tmp, O + 1 + 4 + strlen (name));
+			strcpy (O, tmp);
+		}
+
+		fprintf (file, O);
+
+		//Se chiamo una funzione la inserisco nelle dipendeze da risolvere
 		if ( is_a_call (funzione_corrente->val) == 1 ) {
 			char name[400];
 			get_function_name (name, funzione_corrente->val);
 
 			dependencies = tail_insert (dependencies, name);
 		}
-
+		
+		//Procedo nella truduzione
 		funzione_corrente = funzione_corrente->next;
 	}
 

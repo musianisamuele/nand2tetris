@@ -1,0 +1,100 @@
+QUESTO FILE CONTIENE NOTE SUL DEBUGGING DELLA VM. IN PARTICOLARE NOTE
+SULL'USO DEL LINGUAGGIO tst CHE È STATO FORNITO DA nand2tetris.
+
+File format and usage:
+	Xxx.vm 		-> Il file con il docice vm da testare
+
+	Xxx.tst 	-> Script del test
+
+	Xxx.out		-> File OPZIONALE. Tiene una traccia di quello che viene stampato
+
+	Xxx.cmp		-> File OPZIONALE. Confronta quello stampato
+
+	TUTTI I FILE DEVONO ESSERE NELLA STESSA DIRECTORY
+
+
+Script commands:
+
+	// 	-> Commenti
+
+	,		-> terminates a scuot command
+
+	;		-> terminates a script command and a simultation step. A simulation step
+				 consistes of one or more script commands. In pratica dovrebbe corrispondere
+				 all'avanzamento di uno step se si fa dalla GUI.
+				 
+	!		-> terminates a script command and stops the script execution. The user can
+				 later resume the script execution from that point onward. This option is
+				 typically used to facilitate interactive debugging.
+
+	Setup commands:
+		
+		load Xxx.vm			-> Carico il file. Deve essere nella stessa directory. Se l'estensione non
+											 è specificata carico la cartella con nome Xxx
+
+		output-file Xxx.out		-> File di output nella stessa directory
+
+		compare-to Xxx.cmp		-> File di comparazione dell'output. If any two lines
+														 are not the same, the simulator displays an error
+														 message and halts the script execution.
+
+		output-list v1,v2,... -> Il seguente comando serve per indicare il formato e cosa
+														 stampare nel file di output. È seguito dai nomi delle variabili
+														 e dal formato di stampa. Il formato può essere %B (binario),
+														 %X (esadecimale), %D (decimale), %S (string). Inoltre è fomato da
+														 3 numeri che indicano le spaziature: padL.len.padR .
+														 CI PUÒ ESSERE PIÙ VOLTE QUESSTO COMANDO.
+
+														Output-list time%S1.5.1	
+																				reset%B2.1.2
+																				pc%D2.3.1
+																				DRegister[] %X3.4.4
+
+														|	time	|reset|	pc	|Dregister[]|
+														|	20+		|	0		|	21	|		FFFF		|
+														|	21		|	0		|	22	|		FFFF		|
+
+	Simulation Commands:
+		
+		set yyy vvv		-> Assegna alla varibiale di nome yyy il valore vvv. 
+
+		eval					-> ??
+
+		output				-> Scrive l'output e compara con il .cmp
+
+		repeat n {commands} -> Ripete n volte i comandi tra graffe
+
+		while con {commands} -> Finchè con è TRUE allora i comandi vengono ripetuti
+
+		echo "text"		-> Printa il testo dentro la GUI nella status line
+
+		clear-echo		-> Pulisce la status line
+
+
+		breakpoint yyy vvv	-> Se la variabile yyy assume il valore vvv lo script si ferma
+
+		clear-breakpoint		-> Cancella i breakpoint precedentemente definiti
+
+		vmstep		-> Va avanti di un'instruzione
+	
+
+	Variabili:
+		local[i]
+
+		argument[i]
+
+		this[i]
+		
+		that[i]
+
+		temp[i]
+
+		SP
+
+		RAM[i]
+
+		local, argumen, this, that		-> Come valori e non come puntano
+
+		currentFunction
+
+		line
