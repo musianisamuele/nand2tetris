@@ -75,7 +75,7 @@ plistas traduci_function (plistas funzione_corrente, plistas dependencies, FILE*
 		//Stampo su file l'istruzione
 		if ( is_a_function (O) == 1 ) {
 			char tmp[1000];
-			strcpy (tmp, "\nfunction OS_PONG.");
+			strcpy (tmp, "\nfunction MYPONG.");
 			char name[1000];
 			get_function_name (name, O);
 
@@ -92,7 +92,7 @@ plistas traduci_function (plistas funzione_corrente, plistas dependencies, FILE*
 
 		if ( is_a_call (O) == 1 ) {
 			char tmp[1000];
-			strcpy (tmp, "call OS_PONG.");
+			strcpy (tmp, "call MYPONG.");
 			char name[1000];
 			get_function_name (name, O);
 
