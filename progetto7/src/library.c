@@ -53,6 +53,9 @@ void traduci (FILE* fileI, FILE* fileO) {
 
 	get_routine_of_return (O);
 	fprintf (fileO, "%s\n", O);
+	
+	get_routine_of_call (O);
+	fprintf (fileO, "%s\n", O);
 }
 
 /* Postocondizione: Presa in input una stringa restituisce

@@ -269,6 +269,21 @@ void translate_instruction_of_type_function (char* I, char* O) {
 		ex_next_word (I, name, i);
 		ex_next_word (I, str_arg, i + strlen (name)  + 1);
 
+		//NUOVA IMPLEMENTAZIONE
+		
+		strcpy (O, "@"); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, "\n");
+		strcat (O, "D=A\n@SP\nA=M\nM=D\n");
+		strcat (O, "@"); strcat (O, str_arg); strcat (O, "\n");
+		strcat (O, "D=A\n@R13\nM=D\n");
+		strcat (O, "@"); strcat (O, name); strcat (O, "\n");
+		strcat (O, "D=A\n@R14\nM=D\n");
+		strcat (O, "@"); strcat (O, ROUTINE_OF_CALL);
+		strcat (O, "\n0;JMP\n");
+		strcat (O, "("); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, ")");
+
+
+		//VECCHIA IMPLEMENTAZIONE
+		/*
 		strcpy (O, "@5\nD=A\n@SP\nM=M+D\nD=M-1\n@R14\nM=D\n@THAT\nD=M\n@R14\nA=M\nM=D\n@THIS\nD=M\n@R14\nAM=M-1\nM=D\n@ARG\nD=M\n@R14\nAM=M-1\nM=D\n@LCL\nD=M\n@R14\nAM=M-1\nM=D\n");
 		strcat (O, "@"); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, "\n");
 		strcat (O, "D=A\n@R14\nAM=M-1\nM=D\n@SP\nD=M\n@LCL\nM=D\n");
@@ -276,6 +291,7 @@ void translate_instruction_of_type_function (char* I, char* O) {
 		strcat (O, "D=A\n@R14\nD=M-D\n@ARG\nM=D\n");
 		strcat (O, "@"); strcat (O, name); strcat (O, "\n0;JMP\n");
 		strcat (O, "("); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, ")\n");
+		*/
 
 	} else if (strcmp (command, "return") == 0) {
 		strcpy (O, "@");
@@ -289,8 +305,21 @@ void translate_instruction_of_type_function (char* I, char* O) {
 }
 
 void get_routine_of_return (char* O) {
-		strcpy (O, "(");
-		strcat (O, ROUTINE_OF_RETURN);
-		strcat (O, ")\n");
-		strcat (O, "@SP\nA=M-1\nD=M\n@ARG\nA=M\nM=D\nD=A+1\n@SP\nM=D\n@LCL\nD=M\n@R14\nAM=D-1\nD=M\n@THAT\nM=D\n@R14\nAM=M-1\nD=M\n@THIS\nM=D\n@R14\nAM=M-1\nD=M\n@ARG\nM=D\n@R14\nAM=M-1\nD=M\n@LCL\nM=D\n@R14\nAM=M-1\nA=M\n0;JMP");
+	strcpy (O, "(");
+	strcat (O, ROUTINE_OF_RETURN);
+	strcat (O, ")\n");
+	strcat (O, "@SP\nA=M-1\nD=M\n@ARG\nA=M\nM=D\nD=A+1\n@SP\nM=D\n@LCL\nD=M\n@R14\nAM=D-1\nD=M\n@THAT\nM=D\n@R14\nAM=M-1\nD=M\n@THIS\nM=D\n@R14\nAM=M-1\nD=M\n@ARG\nM=D\n@R14\nAM=M-1\nD=M\n@LCL\nM=D\n@R14\nAM=M-1\nA=M\n0;JMP");
+}
+
+void get_routine_of_call (char* O) {
+	strcpy (O, "(");
+	strcat (O, ROUTINE_OF_CALL);
+	strcat (O, ")\n");
+	strcat (O, "@LCL\nD=M\n@SP\nAM=M+1\nM=D\n");
+	strcat (O, "@ARG\nD=M\n@SP\nAM=M+1\nM=D\n");
+	strcat (O, "@THIS\nD=M\n@SP\nAM=M+1\nM=D\n");
+	strcat (O, "@THAT\nD=M\n@SP\nAM=M+1\nM=D\n");
+	strcat (O, "@SP\nMD=M+1\n@LCL\nM=D\n");
+	strcat (O, "@5\nD=A\n@R13\nD=D+M\n@SP\nD=M-D\n@ARG\nM=D\n");
+	strcat (O, "@R14\nA=M\n0;JMP");
 }

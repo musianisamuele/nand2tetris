@@ -1,0 +1,12 @@
+push constant 111
+push constant 222
+call Sum 2
+label PIPPO
+goto PIPPO
+
+function Sum 0
+push argument 0
+push argument 1
+add
+return
+

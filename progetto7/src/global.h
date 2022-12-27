@@ -8,6 +8,7 @@ typedef struct lista* plista;
 #define MAX_INST_LEN 2000
 
 #define ROUTINE_OF_RETURN "ROUTINE_OF_RETURN"
+#define ROUTINE_OF_CALL "ROUTINE_OF_CALL"
 
 //VARIABILI GLOBALI
 extern plista list_of_command;
@@ -30,6 +31,7 @@ void translate_instruction_of_type_memory (char* I, char* O);
 void translate_instruction_of_type_program (char* I, char* O);
 void translate_instruction_of_type_function (char* I, char* O);
 void get_routine_of_return (char* O);
+void get_routine_of_call (char* O);
 
 
 	/* LISTE */

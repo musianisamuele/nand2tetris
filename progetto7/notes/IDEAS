@@ -48,4 +48,139 @@ Idee:
 --------------------------------------------------	OTTIMIZZAZIONE CALL	 --------------------------------------------------	
 
 	Codice vecchio:
-		
+		call (f) =								push return-address
+															push LCL
+															push ARG
+															push THIS
+															push THAT
+															ARG = SP - n - 5 (n : number of args)
+															LCL = SP
+															goto f
+															(return-address)
+
+															ASSEMBLY:
+															@5			//Devo fare la push di 5 valori (lo so a priori)
+															D=A			
+															@SP
+															M=M+D		//Aumento lo stack pointer di 5 (tanto lo so a priori)
+															D=M-1		//Vado al contrario per salvare i valori (è più comodo).
+															@R14		//Indirizzo di supporto in cui salvo gli indirizzi in cui scrivere
+															M=D
+															
+															@THAT		//Prendo il valore di that
+															D=M
+															@R14
+															A=M
+															M=D			//Inserisco THAT nello stack
+															
+															@THIS
+															D=M
+															@R14
+															AM=M-1
+															M=D			//Inserisco THIS
+
+
+															@ARG
+															D=M
+															@R14
+															AM=M-1
+															M=D			//Inserisco THIS
+
+															@LCL
+															D=M
+															@R14
+															AM=M-1
+															M=D			//Inserisco THIS
+
+															@f_acctual.return		//Inserisco il valore di return
+															D=A
+															@R14
+															AM=M-1
+															M=D
+
+															@SP				//LCL = SP
+															D=M
+															@LCL
+															M=D
+
+															@n					//ARG = SP - n - 5. MODIFICARE n IN RUNTIME -> NUMERO ARGOMENTI
+															D=A
+															@R14
+															D=M-D
+															@ARG
+															M=D
+
+															@f
+															0;JMP
+
+															(f_actual.return) //Label di ritorno (f è il nome della funzione)
+															ATTENZIONE: SE CHIAMO PIÙ VOLTE LA FUNZIONE I RETURN SONO UGUALI
+
+	
+	Codice nuovo:
+		call (f) =								@f_acctual.return
+															D=A
+															@SP
+															A=M
+															M=D
+
+															@n
+															D=A
+															@R13
+															M=D
+
+															@f
+															D=A
+															@R14
+															M=D
+
+															@ROUTINE_OF_CALL
+															0;JMP
+
+															(f_acctual.return)
+
+
+															(ROUTINE_OF_CALL)
+
+															@LCL
+															D=M
+															@SP
+															AM=M+1
+															M=D
+
+															@ARG
+															D=M
+															@SP
+															AM=M+1
+															M=D
+															
+															@THIS
+															D=M
+															@SP
+															AM=M+1
+															M=D
+
+															@THAT
+															D=M
+															@SP
+															AM=M+1
+															M=D
+
+															@SP
+															MD=M+1
+															@LCL
+															M=D
+
+															@5
+															D=A
+															@R13			//Dove ho salvato il numero di argomenti
+															D=D+M
+															@SP
+															D=M-D
+															@ARG
+															M=D
+
+															@R14
+															A=M
+															0;JMP
+
