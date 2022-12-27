@@ -278,10 +278,19 @@ void translate_instruction_of_type_function (char* I, char* O) {
 		strcat (O, "("); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, ")\n");
 
 	} else if (strcmp (command, "return") == 0) {
-		strcpy (O, "@SP\nA=M-1\nD=M\n@ARG\nA=M\nM=D\nD=A+1\n@SP\nM=D\n@LCL\nD=M\n@R14\nAM=D-1\nD=M\n@THAT\nM=D\n@R14\nAM=M-1\nD=M\n@THIS\nM=D\n@R14\nAM=M-1\nD=M\n@ARG\nM=D\n@R14\nAM=M-1\nD=M\n@LCL\nM=D\n@R14\nAM=M-1\nA=M\n0;JMP");
+		strcpy (O, "@");
+		strcat (O, ROUTINE_OF_RETURN);
+		strcat (O, "\n0;JMP");
 	} else {
 		printf ("ERROR: istruzione di tipo function non riconosciuta!\n");
 		printf ("Istruzione: %s\n", I);
 		abort ();
 	}
+}
+
+void get_routine_of_return (char* O) {
+		strcpy (O, "(");
+		strcat (O, ROUTINE_OF_RETURN);
+		strcat (O, ")\n");
+		strcat (O, "@SP\nA=M-1\nD=M\n@ARG\nA=M\nM=D\nD=A+1\n@SP\nM=D\n@LCL\nD=M\n@R14\nAM=D-1\nD=M\n@THAT\nM=D\n@R14\nAM=M-1\nD=M\n@THIS\nM=D\n@R14\nAM=M-1\nD=M\n@ARG\nM=D\n@R14\nAM=M-1\nD=M\n@LCL\nM=D\n@R14\nAM=M-1\nA=M\n0;JMP");
 }

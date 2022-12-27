@@ -50,6 +50,9 @@ void traduci (FILE* fileI, FILE* fileO) {
 		if (I_type != -1)			
 			fprintf (fileO, "%s\n", O);
 	}
+
+	get_routine_of_return (O);
+	fprintf (fileO, "%s\n", O);
 }
 
 /* Postocondizione: Presa in input una stringa restituisce

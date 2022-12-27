@@ -10,11 +10,10 @@ Considerazioni:
 	3) Nonostante alcune parti di codice non siano statiche è probabile che lo stack pointer sia quasi sempre determinato e con lui altri valori. Dovrei
 		 effettivamente verificare questa mia tesi, ma se così fosse sarebbe possibile evitare molte istruzioni inutili 
 
-<<<<<<< HEAD
 	4) In alcuni programmi ci sono tantissime call alla stassa funzione. Forse con dei jmp posso ottimizzare per evitare di ripetere sempre tutte le istruzioni
 
-=======
->>>>>>> 40e2b9f (First commit)
+	5) Le istruzioni per i return sono SEMPRE UGUALI. Sono 66 return per 44 righe di codice. Posso togliere circa 2900 righe.
+
 
 Idee:
 	0) Invece che tradurre tutto a "cervello spento" faccio una considerazione: traduco solo quello che viene effettivamente chiamato.
@@ -38,3 +37,15 @@ Idee:
 		 confronto tra di loro per vedere quali valori sono sempre gli stessi. Fatto questo potrei fare un backtracking per cercare di capire quali istruzioni causano quei valori e sostituirle.
 		 La cosa effettivamente potrebbe salvare istruzioni ma, se fatta a manom, richiederebbe un tempo considerevole. Un programma per automatizzare la cosa per il momento però non mi viene in mente. 
 
+	4) Buona parte del comando call è sempre la stessa. Mi basta quindi estrapolare quella parte e renderla globale per poi poter chiamarle tutte le volte e risparmiare codice.
+
+	5) Rendo le istruzioni di ritorno "globali" come se effettivamente fossero una funzione e le chiamo in qualche modo unico tipo RETURN_RUTINE.
+		 In questo modo ogni volta che in una funzione raggiungo il return mi basta fare: (RETURN_RUTINE) e 0;JMP 
+
+
+
+
+--------------------------------------------------	OTTIMIZZAZIONE CALL	 --------------------------------------------------	
+
+	Codice vecchio:
+		
