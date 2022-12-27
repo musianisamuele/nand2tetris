@@ -308,7 +308,19 @@ void get_routine_of_return (char* O) {
 	strcpy (O, "(");
 	strcat (O, ROUTINE_OF_RETURN);
 	strcat (O, ")\n");
-	strcat (O, "@SP\nA=M-1\nD=M\n@ARG\nA=M\nM=D\nD=A+1\n@SP\nM=D\n@LCL\nD=M\n@R14\nAM=D-1\nD=M\n@THAT\nM=D\n@R14\nAM=M-1\nD=M\n@THIS\nM=D\n@R14\nAM=M-1\nD=M\n@ARG\nM=D\n@R14\nAM=M-1\nD=M\n@LCL\nM=D\n@R14\nAM=M-1\nA=M\n0;JMP");
+	strcat (O, "@5\nD=A\n@LCL\nA=M-D\nD=M\n@R13\nM=D\n");
+	strcat (O, "@SP\nD=M\n@LCL\nD=M-D\n@NO_RETURN_VALUE\nD;JEQ\n");
+	strcat (O, "@SP\nA=M-1\nD=M\n@ARG\nA=M\nM=D\n");
+	strcat (O, "@ARG\nD=M+1\n@SP\nM=D\n");
+	strcat (O, "@RESUME_RETURN\n0;JMP\n");
+	strcat (O, "(NO_RETURN_VALUE)\n");
+	strcat (O, "@ARG\nD=M\n@SP\nM=D\n");
+	strcat (O, "(RESUME_RETURN)\n");
+	strcat (O, "@LCL\nAM=M-1\nD=M\n@THAT\nM=D\n");
+	strcat (O, "@LCL\nAM=M-1\nD=M\n@THIS\nM=D\n");
+	strcat (O, "@LCL\nAM=M-1\nD=M\n@ARG\nM=D\n");
+	strcat (O, "@LCL\nAM=M-1\nD=M\n@LCL\nM=D\n");
+	strcat (O, "@R13\nA=M\n0;JMP");
 }
 
 void get_routine_of_call (char* O) {
@@ -323,3 +335,4 @@ void get_routine_of_call (char* O) {
 	strcat (O, "@5\nD=A\n@R13\nD=D+M\n@SP\nD=M-D\n@ARG\nM=D\n");
 	strcat (O, "@R14\nA=M\n0;JMP");
 }
+

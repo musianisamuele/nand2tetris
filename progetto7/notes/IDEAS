@@ -184,3 +184,77 @@ Idee:
 															A=M
 															0;JMP
 
+
+-------------------------------------------------RISCRITTURA RETURN ---------------------------------------------------
+Il problema con la return attuale è che se una funzione non ha argomenti, quando va a scrivere il valore
+con cui ritorna la fuzione in cima allo stack, questo sovrascrive l'indirizzo a cui devo tornare. Devo quindi
+implementare una return differente in modo da poter gestire anche funzioni che non hanno argomenti, variabili locali o in generale valori di ritorno (?).
+
+
+	return =										@5
+															D=A
+															@LCL
+															A=M-D		//punto al return address 
+															D=M
+															@R13		// Lo salvo il R13
+															M=D
+														
+															@SP
+															D=M
+															@LCL
+															D=M-D
+															@NO_RETURN_VALUE //Se SP e LCL coincidono vuol dire che non devo ritornare nulla
+															D;JEQ
+															
+															//Se invece ho un valore da ritornare
+															@SP
+															A=M-1
+															D=M
+															@ARG
+															A=M
+															M=D					//Salvo il valore di ritorno in cima allo stack della funzione prec.
+
+															@ARG
+															D=M+1
+															@SP
+															M=D
+
+															@RESUME_RETURN
+															0;JMP
+
+
+															(NO_RETURN_VALUE)
+															@ARG
+															D=M
+															@SP
+															M=D
+															
+															(RESUME_RETURN)
+															@LCL
+															AM=M-1
+															D=M
+															@THAT
+															M=D
+
+															@LCL
+															AM=M-1
+															D=M
+															@THIS
+															M=D
+
+															@LCL
+															AM=M-1
+															D=M
+															@ARG
+															M=D
+
+															@LCL
+															A=M-1
+															D=M
+															@LCL
+															M=D
+
+
+															@R13
+															A=M
+															0;JMP

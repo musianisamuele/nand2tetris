@@ -5,8 +5,8 @@
 
 // FibonacciElement.asm is the result of translating both Main.vm and Sys.vm.
 
-load FibonacciElement.asm,
-output-file FibonacciElement.out,
+load test0.asm,
+output-file test0.out,
 //compare-to FibonacciElement.cmp,
 output-list RAM[0]%D1.6.1 RAM[256]%D1.6.1;
 

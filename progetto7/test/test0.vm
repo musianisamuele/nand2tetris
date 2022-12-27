@@ -1,0 +1,38 @@
+push constant 111
+push constant 222
+push constant 333
+push constant 444
+push constant 555
+push constant 666
+push constant 777
+push constant 888
+push constant 999
+
+call test0.pippo 9
+label WHILE
+goto WHILE
+
+function test0.pippo 0
+push argument 0
+push argument 1
+add
+
+push argument 2
+push argument 3
+add
+add
+
+push argument 4
+push argument 5
+add
+
+push argument 6
+push argument 7
+add
+add
+
+add
+push argument 8
+
+add
+return

@@ -430,7 +430,8 @@ TRADUZIONE VM:
 															(f_actual.return) //Label di ritorno (f è il nome della funzione)
 															ATTENZIONE: SE CHIAMO PIÙ VOLTE LA FUNZIONE I RETURN SONO UGUALI
 
-
+		
+		//NON FUNZIONE CON 0 ARGOMENTI e 0 VAR LOCALI -> Riscritta nel file IDEAS
 		return =									FRAME = LCL				(FRAME è temporanea)
 															RET = *(FRAME - 5)
 															*ARG = pop()
