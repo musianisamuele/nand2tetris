@@ -1,0 +1,14 @@
+----------------------------- TODO LIST --------------------------------
+(In ordine di priorita')
+
+Implementare correttamente la traduzione di static nei multifile
+
+Unire i due traduttori
+
+Ottimizzare:
+	-	gt, lt, eq
+	- Alcuni comandi asm
+
+Commentare il codice
+
+Scrivere programmi VM (come da consegna)

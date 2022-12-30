@@ -32,8 +32,8 @@ Implementazione su directories:
 
 	
 	Lookup delle funzioni:
-		Quando ho una nuova funzione da tradurre vado a vedere in che file si trova, grazia alla scansione fatta
-		inizialmente. Se non la trovo blocco tutto.
+		Quando ho una nuova funzione da tradurre vado a vedere in che file si trova (l'ho implementato come una lista),
+		grazia alla scansione fatta inizialmente. Se non la trovo blocco tutto.
 
 Implementazione segmenti:
 	- this, that:

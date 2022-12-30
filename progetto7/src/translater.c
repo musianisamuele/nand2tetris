@@ -155,7 +155,7 @@ void translate_instruction_of_type_memory (char* I, char* O) {
 		} else {
 			strcat (O, "@"); strcat (O, number);
 			strcat (O, "\nD=A\n");
-
+			
 			if (strcmp (segment, "constant") != 0) {
 				if (strcmp (segment, "argument") == 0) {
 					strcat (O, "@ARG\n");
@@ -168,16 +168,16 @@ void translate_instruction_of_type_memory (char* I, char* O) {
 					strcat (O, file_name);
 					strcat (O, ".");
 					strcat (O, number);
-					strcat (O, "\nD=A\n");
+					strcat (O, "\n");	
 				} else if (strcmp (segment, "this") == 0) {
 					strcat (O, "@THIS\n");
-					strcat (O, "D=D+M\n");
+					strcat (O, "A=D+M\n");
 				} else if (strcmp (segment, "that") == 0) {
 					strcat (O, "@THAT\n");
-					strcat (O, "D=D+M\n");
+					strcat (O, "A=D+M\n");
 				} else if (strcmp (segment, "temp") == 0) {
 					strcat (O, "@R5\n");
-					strcat (O, "D=D+M\n");
+					strcat (O, "A=A+D\n");
 				}
 
 				strcat (O, "D=M\n");
@@ -218,7 +218,7 @@ void translate_instruction_of_type_program (char* I, char* O) {
 		strcat (O, function_name);
 		strcat (O, "$");
 		strcat (O, name); 
-		strcat (O, "\nD;JNE");
+		strcat (O, "\nD;JNE");	//E' giusta come implementazione? Salta tutte le volte che il valore != 0 e non quando è uguale a -1
 	} else {
 		printf ("ERROR: istruzione di tipo program non riconosciuta!\n");
 		printf ("Istruzione: %s\n", I);

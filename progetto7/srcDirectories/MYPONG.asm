@@ -193,7 +193,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.13
-D=A
 D=M
 @SP
 M=M+1
@@ -247,7 +246,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.13
-D=A
 D=M
 @SP
 M=M+1
@@ -383,7 +381,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.11
-D=A
 D=M
 @SP
 M=M+1
@@ -519,7 +516,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.11
-D=A
 D=M
 @SP
 M=M+1
@@ -553,7 +549,6 @@ D=M
 A=A-1
 M=M-D
 @MYPONG.11
-D=A
 D=M
 @SP
 M=M+1
@@ -573,7 +568,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -601,7 +596,6 @@ D=M
 A=A-1
 M=M-D
 @MYPONG.11
-D=A
 D=M
 @SP
 M=M+1
@@ -621,7 +615,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -758,7 +752,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.7
-D=A
 D=M
 @SP
 M=M+1
@@ -894,7 +887,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.7
-D=A
 D=M
 @SP
 M=M+1
@@ -928,7 +920,6 @@ D=M
 A=A-1
 M=M-D
 @MYPONG.7
-D=A
 D=M
 @SP
 M=M+1
@@ -948,7 +939,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -976,7 +967,6 @@ D=M
 A=A-1
 M=M-D
 @MYPONG.7
-D=A
 D=M
 @SP
 M=M+1
@@ -996,7 +986,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -10825,7 +10815,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.5
-D=A
 D=M
 @SP
 M=M+1
@@ -10845,7 +10834,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -10909,7 +10898,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.6
-D=A
 D=M
 @SP
 M=M+1
@@ -11079,7 +11067,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -11333,7 +11321,6 @@ D=A
 M=M+D
 A=M-D
 @MYPONG.14
-D=A
 D=M
 @SP
 M=M+1
@@ -11367,7 +11354,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -11424,7 +11411,7 @@ M=-1
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -11480,7 +11467,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -11584,7 +11571,7 @@ D;JNE
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -11667,7 +11654,7 @@ D;JNE
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -11814,7 +11801,7 @@ M=!M
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -11870,7 +11857,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -11933,7 +11920,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -12254,7 +12241,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -12284,7 +12271,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -12649,7 +12636,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -12722,7 +12709,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -12860,7 +12847,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -12981,7 +12968,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -13072,7 +13059,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -13297,7 +13284,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -13552,7 +13539,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.5
-D=A
 D=M
 @SP
 M=M+1
@@ -14718,7 +14704,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.11
-D=A
 D=M
 @SP
 M=M+1
@@ -14738,7 +14723,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -14853,7 +14838,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.11
-D=A
 D=M
 @SP
 M=M+1
@@ -14873,7 +14857,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15116,7 +15100,7 @@ M=D
 @6
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15225,7 +15209,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15698,7 +15682,7 @@ M=D
 @4
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15742,7 +15726,7 @@ D;JNE
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15776,7 +15760,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15867,7 +15851,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15876,7 +15860,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15903,7 +15887,7 @@ M=D+M
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15912,7 +15896,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15921,7 +15905,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15948,7 +15932,7 @@ M=D+M
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -15957,7 +15941,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16023,7 +16007,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16032,7 +16016,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16041,7 +16025,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16062,7 +16046,7 @@ M=D+M
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16071,7 +16055,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16110,7 +16094,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16144,7 +16128,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16153,7 +16137,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16209,7 +16193,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16265,7 +16249,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16286,7 +16270,7 @@ M=M-D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16295,7 +16279,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16316,7 +16300,7 @@ M=M-D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16325,7 +16309,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16391,7 +16375,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16400,7 +16384,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16427,7 +16411,7 @@ M=M-D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16436,7 +16420,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16445,7 +16429,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16460,7 +16444,7 @@ M=D+M
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16469,7 +16453,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16544,7 +16528,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16582,7 +16566,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16617,7 +16601,7 @@ M=-1
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16626,7 +16610,7 @@ M=D
 @5
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16673,7 +16657,7 @@ D;JNE
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16714,7 +16698,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16752,7 +16736,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16790,7 +16774,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16828,7 +16812,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -16866,7 +16850,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17005,7 +16989,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17190,7 +17174,7 @@ M=D
 @6
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17224,7 +17208,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17233,7 +17217,7 @@ M=D
 @6
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17263,7 +17247,7 @@ M=D
 @4
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17330,7 +17314,7 @@ M=D
 @4
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17362,7 +17346,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17744,7 +17728,6 @@ D=M
 A=A-1
 M=D+M
 @MYPONG.0
-D=A
 D=M
 @SP
 M=M+1
@@ -17777,7 +17760,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.0
-D=A
 D=M
 @SP
 M=M+1
@@ -17894,7 +17876,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17903,7 +17885,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17969,7 +17951,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -17978,7 +17960,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -18031,7 +18013,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -18449,7 +18431,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -18497,7 +18479,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -18588,7 +18570,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -18703,7 +18685,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -18753,7 +18735,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -18823,7 +18805,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -19003,7 +18985,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -19055,7 +19037,6 @@ D=A
 M=M+D
 A=M-D
 @MYPONG.3
-D=A
 D=M
 @SP
 M=M+1
@@ -19092,7 +19073,6 @@ D=M
 @5
 M=D
 @MYPONG.3
-D=A
 D=M
 @SP
 M=M+1
@@ -19277,7 +19257,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.8
-D=A
 D=M
 @SP
 M=M+1
@@ -19825,7 +19804,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -19862,7 +19841,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -19890,7 +19869,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -19928,7 +19907,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -20017,7 +19996,7 @@ M=D
 @7
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -20101,7 +20080,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -20152,7 +20131,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -20206,7 +20185,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -20257,7 +20236,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -20999,7 +20978,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.7
-D=A
 D=M
 @SP
 M=M+1
@@ -21019,7 +20997,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -21075,7 +21053,6 @@ D=M
 A=A-1
 M=D+M
 @MYPONG.7
-D=A
 D=M
 @SP
 M=M+1
@@ -21095,7 +21072,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -21758,7 +21735,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.13
-D=A
 D=M
 @SP
 M=M+1
@@ -21778,7 +21754,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -21870,7 +21846,7 @@ M=D
 @4
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -21914,7 +21890,7 @@ D;JNE
 @4
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -21923,7 +21899,7 @@ M=D
 @5
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -21954,7 +21930,7 @@ M=D
 @4
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -21963,7 +21939,7 @@ M=D
 @6
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -21991,7 +21967,7 @@ M=D
 @9
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22009,7 +21985,7 @@ D;JNE
 @7
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22027,7 +22003,7 @@ D;JNE
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22064,7 +22040,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22102,7 +22078,7 @@ M=D
 @7
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22120,7 +22096,7 @@ D;JNE
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22157,7 +22133,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22194,7 +22170,7 @@ M=D
 @8
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22212,7 +22188,7 @@ D;JNE
 @7
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22230,7 +22206,7 @@ D;JNE
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22267,7 +22243,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22305,7 +22281,7 @@ M=D
 @7
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22323,7 +22299,7 @@ D;JNE
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22360,7 +22336,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22396,7 +22372,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22405,7 +22381,7 @@ M=D
 @10
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22465,7 +22441,7 @@ M=D
 @10
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22488,7 +22464,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22497,7 +22473,7 @@ M=D
 @11
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22557,7 +22533,7 @@ M=D
 @11
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22580,7 +22556,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22589,7 +22565,7 @@ M=D
 @12
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22649,7 +22625,7 @@ M=D
 @12
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22672,7 +22648,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22681,7 +22657,7 @@ M=D
 @13
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22741,7 +22717,7 @@ M=D
 @13
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22791,7 +22767,7 @@ M=D
 @14
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22822,7 +22798,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22853,7 +22829,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22862,7 +22838,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22899,7 +22875,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -22930,7 +22906,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23087,7 +23063,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23131,7 +23107,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23241,7 +23217,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23320,7 +23296,7 @@ M=D&M
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23457,7 +23433,7 @@ M=D
 @14
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23592,7 +23568,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23657,7 +23633,7 @@ M=D
 @14
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23789,7 +23765,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23854,7 +23830,7 @@ M=D
 @14
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -23989,7 +23965,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -24142,7 +24118,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -24521,7 +24497,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.12
-D=A
 D=M
 @SP
 M=M+1
@@ -24704,7 +24679,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.12
-D=A
 D=M
 @SP
 M=M+1
@@ -24724,7 +24698,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -24758,7 +24732,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.12
-D=A
 D=M
 @SP
 M=M+1
@@ -24778,7 +24751,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -24872,7 +24845,6 @@ D=M
 A=A-1
 M=D+M
 @MYPONG.12
-D=A
 D=M
 @SP
 M=M+1
@@ -24894,7 +24866,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.12
-D=A
 D=M
 @SP
 M=M+1
@@ -24914,7 +24885,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -24930,7 +24901,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.12
-D=A
 D=M
 @SP
 M=M+1
@@ -24950,7 +24920,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -25013,7 +24983,6 @@ D=M
 A=A-1
 M=D+M
 @MYPONG.12
-D=A
 D=M
 @SP
 M=M+1
@@ -25033,7 +25002,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -25223,7 +25192,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.12
-D=A
 D=M
 @SP
 M=M+1
@@ -25243,7 +25211,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -25333,7 +25301,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.11
-D=A
 D=M
 @SP
 M=M+1
@@ -25353,7 +25320,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -25397,7 +25364,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.12
-D=A
 D=M
 @SP
 M=M+1
@@ -25417,7 +25383,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -25588,7 +25554,6 @@ D=M
 A=M
 M=D
 @MYPONG.1
-D=A
 D=M
 @SP
 M=M+1
@@ -25653,7 +25618,6 @@ D=M
 @MYPONG.Output_drawChar$WHILE_END0
 D;JNE
 @MYPONG.2
-D=A
 D=M
 @SP
 M=M+1
@@ -25678,7 +25642,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.4
-D=A
 D=M
 @SP
 M=M+1
@@ -25698,7 +25661,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -25745,7 +25708,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.4
-D=A
 D=M
 @SP
 M=M+1
@@ -25765,7 +25727,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -25807,7 +25769,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.4
-D=A
 D=M
 @SP
 M=M+1
@@ -25851,7 +25812,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -26003,7 +25964,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -26078,7 +26039,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -26122,7 +26083,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -26203,7 +26164,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -26223,7 +26184,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -26424,7 +26385,6 @@ D=M
 @5
 M=D
 @MYPONG.2
-D=A
 D=M
 @SP
 M=M+1
@@ -26443,7 +26403,6 @@ D;JNE
 0;JMP
 (MYPONG.Output_printChar$IF_TRUE2)
 @MYPONG.0
-D=A
 D=M
 @SP
 M=M+1
@@ -26473,7 +26432,6 @@ D=M
 A=M
 M=D
 @MYPONG.1
-D=A
 D=M
 @SP
 M=M+1
@@ -26504,7 +26462,6 @@ A=M
 M=D
 (MYPONG.Output_printChar$IF_FALSE2)
 @MYPONG.0
-D=A
 D=M
 @SP
 M=M+1
@@ -26570,7 +26527,6 @@ M=D
 0;JMP
 (MYPONG.Output_printChar$IF_FALSE3)
 @MYPONG.2
-D=A
 D=M
 @SP
 M=M+1
@@ -26632,7 +26588,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27224,7 +27180,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27349,7 +27305,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27441,7 +27397,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27488,7 +27444,7 @@ D;JNE
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27497,7 +27453,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27521,7 +27477,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27568,7 +27524,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27606,7 +27562,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27856,7 +27812,6 @@ D=A
 M=M+D
 A=M-D
 @MYPONG.9
-D=A
 D=M
 @SP
 M=M+1
@@ -27881,7 +27836,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.8
-D=A
 D=M
 @SP
 M=M+1
@@ -27903,7 +27857,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.8
-D=A
 D=M
 @SP
 M=M+1
@@ -27923,7 +27876,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -27986,7 +27939,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.8
-D=A
 D=M
 @SP
 M=M+1
@@ -28008,7 +27960,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.8
-D=A
 D=M
 @SP
 M=M+1
@@ -28028,7 +27979,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -28368,7 +28319,6 @@ A=M
 M=D
 (MYPONG.Output_getMap$IF_FALSE0)
 @MYPONG.2
-D=A
 D=M
 @SP
 M=M+1
@@ -28393,7 +28343,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.5
-D=A
 D=M
 @SP
 M=M+1
@@ -28413,7 +28362,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -28445,7 +28394,6 @@ M=M+1
 A=M-1
 M=D
 @MYPONG.6
-D=A
 D=M
 @SP
 M=M+1
@@ -28465,7 +28413,7 @@ M=D
 @0
 D=A
 @THAT
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -28517,7 +28465,6 @@ D=A
 M=M+D
 A=M-D
 @MYPONG.1
-D=A
 D=M
 @SP
 M=M+1
@@ -28536,7 +28483,6 @@ D=M
 A=A-1
 M=D+M
 @MYPONG.0
-D=A
 D=M
 @SP
 M=M+1
@@ -28597,7 +28543,6 @@ D=M
 A=M
 M=D
 @MYPONG.1
-D=A
 D=M
 @SP
 M=M+1
@@ -28685,7 +28630,6 @@ D=A
 M=M+D
 A=M-D
 @MYPONG.2
-D=A
 D=M
 @SP
 M=M+1
@@ -28701,7 +28645,6 @@ D;JNE
 0;JMP
 (MYPONG.Output_backSpace$IF_TRUE0)
 @MYPONG.0
-D=A
 D=M
 @SP
 M=M+1
@@ -28743,7 +28686,6 @@ D;JNE
 0;JMP
 (MYPONG.Output_backSpace$IF_TRUE1)
 @MYPONG.0
-D=A
 D=M
 @SP
 M=M+1
@@ -28773,7 +28715,6 @@ D=M
 A=M
 M=D
 @MYPONG.1
-D=A
 D=M
 @SP
 M=M+1
@@ -28823,7 +28764,6 @@ D=M
 A=M
 M=D
 @MYPONG.1
-D=A
 D=M
 @SP
 M=M+1
@@ -28883,7 +28823,6 @@ A=M
 M=D
 (MYPONG.Output_backSpace$IF_FALSE2)
 @MYPONG.1
-D=A
 D=M
 @SP
 M=M+1
@@ -29067,7 +29006,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -29076,7 +29015,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -29085,7 +29024,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -29094,7 +29033,7 @@ M=D
 @2
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -29109,7 +29048,7 @@ M=D+M
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -29118,7 +29057,7 @@ M=D
 @3
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -29182,7 +29121,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -29191,7 +29130,7 @@ M=D
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -29200,7 +29139,7 @@ M=D
 @0
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
@@ -29221,7 +29160,7 @@ M=D+M
 @1
 D=A
 @THIS
-D=D+M
+A=D+M
 D=M
 @SP
 M=M+1
