@@ -20,7 +20,7 @@ void multi_file_translater (plistaf functions, FILE* file) {
 		int status = is_already_translated (functions, da_tradurre->val);
 
 		if (status == 0) {		//Devo ancora tradurla
-			printf ("Devo tradurre %s\n", da_tradurre->val);
+			//printf ("Devo tradurre %s\n", da_tradurre->val);
 
 			plistas function_body = get_function_body (functions, da_tradurre->val);
 

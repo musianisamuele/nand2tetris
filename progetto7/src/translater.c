@@ -2,15 +2,15 @@
 
 void translate_instruction_of_type_arithm (char* I, char* O) {
 	if ( strcmp (I, "add") == 0 ) {
-		strcpy (O, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D+M");
+		strcpy (O, "@SP\nAM=M-1\nD=M\nA=A-1\nM=D+M");
 	} else if ( strcmp (I, "sub") == 0 ) {
-		strcpy (O, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=M-D");
+		strcpy (O, "@SP\nAM=M-1\nD=M\nA=A-1\nM=M-D");
 	} else if ( strcmp (I, "neg") == 0 ) {
 		strcpy (O, "@SP\nA=M-1\nM=-M");
 	} else if ( strcmp (I, "and") == 0 ) {
-		strcpy (O, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D&M");
+		strcpy (O, "@SP\nAM=M-1\nD=M\nA=A-1\nM=D&M");
 	} else if ( strcmp (I, "or") == 0 ) {
-		strcpy (O, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nM=D|M");
+		strcpy (O, "@SP\nAM=M-1\nD=M\nA=A-1\nM=D|M");
 	} else if ( strcmp (I, "not") == 0 ) {
 		strcpy (O, "@SP\nA=M-1\nM=!M");	
 	} else if ( strcmp (I, "eq") == 0 || strcmp (I, "gt") == 0 || strcmp (I, "lt") == 0) {
@@ -251,12 +251,16 @@ void translate_instruction_of_type_function (char* I, char* O) {
 		int_lcl = atoi (str_lcl);
 		strcat (O, "(");
 		strcat (O, function_name);
-		strcat (O, ")\n@");
-		strcat (O, str_lcl);
-		strcat (O, "\nD=A\n@SP\nM=M+D\nA=M-D");
+		strcat (O, ")");
 
-		for (i = 0; i < int_lcl; i++)
-			strcat (O, "\nM=0\nA=A+1");
+		if (int_lcl > 0)  {
+			strcat (O, "\n@");
+			strcat (O, str_lcl);
+			strcat (O, "\nD=A\n@SP\nM=M+D\nA=M-D");
+
+			for (i = 0; i < int_lcl; i++)
+				strcat (O, "\nM=0\nA=A+1");
+		}
 
 	} else if (strcmp (command, "call") == 0) { 
 		char name[200]; name[0] = '\0';
@@ -280,18 +284,6 @@ void translate_instruction_of_type_function (char* I, char* O) {
 		strcat (O, "@"); strcat (O, ROUTINE_OF_CALL);
 		strcat (O, "\n0;JMP\n");
 		strcat (O, "("); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, ")");
-
-
-		//VECCHIA IMPLEMENTAZIONE
-		/*
-		strcpy (O, "@5\nD=A\n@SP\nM=M+D\nD=M-1\n@R14\nM=D\n@THAT\nD=M\n@R14\nA=M\nM=D\n@THIS\nD=M\n@R14\nAM=M-1\nM=D\n@ARG\nD=M\n@R14\nAM=M-1\nM=D\n@LCL\nD=M\n@R14\nAM=M-1\nM=D\n");
-		strcat (O, "@"); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, "\n");
-		strcat (O, "D=A\n@R14\nAM=M-1\nM=D\n@SP\nD=M\n@LCL\nM=D\n");
-		strcat (O, "@"); strcat (O, str_arg); strcat (O, "\n");
-		strcat (O, "D=A\n@R14\nD=M-D\n@ARG\nM=D\n");
-		strcat (O, "@"); strcat (O, name); strcat (O, "\n0;JMP\n");
-		strcat (O, "("); strcat (O, function_name); strcat (O, ":return"); strcat (O, str_index_return); strcat (O, ")\n");
-		*/
 
 	} else if (strcmp (command, "return") == 0) {
 		strcpy (O, "@");
