@@ -158,6 +158,7 @@ plistas get_function_body (plistaf h, char* name) {
 	if (h == NULL) return NULL;
 	else if ( strcmp (h->name, name) == 0 ) {
 		h->translated = 1;
+		file_name = h->file;
 		return h->val;
 	}
 	else return (get_function_body (h->next, name));

@@ -20,11 +20,6 @@ void traduci (FILE* fileI, FILE* fileO) {
 	char I [MAX_INST_LEN];	//I -> istruzione che viene letta da fileI
 	char O [MAX_INST_LEN];	//O -> serie di istruzioni che vengono scritte in fileO	
 
-	//CREAZIONE LISTA CON I VARI COMANDI
-	list_of_command = insert_predefined (list_of_command);
-
-	// INIZIALIZZAZIONI NECESARIE
-	fprintf(fileO, "@256\nD=A\n@SP\nM=D\n");	//SP = 256;
 
 	// TRADUZIONE
 	while (fgets (I, MAX_INST_LEN , fileI) != NULL) {
@@ -51,14 +46,7 @@ void traduci (FILE* fileI, FILE* fileO) {
 			fprintf (fileO, "%s\n", O);
 	}
 
-	//Aggiungo le routine solo se ho effettivamente delle funzioni
-	if (strlen (function_name) != 0) {
-		get_routine_of_return (O);
-		fprintf (fileO, "%s\n", O);
-		
-		get_routine_of_call (O);
-		fprintf (fileO, "%s\n", O);
-	}
+	
 }
 
 /* Postocondizione: Presa in input una stringa restituisce

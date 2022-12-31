@@ -1,4074 +1,29300 @@
-
-function MYPONG.Sys_init 0
-call MYPONG.Memory_init 0
-pop temp 0
-call MYPONG.Math_init 0
-pop temp 0
-call MYPONG.Screen_init 0
-pop temp 0
-call MYPONG.Output_init 0
-pop temp 0
-call MYPONG.Keyboard_init 0
-pop temp 0
-call MYPONG.Main_main 0
-pop temp 0
-call MYPONG.Sys_halt 0
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Memory_init 0
-push constant 0
-pop static 0
-push constant 2048
-push static 0
-add
-push constant 14334
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 2049
-push static 0
-add
-push constant 2050
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 0
-return
-
-function MYPONG.Math_init 1
-push constant 16
-call MYPONG.Array_new 1
-pop static 1
-push constant 16
-call MYPONG.Array_new 1
-pop static 0
-push constant 0
-push static 0
-add
-push constant 1
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-label WHILE_EXP0
-push local 0
-push constant 15
-lt
-not
-if-goto WHILE_END0
-push local 0
-push constant 1
-add
-pop local 0
-push local 0
-push static 0
-add
-push local 0
-push constant 1
-sub
-push static 0
-add
-pop pointer 1
-push that 0
-push local 0
-push constant 1
-sub
-push static 0
-add
-pop pointer 1
-push that 0
-add
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-goto WHILE_EXP0
-label WHILE_END0
-push constant 0
-return
-
-function MYPONG.Screen_init 1
-push constant 16384
-pop static 1
-push constant 0
-not
-pop static 2
-push constant 17
-call MYPONG.Array_new 1
-pop static 0
-push constant 0
-push static 0
-add
-push constant 1
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-label WHILE_EXP0
-push local 0
-push constant 16
-lt
-not
-if-goto WHILE_END0
-push local 0
-push constant 1
-add
-pop local 0
-push local 0
-push static 0
-add
-push local 0
-push constant 1
-sub
-push static 0
-add
-pop pointer 1
-push that 0
-push local 0
-push constant 1
-sub
-push static 0
-add
-pop pointer 1
-push that 0
-add
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-goto WHILE_EXP0
-label WHILE_END0
-push constant 0
-return
-
-function MYPONG.Output_init 0
-push constant 16384
-pop static 4
-push constant 0
-not
-pop static 2
-push constant 32
-pop static 1
-push constant 0
-pop static 0
-push constant 6
-call MYPONG.String_new 1
-pop static 3
-call MYPONG.Output_initMap 0
-pop temp 0
-call MYPONG.Output_createShiftedMap 0
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Keyboard_init 0
-push constant 0
-return
-
-function MYPONG.Main_main 1
-call MYPONG.PongGame_newInstance 0
-pop temp 0
-call MYPONG.PongGame_getInstance 0
-pop local 0
-push local 0
-call MYPONG.PongGame_run 1
-pop temp 0
-push local 0
-call MYPONG.PongGame_dispose 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Sys_halt 0
-label WHILE_EXP0
-push constant 0
-not
-not
-if-goto WHILE_END0
-goto WHILE_EXP0
-label WHILE_END0
-push constant 0
-return
-
-function MYPONG.Array_new 0
-push argument 0
-push constant 0
-gt
-not
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 2
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE0
-push argument 0
-call MYPONG.Memory_alloc 1
-return
-
-function MYPONG.String_new 0
-push constant 3
-call MYPONG.Memory_alloc 1
-pop pointer 0
-push argument 0
-push constant 0
-lt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 14
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE0
-push argument 0
-push constant 0
-gt
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push argument 0
-call MYPONG.Array_new 1
-pop this 1
-label IF_FALSE1
-push argument 0
-pop this 0
-push constant 0
-pop this 2
-push pointer 0
-return
-
-function MYPONG.Output_initMap 0
-push constant 127
-call MYPONG.Array_new 1
-pop static 5
-push constant 0
-push constant 63
-push constant 63
-push constant 63
-push constant 63
-push constant 63
-push constant 63
-push constant 63
-push constant 63
-push constant 63
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 32
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 33
-push constant 12
-push constant 30
-push constant 30
-push constant 30
-push constant 12
-push constant 12
-push constant 0
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 34
-push constant 54
-push constant 54
-push constant 20
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 35
-push constant 0
-push constant 18
-push constant 18
-push constant 63
-push constant 18
-push constant 18
-push constant 63
-push constant 18
-push constant 18
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 36
-push constant 12
-push constant 30
-push constant 51
-push constant 3
-push constant 30
-push constant 48
-push constant 51
-push constant 30
-push constant 12
-push constant 12
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 37
-push constant 0
-push constant 0
-push constant 35
-push constant 51
-push constant 24
-push constant 12
-push constant 6
-push constant 51
-push constant 49
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 38
-push constant 12
-push constant 30
-push constant 30
-push constant 12
-push constant 54
-push constant 27
-push constant 27
-push constant 27
-push constant 54
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 39
-push constant 12
-push constant 12
-push constant 6
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 40
-push constant 24
-push constant 12
-push constant 6
-push constant 6
-push constant 6
-push constant 6
-push constant 6
-push constant 12
-push constant 24
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 41
-push constant 6
-push constant 12
-push constant 24
-push constant 24
-push constant 24
-push constant 24
-push constant 24
-push constant 12
-push constant 6
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 42
-push constant 0
-push constant 0
-push constant 0
-push constant 51
-push constant 30
-push constant 63
-push constant 30
-push constant 51
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 43
-push constant 0
-push constant 0
-push constant 0
-push constant 12
-push constant 12
-push constant 63
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 44
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 12
-push constant 12
-push constant 6
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 45
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 63
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 46
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 47
-push constant 0
-push constant 0
-push constant 32
-push constant 48
-push constant 24
-push constant 12
-push constant 6
-push constant 3
-push constant 1
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 48
-push constant 12
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 12
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 49
-push constant 12
-push constant 14
-push constant 15
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 63
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 50
-push constant 30
-push constant 51
-push constant 48
-push constant 24
-push constant 12
-push constant 6
-push constant 3
-push constant 51
-push constant 63
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 51
-push constant 30
-push constant 51
-push constant 48
-push constant 48
-push constant 28
-push constant 48
-push constant 48
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 52
-push constant 16
-push constant 24
-push constant 28
-push constant 26
-push constant 25
-push constant 63
-push constant 24
-push constant 24
-push constant 60
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 53
-push constant 63
-push constant 3
-push constant 3
-push constant 31
-push constant 48
-push constant 48
-push constant 48
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 54
-push constant 28
-push constant 6
-push constant 3
-push constant 3
-push constant 31
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 55
-push constant 63
-push constant 49
-push constant 48
-push constant 48
-push constant 24
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 56
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 57
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 62
-push constant 48
-push constant 48
-push constant 24
-push constant 14
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 58
-push constant 0
-push constant 0
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 59
-push constant 0
-push constant 0
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-push constant 12
-push constant 12
-push constant 6
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 60
-push constant 0
-push constant 0
-push constant 24
-push constant 12
-push constant 6
-push constant 3
-push constant 6
-push constant 12
-push constant 24
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 61
-push constant 0
-push constant 0
-push constant 0
-push constant 63
-push constant 0
-push constant 0
-push constant 63
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 62
-push constant 0
-push constant 0
-push constant 3
-push constant 6
-push constant 12
-push constant 24
-push constant 12
-push constant 6
-push constant 3
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 64
-push constant 30
-push constant 51
-push constant 51
-push constant 59
-push constant 59
-push constant 59
-push constant 27
-push constant 3
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 63
-push constant 30
-push constant 51
-push constant 51
-push constant 24
-push constant 12
-push constant 12
-push constant 0
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 65
-push constant 12
-push constant 30
-push constant 51
-push constant 51
-push constant 63
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 66
-push constant 31
-push constant 51
-push constant 51
-push constant 51
-push constant 31
-push constant 51
-push constant 51
-push constant 51
-push constant 31
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 67
-push constant 28
-push constant 54
-push constant 35
-push constant 3
-push constant 3
-push constant 3
-push constant 35
-push constant 54
-push constant 28
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 68
-push constant 15
-push constant 27
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 27
-push constant 15
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 69
-push constant 63
-push constant 51
-push constant 35
-push constant 11
-push constant 15
-push constant 11
-push constant 35
-push constant 51
-push constant 63
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 70
-push constant 63
-push constant 51
-push constant 35
-push constant 11
-push constant 15
-push constant 11
-push constant 3
-push constant 3
-push constant 3
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 71
-push constant 28
-push constant 54
-push constant 35
-push constant 3
-push constant 59
-push constant 51
-push constant 51
-push constant 54
-push constant 44
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 72
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 63
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 73
-push constant 30
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 74
-push constant 60
-push constant 24
-push constant 24
-push constant 24
-push constant 24
-push constant 24
-push constant 27
-push constant 27
-push constant 14
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 75
-push constant 51
-push constant 51
-push constant 51
-push constant 27
-push constant 15
-push constant 27
-push constant 51
-push constant 51
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 76
-push constant 3
-push constant 3
-push constant 3
-push constant 3
-push constant 3
-push constant 3
-push constant 35
-push constant 51
-push constant 63
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 77
-push constant 33
-push constant 51
-push constant 63
-push constant 63
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 78
-push constant 51
-push constant 51
-push constant 55
-push constant 55
-push constant 63
-push constant 59
-push constant 59
-push constant 51
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 79
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 80
-push constant 31
-push constant 51
-push constant 51
-push constant 51
-push constant 31
-push constant 3
-push constant 3
-push constant 3
-push constant 3
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 81
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 63
-push constant 59
-push constant 30
-push constant 48
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 82
-push constant 31
-push constant 51
-push constant 51
-push constant 51
-push constant 31
-push constant 27
-push constant 51
-push constant 51
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 83
-push constant 30
-push constant 51
-push constant 51
-push constant 6
-push constant 28
-push constant 48
-push constant 51
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 84
-push constant 63
-push constant 63
-push constant 45
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 85
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 86
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 30
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 87
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 63
-push constant 63
-push constant 63
-push constant 18
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 88
-push constant 51
-push constant 51
-push constant 30
-push constant 30
-push constant 12
-push constant 30
-push constant 30
-push constant 51
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 89
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 12
-push constant 12
-push constant 12
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 90
-push constant 63
-push constant 51
-push constant 49
-push constant 24
-push constant 12
-push constant 6
-push constant 35
-push constant 51
-push constant 63
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 91
-push constant 30
-push constant 6
-push constant 6
-push constant 6
-push constant 6
-push constant 6
-push constant 6
-push constant 6
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 92
-push constant 0
-push constant 0
-push constant 1
-push constant 3
-push constant 6
-push constant 12
-push constant 24
-push constant 48
-push constant 32
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 93
-push constant 30
-push constant 24
-push constant 24
-push constant 24
-push constant 24
-push constant 24
-push constant 24
-push constant 24
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 94
-push constant 8
-push constant 28
-push constant 54
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 95
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 63
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 96
-push constant 6
-push constant 12
-push constant 24
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 97
-push constant 0
-push constant 0
-push constant 0
-push constant 14
-push constant 24
-push constant 30
-push constant 27
-push constant 27
-push constant 54
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 98
-push constant 3
-push constant 3
-push constant 3
-push constant 15
-push constant 27
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 99
-push constant 0
-push constant 0
-push constant 0
-push constant 30
-push constant 51
-push constant 3
-push constant 3
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 100
-push constant 48
-push constant 48
-push constant 48
-push constant 60
-push constant 54
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 101
-push constant 0
-push constant 0
-push constant 0
-push constant 30
-push constant 51
-push constant 63
-push constant 3
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 102
-push constant 28
-push constant 54
-push constant 38
-push constant 6
-push constant 15
-push constant 6
-push constant 6
-push constant 6
-push constant 15
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 103
-push constant 0
-push constant 0
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 62
-push constant 48
-push constant 51
-push constant 30
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 104
-push constant 3
-push constant 3
-push constant 3
-push constant 27
-push constant 55
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 105
-push constant 12
-push constant 12
-push constant 0
-push constant 14
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 106
-push constant 48
-push constant 48
-push constant 0
-push constant 56
-push constant 48
-push constant 48
-push constant 48
-push constant 48
-push constant 51
-push constant 30
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 107
-push constant 3
-push constant 3
-push constant 3
-push constant 51
-push constant 27
-push constant 15
-push constant 15
-push constant 27
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 108
-push constant 14
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 109
-push constant 0
-push constant 0
-push constant 0
-push constant 29
-push constant 63
-push constant 43
-push constant 43
-push constant 43
-push constant 43
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 110
-push constant 0
-push constant 0
-push constant 0
-push constant 29
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 111
-push constant 0
-push constant 0
-push constant 0
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 112
-push constant 0
-push constant 0
-push constant 0
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 31
-push constant 3
-push constant 3
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 113
-push constant 0
-push constant 0
-push constant 0
-push constant 30
-push constant 51
-push constant 51
-push constant 51
-push constant 62
-push constant 48
-push constant 48
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 114
-push constant 0
-push constant 0
-push constant 0
-push constant 29
-push constant 55
-push constant 51
-push constant 3
-push constant 3
-push constant 7
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 115
-push constant 0
-push constant 0
-push constant 0
-push constant 30
-push constant 51
-push constant 6
-push constant 24
-push constant 51
-push constant 30
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 116
-push constant 4
-push constant 6
-push constant 6
-push constant 15
-push constant 6
-push constant 6
-push constant 6
-push constant 54
-push constant 28
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 117
-push constant 0
-push constant 0
-push constant 0
-push constant 27
-push constant 27
-push constant 27
-push constant 27
-push constant 27
-push constant 54
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 118
-push constant 0
-push constant 0
-push constant 0
-push constant 51
-push constant 51
-push constant 51
-push constant 51
-push constant 30
-push constant 12
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 119
-push constant 0
-push constant 0
-push constant 0
-push constant 51
-push constant 51
-push constant 51
-push constant 63
-push constant 63
-push constant 18
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 120
-push constant 0
-push constant 0
-push constant 0
-push constant 51
-push constant 30
-push constant 12
-push constant 12
-push constant 30
-push constant 51
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 121
-push constant 0
-push constant 0
-push constant 0
-push constant 51
-push constant 51
-push constant 51
-push constant 62
-push constant 48
-push constant 24
-push constant 15
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 122
-push constant 0
-push constant 0
-push constant 0
-push constant 63
-push constant 27
-push constant 12
-push constant 6
-push constant 51
-push constant 63
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 123
-push constant 56
-push constant 12
-push constant 12
-push constant 12
-push constant 7
-push constant 12
-push constant 12
-push constant 12
-push constant 56
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 124
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 12
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 125
-push constant 7
-push constant 12
-push constant 12
-push constant 12
-push constant 56
-push constant 12
-push constant 12
-push constant 12
-push constant 7
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 126
-push constant 38
-push constant 45
-push constant 25
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-push constant 0
-call MYPONG.Output_create 12
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Output_createShiftedMap 4
-push constant 127
-call MYPONG.Array_new 1
-pop static 6
-push constant 0
-pop local 2
-label WHILE_EXP0
-push local 2
-push constant 127
-lt
-not
-if-goto WHILE_END0
-push local 2
-push static 5
-add
-pop pointer 1
-push that 0
-pop local 0
-push constant 11
-call MYPONG.Array_new 1
-pop local 1
-push local 2
-push static 6
-add
-push local 1
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 0
-pop local 3
-label WHILE_EXP1
-push local 3
-push constant 11
-lt
-not
-if-goto WHILE_END1
-push local 3
-push local 1
-add
-push local 3
-push local 0
-add
-pop pointer 1
-push that 0
-push constant 256
-call MYPONG.Math_multiply 2
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push local 3
-push constant 1
-add
-pop local 3
-goto WHILE_EXP1
-label WHILE_END1
-push local 2
-push constant 0
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 32
-pop local 2
-goto IF_END0
-label IF_FALSE0
-push local 2
-push constant 1
-add
-pop local 2
-label IF_END0
-goto WHILE_EXP0
-label WHILE_END0
-push constant 0
-return
-
-function MYPONG.PongGame_newInstance 0
-call MYPONG.PongGame_new 0
-pop static 0
-push constant 0
-return
-
-function MYPONG.PongGame_getInstance 0
-push static 0
-return
-
-function MYPONG.PongGame_run 1
-push argument 0
-pop pointer 0
-label WHILE_EXP0
-push this 3
-not
-not
-if-goto WHILE_END0
-label WHILE_EXP1
-push local 0
-push constant 0
-eq
-push this 3
-not
-and
-not
-if-goto WHILE_END1
-call MYPONG.Keyboard_keyPressed 0
-pop local 0
-push this 0
-call MYPONG.Bat_move 1
-pop temp 0
-push pointer 0
-call MYPONG.PongGame_moveBall 1
-pop temp 0
-goto WHILE_EXP1
-label WHILE_END1
-push local 0
-push constant 130
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push this 0
-push constant 1
-call MYPONG.Bat_setDirection 2
-pop temp 0
-goto IF_END0
-label IF_FALSE0
-push local 0
-push constant 132
-eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push this 0
-push constant 2
-call MYPONG.Bat_setDirection 2
-pop temp 0
-goto IF_END1
-label IF_FALSE1
-push local 0
-push constant 140
-eq
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push constant 0
-not
-pop this 3
-label IF_FALSE2
-label IF_END1
-label IF_END0
-label WHILE_EXP2
-push local 0
-push constant 0
-eq
-not
-push this 3
-not
-and
-not
-if-goto WHILE_END2
-call MYPONG.Keyboard_keyPressed 0
-pop local 0
-push this 0
-call MYPONG.Bat_move 1
-pop temp 0
-push pointer 0
-call MYPONG.PongGame_moveBall 1
-pop temp 0
-goto WHILE_EXP2
-label WHILE_END2
-goto WHILE_EXP0
-label WHILE_END0
-push this 3
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
-push constant 10
-push constant 27
-call MYPONG.Output_moveCursor 2
-pop temp 0
-push constant 9
-call MYPONG.String_new 1
-push constant 71
-call MYPONG.String_appendChar 2
-push constant 97
-call MYPONG.String_appendChar 2
-push constant 109
-call MYPONG.String_appendChar 2
-push constant 101
-call MYPONG.String_appendChar 2
-push constant 32
-call MYPONG.String_appendChar 2
-push constant 79
-call MYPONG.String_appendChar 2
-push constant 118
-call MYPONG.String_appendChar 2
-push constant 101
-call MYPONG.String_appendChar 2
-push constant 114
-call MYPONG.String_appendChar 2
-call MYPONG.Output_printString 1
-pop temp 0
-label IF_FALSE3
-push constant 0
-return
-
-function MYPONG.PongGame_dispose 0
-push argument 0
-pop pointer 0
-push this 0
-call MYPONG.Bat_dispose 1
-pop temp 0
-push this 1
-call MYPONG.Ball_dispose 1
-pop temp 0
-push pointer 0
-call MYPONG.Memory_deAlloc 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Sys_error 0
-push constant 3
-call MYPONG.String_new 1
-push constant 69
-call MYPONG.String_appendChar 2
-push constant 82
-call MYPONG.String_appendChar 2
-push constant 82
-call MYPONG.String_appendChar 2
-call MYPONG.Output_printString 1
-pop temp 0
-push argument 0
-call MYPONG.Output_printInt 1
-pop temp 0
-call MYPONG.Sys_halt 0
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Memory_alloc 1
-push argument 0
-push constant 1
-lt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 5
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE0
-push constant 2048
-pop local 0
-label WHILE_EXP0
-push constant 0
-push local 0
-add
-pop pointer 1
-push that 0
-push argument 0
-lt
-not
-if-goto WHILE_END0
-push constant 1
-push local 0
-add
-pop pointer 1
-push that 0
-pop local 0
-goto WHILE_EXP0
-label WHILE_END0
-push local 0
-push argument 0
-add
-push constant 16379
-gt
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push constant 6
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE1
-push constant 0
-push local 0
-add
-pop pointer 1
-push that 0
-push argument 0
-push constant 2
-add
-gt
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push argument 0
-push constant 2
-add
-push local 0
-add
-push constant 0
-push local 0
-add
-pop pointer 1
-push that 0
-push argument 0
-sub
-push constant 2
-sub
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 1
-push local 0
-add
-pop pointer 1
-push that 0
-push local 0
-push constant 2
-add
-eq
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
-push argument 0
-push constant 3
-add
-push local 0
-add
-push local 0
-push argument 0
-add
-push constant 4
-add
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-goto IF_END3
-label IF_FALSE3
-push argument 0
-push constant 3
-add
-push local 0
-add
-push constant 1
-push local 0
-add
-pop pointer 1
-push that 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-label IF_END3
-push constant 1
-push local 0
-add
-push local 0
-push argument 0
-add
-push constant 2
-add
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-label IF_FALSE2
-push constant 0
-push local 0
-add
-push constant 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push local 0
-push constant 2
-add
-return
-
-function MYPONG.Output_create 1
-push constant 11
-call MYPONG.Array_new 1
-pop local 0
-push argument 0
-push static 5
-add
-push local 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 0
-push local 0
-add
-push argument 1
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 1
-push local 0
-add
-push argument 2
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 2
-push local 0
-add
-push argument 3
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 3
-push local 0
-add
-push argument 4
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 4
-push local 0
-add
-push argument 5
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 5
-push local 0
-add
-push argument 6
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 6
-push local 0
-add
-push argument 7
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 7
-push local 0
-add
-push argument 8
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 8
-push local 0
-add
-push argument 9
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 9
-push local 0
-add
-push argument 10
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 10
-push local 0
-add
-push argument 11
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 0
-return
-
-function MYPONG.Math_multiply 5
-push argument 0
-push constant 0
-lt
-push argument 1
-push constant 0
-gt
-and
-push argument 0
-push constant 0
-gt
-push argument 1
-push constant 0
-lt
-and
-or
-pop local 4
-push argument 0
-call MYPONG.Math_abs 1
-pop argument 0
-push argument 1
-call MYPONG.Math_abs 1
-pop argument 1
-push argument 0
-push argument 1
-lt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push argument 0
-pop local 1
-push argument 1
-pop argument 0
-push local 1
-pop argument 1
-label IF_FALSE0
-label WHILE_EXP0
-push local 2
-push constant 1
-sub
-push argument 1
-push constant 1
-sub
-lt
-not
-if-goto WHILE_END0
-push local 3
-push static 0
-add
-pop pointer 1
-push that 0
-push argument 1
-and
-push constant 0
-eq
-not
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push local 0
-push argument 0
-add
-pop local 0
-push local 2
-push local 3
-push static 0
-add
-pop pointer 1
-push that 0
-add
-pop local 2
-label IF_FALSE1
-push argument 0
-push argument 0
-add
-pop argument 0
-push local 3
-push constant 1
-add
-pop local 3
-goto WHILE_EXP0
-label WHILE_END0
-push local 4
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push local 0
-neg
-pop local 0
-label IF_FALSE2
-push local 0
-return
-
-function MYPONG.PongGame_new 0
-push constant 7
-call MYPONG.Memory_alloc 1
-pop pointer 0
-call MYPONG.Screen_clearScreen 0
-pop temp 0
-push constant 50
-pop this 6
-push constant 230
-push constant 229
-push this 6
-push constant 7
-call MYPONG.Bat_new 4
-pop this 0
-push constant 253
-push constant 222
-push constant 0
-push constant 511
-push constant 0
-push constant 229
-call MYPONG.Ball_new 6
-pop this 1
-push this 1
-push constant 400
-push constant 0
-call MYPONG.Ball_setDestination 3
-pop temp 0
-push constant 0
-push constant 238
-push constant 511
-push constant 240
-call MYPONG.Screen_drawRectangle 4
-pop temp 0
-push constant 22
-push constant 0
-call MYPONG.Output_moveCursor 2
-pop temp 0
-push constant 8
-call MYPONG.String_new 1
-push constant 83
-call MYPONG.String_appendChar 2
-push constant 99
-call MYPONG.String_appendChar 2
-push constant 111
-call MYPONG.String_appendChar 2
-push constant 114
-call MYPONG.String_appendChar 2
-push constant 101
-call MYPONG.String_appendChar 2
-push constant 58
-call MYPONG.String_appendChar 2
-push constant 32
-call MYPONG.String_appendChar 2
-push constant 48
-call MYPONG.String_appendChar 2
-call MYPONG.Output_printString 1
-pop temp 0
-push constant 0
-pop this 3
-push constant 0
-pop this 4
-push constant 0
-pop this 2
-push constant 0
-pop this 5
-push pointer 0
-return
-
-function MYPONG.Keyboard_keyPressed 0
-push constant 24576
-call MYPONG.Memory_peek 1
-return
-
-function MYPONG.Bat_move 0
-push argument 0
-pop pointer 0
-push this 4
-push constant 1
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push this 0
-push constant 4
-sub
-pop this 0
-push this 0
-push constant 0
-lt
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push constant 0
-pop this 0
-label IF_FALSE1
-push constant 0
-call MYPONG.Screen_setColor 1
-pop temp 0
-push this 0
-push this 2
-add
-push constant 1
-add
-push this 1
-push this 0
-push this 2
-add
-push constant 4
-add
-push this 1
-push this 3
-add
-call MYPONG.Screen_drawRectangle 4
-pop temp 0
-push constant 0
-not
-call MYPONG.Screen_setColor 1
-pop temp 0
-push this 0
-push this 1
-push this 0
-push constant 3
-add
-push this 1
-push this 3
-add
-call MYPONG.Screen_drawRectangle 4
-pop temp 0
-goto IF_END0
-label IF_FALSE0
-push this 0
-push constant 4
-add
-pop this 0
-push this 0
-push this 2
-add
-push constant 511
-gt
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push constant 511
-push this 2
-sub
-pop this 0
-label IF_FALSE2
-push constant 0
-call MYPONG.Screen_setColor 1
-pop temp 0
-push this 0
-push constant 4
-sub
-push this 1
-push this 0
-push constant 1
-sub
-push this 1
-push this 3
-add
-call MYPONG.Screen_drawRectangle 4
-pop temp 0
-push constant 0
-not
-call MYPONG.Screen_setColor 1
-pop temp 0
-push this 0
-push this 2
-add
-push constant 3
-sub
-push this 1
-push this 0
-push this 2
-add
-push this 1
-push this 3
-add
-call MYPONG.Screen_drawRectangle 4
-pop temp 0
-label IF_END0
-push constant 0
-return
-
-function MYPONG.PongGame_moveBall 5
-push argument 0
-pop pointer 0
-push this 1
-call MYPONG.Ball_move 1
-pop this 2
-push this 2
-push constant 0
-gt
-push this 2
-push this 5
-eq
-not
-and
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push this 2
-pop this 5
-push constant 0
-pop local 0
-push this 0
-call MYPONG.Bat_getLeft 1
-pop local 1
-push this 0
-call MYPONG.Bat_getRight 1
-pop local 2
-push this 1
-call MYPONG.Ball_getLeft 1
-pop local 3
-push this 1
-call MYPONG.Ball_getRight 1
-pop local 4
-push this 2
-push constant 4
-eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push local 1
-push local 4
-gt
-push local 2
-push local 3
-lt
-or
-pop this 3
-push this 3
-not
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push local 4
-push local 1
-push constant 10
-add
-lt
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
-push constant 1
-neg
-pop local 0
-goto IF_END3
-label IF_FALSE3
-push local 3
-push local 2
-push constant 10
-sub
-gt
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
-push constant 1
-pop local 0
-label IF_FALSE4
-label IF_END3
-push this 6
-push constant 2
-sub
-pop this 6
-push this 0
-push this 6
-call MYPONG.Bat_setWidth 2
-pop temp 0
-push this 4
-push constant 1
-add
-pop this 4
-push constant 22
-push constant 7
-call MYPONG.Output_moveCursor 2
-pop temp 0
-push this 4
-call MYPONG.Output_printInt 1
-pop temp 0
-label IF_FALSE2
-label IF_FALSE1
-push this 1
-push local 0
-call MYPONG.Ball_bounce 2
-pop temp 0
-label IF_FALSE0
-push constant 0
-return
-
-function MYPONG.Bat_setDirection 0
-push argument 0
-pop pointer 0
-push argument 1
-pop this 4
-push constant 0
-return
-
-function MYPONG.Output_moveCursor 0
-push argument 0
-push constant 0
-lt
-push argument 0
-push constant 22
-gt
-or
-push argument 1
-push constant 0
-lt
-or
-push argument 1
-push constant 63
-gt
-or
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 20
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE0
-push argument 1
-push constant 2
-call MYPONG.Math_divide 2
-pop static 0
-push constant 32
-push argument 0
-push constant 352
-call MYPONG.Math_multiply 2
-add
-push static 0
-add
-pop static 1
-push argument 1
-push static 0
-push constant 2
-call MYPONG.Math_multiply 2
-eq
-pop static 2
-push constant 32
-call MYPONG.Output_drawChar 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.String_appendChar 0
-push argument 0
-pop pointer 0
-push this 2
-push this 0
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 17
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE0
-push this 2
-push this 1
-add
-push argument 1
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push this 2
-push constant 1
-add
-pop this 2
-push pointer 0
-return
-
-function MYPONG.Output_printString 2
-push argument 0
-call MYPONG.String_length 1
-pop local 1
-label WHILE_EXP0
-push local 0
-push local 1
-lt
-not
-if-goto WHILE_END0
-push argument 0
-push local 0
-call MYPONG.String_charAt 2
-call MYPONG.Output_printChar 1
-pop temp 0
-push local 0
-push constant 1
-add
-pop local 0
-goto WHILE_EXP0
-label WHILE_END0
-push constant 0
-return
-
-function MYPONG.Bat_dispose 0
-push argument 0
-pop pointer 0
-push pointer 0
-call MYPONG.Memory_deAlloc 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Ball_dispose 0
-push argument 0
-pop pointer 0
-push pointer 0
-call MYPONG.Memory_deAlloc 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Memory_deAlloc 2
-push argument 0
-push constant 2
-sub
-pop local 0
-push constant 1
-push local 0
-add
-pop pointer 1
-push that 0
-pop local 1
-push constant 0
-push local 1
-add
-pop pointer 1
-push that 0
-push constant 0
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 0
-push local 0
-add
-push constant 1
-push local 0
-add
-pop pointer 1
-push that 0
-push local 0
-sub
-push constant 2
-sub
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-goto IF_END0
-label IF_FALSE0
-push constant 0
-push local 0
-add
-push constant 1
-push local 0
-add
-pop pointer 1
-push that 0
-push local 0
-sub
-push constant 0
-push local 1
-add
-pop pointer 1
-push that 0
-add
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 1
-push local 1
-add
-pop pointer 1
-push that 0
-push local 1
-push constant 2
-add
-eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push constant 1
-push local 0
-add
-push local 0
-push constant 2
-add
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-goto IF_END1
-label IF_FALSE1
-push constant 1
-push local 0
-add
-push constant 1
-push local 1
-add
-pop pointer 1
-push that 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-label IF_END1
-label IF_END0
-push constant 0
-return
-
-function MYPONG.Output_printInt 0
-push static 3
-push argument 0
-call MYPONG.String_setInt 2
-pop temp 0
-push static 3
-call MYPONG.Output_printString 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Math_abs 0
-push argument 0
-push constant 0
-lt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push argument 0
-neg
-pop argument 0
-label IF_FALSE0
-push argument 0
-return
-
-function MYPONG.Screen_clearScreen 1
-label WHILE_EXP0
-push local 0
-push constant 8192
-lt
-not
-if-goto WHILE_END0
-push local 0
-push static 1
-add
-push constant 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push local 0
-push constant 1
-add
-pop local 0
-goto WHILE_EXP0
-label WHILE_END0
-push constant 0
-return
-
-function MYPONG.Bat_new 0
-push constant 5
-call MYPONG.Memory_alloc 1
-pop pointer 0
-push argument 0
-pop this 0
-push argument 1
-pop this 1
-push argument 2
-pop this 2
-push argument 3
-pop this 3
-push constant 2
-pop this 4
-push pointer 0
-call MYPONG.Bat_show 1
-pop temp 0
-push pointer 0
-return
-
-function MYPONG.Ball_new 0
-push constant 15
-call MYPONG.Memory_alloc 1
-pop pointer 0
-push argument 0
-pop this 0
-push argument 1
-pop this 1
-push argument 2
-pop this 10
-push argument 3
-push constant 6
-sub
-pop this 11
-push argument 4
-pop this 12
-push argument 5
-push constant 6
-sub
-pop this 13
-push constant 0
-pop this 14
-push pointer 0
-call MYPONG.Ball_show 1
-pop temp 0
-push pointer 0
-return
-
-function MYPONG.Ball_setDestination 3
-push argument 0
-pop pointer 0
-push argument 1
-push this 0
-sub
-pop this 2
-push argument 2
-push this 1
-sub
-pop this 3
-push this 2
-call MYPONG.Math_abs 1
-pop local 0
-push this 3
-call MYPONG.Math_abs 1
-pop local 1
-push local 0
-push local 1
-lt
-pop this 7
-push this 7
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push local 0
-pop local 2
-push local 1
-pop local 0
-push local 2
-pop local 1
-push this 1
-push argument 2
-lt
-pop this 8
-push this 0
-push argument 1
-lt
-pop this 9
-goto IF_END0
-label IF_FALSE0
-push this 0
-push argument 1
-lt
-pop this 8
-push this 1
-push argument 2
-lt
-pop this 9
-label IF_END0
-push constant 2
-push local 1
-call MYPONG.Math_multiply 2
-push local 0
-sub
-pop this 4
-push constant 2
-push local 1
-call MYPONG.Math_multiply 2
-pop this 5
-push constant 2
-push local 1
-push local 0
-sub
-call MYPONG.Math_multiply 2
-pop this 6
-push constant 0
-return
-
-function MYPONG.Screen_drawRectangle 9
-push argument 0
-push argument 2
-gt
-push argument 1
-push argument 3
-gt
-or
-push argument 0
-push constant 0
-lt
-or
-push argument 2
-push constant 511
-gt
-or
-push argument 1
-push constant 0
-lt
-or
-push argument 3
-push constant 255
-gt
-or
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 9
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE0
-push argument 0
-push constant 16
-call MYPONG.Math_divide 2
-pop local 3
-push argument 0
-push local 3
-push constant 16
-call MYPONG.Math_multiply 2
-sub
-pop local 7
-push argument 2
-push constant 16
-call MYPONG.Math_divide 2
-pop local 4
-push argument 2
-push local 4
-push constant 16
-call MYPONG.Math_multiply 2
-sub
-pop local 8
-push local 7
-push static 0
-add
-pop pointer 1
-push that 0
-push constant 1
-sub
-not
-pop local 6
-push local 8
-push constant 1
-add
-push static 0
-add
-pop pointer 1
-push that 0
-push constant 1
-sub
-pop local 5
-push argument 1
-push constant 32
-call MYPONG.Math_multiply 2
-push local 3
-add
-pop local 0
-push local 4
-push local 3
-sub
-pop local 2
-label WHILE_EXP0
-push argument 1
-push argument 3
-gt
-not
-not
-if-goto WHILE_END0
-push local 0
-push local 2
-add
-pop local 1
-push local 2
-push constant 0
-eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push local 0
-push local 5
-push local 6
-and
-call MYPONG.Screen_updateLocation 2
-pop temp 0
-goto IF_END1
-label IF_FALSE1
-push local 0
-push local 6
-call MYPONG.Screen_updateLocation 2
-pop temp 0
-push local 0
-push constant 1
-add
-pop local 0
-label WHILE_EXP1
-push local 0
-push local 1
-lt
-not
-if-goto WHILE_END1
-push local 0
-push constant 1
-neg
-call MYPONG.Screen_updateLocation 2
-pop temp 0
-push local 0
-push constant 1
-add
-pop local 0
-goto WHILE_EXP1
-label WHILE_END1
-push local 1
-push local 5
-call MYPONG.Screen_updateLocation 2
-pop temp 0
-label IF_END1
-push argument 1
-push constant 1
-add
-pop argument 1
-push local 1
-push constant 32
-add
-push local 2
-sub
-pop local 0
-goto WHILE_EXP0
-label WHILE_END0
-push constant 0
-return
-
-function MYPONG.Memory_peek 0
-push argument 0
-push static 0
-add
-pop pointer 1
-push that 0
-return
-
-function MYPONG.Screen_setColor 0
-push argument 0
-pop static 2
-push constant 0
-return
-
-function MYPONG.Ball_move 0
-push argument 0
-pop pointer 0
-push pointer 0
-call MYPONG.Ball_hide 1
-pop temp 0
-push this 4
-push constant 0
-lt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push this 4
-push this 5
-add
-pop this 4
-goto IF_END0
-label IF_FALSE0
-push this 4
-push this 6
-add
-pop this 4
-push this 9
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push this 7
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push this 0
-push constant 4
-add
-pop this 0
-goto IF_END2
-label IF_FALSE2
-push this 1
-push constant 4
-add
-pop this 1
-label IF_END2
-goto IF_END1
-label IF_FALSE1
-push this 7
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
-push this 0
-push constant 4
-sub
-pop this 0
-goto IF_END3
-label IF_FALSE3
-push this 1
-push constant 4
-sub
-pop this 1
-label IF_END3
-label IF_END1
-label IF_END0
-push this 8
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
-push this 7
-if-goto IF_TRUE5
-goto IF_FALSE5
-label IF_TRUE5
-push this 1
-push constant 4
-add
-pop this 1
-goto IF_END5
-label IF_FALSE5
-push this 0
-push constant 4
-add
-pop this 0
-label IF_END5
-goto IF_END4
-label IF_FALSE4
-push this 7
-if-goto IF_TRUE6
-goto IF_FALSE6
-label IF_TRUE6
-push this 1
-push constant 4
-sub
-pop this 1
-goto IF_END6
-label IF_FALSE6
-push this 0
-push constant 4
-sub
-pop this 0
-label IF_END6
-label IF_END4
-push this 0
-push this 10
-gt
-not
-if-goto IF_TRUE7
-goto IF_FALSE7
-label IF_TRUE7
-push constant 1
-pop this 14
-push this 10
-pop this 0
-label IF_FALSE7
-push this 0
-push this 11
-lt
-not
-if-goto IF_TRUE8
-goto IF_FALSE8
-label IF_TRUE8
-push constant 2
-pop this 14
-push this 11
-pop this 0
-label IF_FALSE8
-push this 1
-push this 12
-gt
-not
-if-goto IF_TRUE9
-goto IF_FALSE9
-label IF_TRUE9
-push constant 3
-pop this 14
-push this 12
-pop this 1
-label IF_FALSE9
-push this 1
-push this 13
-lt
-not
-if-goto IF_TRUE10
-goto IF_FALSE10
-label IF_TRUE10
-push constant 4
-pop this 14
-push this 13
-pop this 1
-label IF_FALSE10
-push pointer 0
-call MYPONG.Ball_show 1
-pop temp 0
-push this 14
-return
-
-function MYPONG.Bat_getLeft 0
-push argument 0
-pop pointer 0
-push this 0
-return
-
-function MYPONG.Bat_getRight 0
-push argument 0
-pop pointer 0
-push this 0
-push this 2
-add
-return
-
-function MYPONG.Ball_getLeft 0
-push argument 0
-pop pointer 0
-push this 0
-return
-
-function MYPONG.Ball_getRight 0
-push argument 0
-pop pointer 0
-push this 0
-push constant 5
-add
-return
-
-function MYPONG.Bat_setWidth 0
-push argument 0
-pop pointer 0
-push pointer 0
-call MYPONG.Bat_hide 1
-pop temp 0
-push argument 1
-pop this 2
-push pointer 0
-call MYPONG.Bat_show 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Ball_bounce 5
-push argument 0
-pop pointer 0
-push this 2
-push constant 10
-call MYPONG.Math_divide 2
-pop local 2
-push this 3
-push constant 10
-call MYPONG.Math_divide 2
-pop local 3
-push argument 1
-push constant 0
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 10
-pop local 4
-goto IF_END0
-label IF_FALSE0
-push this 2
-push constant 0
-lt
-not
-push argument 1
-push constant 1
-eq
-and
-push this 2
-push constant 0
-lt
-push argument 1
-push constant 1
-neg
-eq
-and
-or
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push constant 20
-pop local 4
-goto IF_END1
-label IF_FALSE1
-push constant 5
-pop local 4
-label IF_END1
-label IF_END0
-push this 14
-push constant 1
-eq
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push constant 506
-pop local 0
-push local 3
-push constant 50
-neg
-call MYPONG.Math_multiply 2
-push local 2
-call MYPONG.Math_divide 2
-pop local 1
-push this 1
-push local 1
-push local 4
-call MYPONG.Math_multiply 2
-add
-pop local 1
-goto IF_END2
-label IF_FALSE2
-push this 14
-push constant 2
-eq
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
-push constant 0
-pop local 0
-push local 3
-push constant 50
-call MYPONG.Math_multiply 2
-push local 2
-call MYPONG.Math_divide 2
-pop local 1
-push this 1
-push local 1
-push local 4
-call MYPONG.Math_multiply 2
-add
-pop local 1
-goto IF_END3
-label IF_FALSE3
-push this 14
-push constant 3
-eq
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
-push constant 250
-pop local 1
-push local 2
-push constant 25
-neg
-call MYPONG.Math_multiply 2
-push local 3
-call MYPONG.Math_divide 2
-pop local 0
-push this 0
-push local 0
-push local 4
-call MYPONG.Math_multiply 2
-add
-pop local 0
-goto IF_END4
-label IF_FALSE4
-push constant 0
-pop local 1
-push local 2
-push constant 25
-call MYPONG.Math_multiply 2
-push local 3
-call MYPONG.Math_divide 2
-pop local 0
-push this 0
-push local 0
-push local 4
-call MYPONG.Math_multiply 2
-add
-pop local 0
-label IF_END4
-label IF_END3
-label IF_END2
-push pointer 0
-push local 0
-push local 1
-call MYPONG.Ball_setDestination 3
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Math_divide 4
-push argument 1
-push constant 0
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 3
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE0
-push argument 0
-push constant 0
-lt
-push argument 1
-push constant 0
-gt
-and
-push argument 0
-push constant 0
-gt
-push argument 1
-push constant 0
-lt
-and
-or
-pop local 2
-push constant 0
-push static 1
-add
-push argument 1
-call MYPONG.Math_abs 1
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push argument 0
-call MYPONG.Math_abs 1
-pop argument 0
-label WHILE_EXP0
-push local 0
-push constant 15
-lt
-push local 3
-not
-and
-not
-if-goto WHILE_END0
-push constant 32767
-push local 0
-push static 1
-add
-pop pointer 1
-push that 0
-push constant 1
-sub
-sub
-push local 0
-push static 1
-add
-pop pointer 1
-push that 0
-push constant 1
-sub
-lt
-pop local 3
-push local 3
-not
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push local 0
-push constant 1
-add
-push static 1
-add
-push local 0
-push static 1
-add
-pop pointer 1
-push that 0
-push local 0
-push static 1
-add
-pop pointer 1
-push that 0
-add
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push local 0
-push constant 1
-add
-push static 1
-add
-pop pointer 1
-push that 0
-push constant 1
-sub
-push argument 0
-push constant 1
-sub
-gt
-pop local 3
-push local 3
-not
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push local 0
-push constant 1
-add
-pop local 0
-label IF_FALSE2
-label IF_FALSE1
-goto WHILE_EXP0
-label WHILE_END0
-label WHILE_EXP1
-push local 0
-push constant 1
-neg
-gt
-not
-if-goto WHILE_END1
-push local 0
-push static 1
-add
-pop pointer 1
-push that 0
-push constant 1
-sub
-push argument 0
-push constant 1
-sub
-gt
-not
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
-push local 1
-push local 0
-push static 0
-add
-pop pointer 1
-push that 0
-add
-pop local 1
-push argument 0
-push local 0
-push static 1
-add
-pop pointer 1
-push that 0
-sub
-pop argument 0
-label IF_FALSE3
-push local 0
-push constant 1
-sub
-pop local 0
-goto WHILE_EXP1
-label WHILE_END1
-push local 2
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
-push local 1
-neg
-pop local 1
-label IF_FALSE4
-push local 1
-return
-
-function MYPONG.Output_drawChar 4
-push argument 0
-call MYPONG.Output_getMap 1
-pop local 2
-push static 1
-pop local 0
-label WHILE_EXP0
-push local 1
-push constant 11
-lt
-not
-if-goto WHILE_END0
-push static 2
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push local 0
-push static 4
-add
-pop pointer 1
-push that 0
-push constant 256
-neg
-and
-pop local 3
-goto IF_END0
-label IF_FALSE0
-push local 0
-push static 4
-add
-pop pointer 1
-push that 0
-push constant 255
-and
-pop local 3
-label IF_END0
-push local 0
-push static 4
-add
-push local 1
-push local 2
-add
-pop pointer 1
-push that 0
-push local 3
-or
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push local 0
-push constant 32
-add
-pop local 0
-push local 1
-push constant 1
-add
-pop local 1
-goto WHILE_EXP0
-label WHILE_END0
-push constant 0
-return
-
-function MYPONG.String_length 0
-push argument 0
-pop pointer 0
-push this 2
-return
-
-function MYPONG.String_charAt 0
-push argument 0
-pop pointer 0
-push argument 1
-push constant 0
-lt
-push argument 1
-push this 2
-gt
-or
-push argument 1
-push this 2
-eq
-or
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 15
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE0
-push argument 1
-push this 1
-add
-pop pointer 1
-push that 0
-return
-
-function MYPONG.Output_printChar 0
-push argument 0
-call MYPONG.String_newLine 0
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-call MYPONG.Output_println 0
-pop temp 0
-goto IF_END0
-label IF_FALSE0
-push argument 0
-call MYPONG.String_backSpace 0
-eq
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-call MYPONG.Output_backSpace 0
-pop temp 0
-goto IF_END1
-label IF_FALSE1
-push argument 0
-call MYPONG.Output_drawChar 1
-pop temp 0
-push static 2
-not
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push static 0
-push constant 1
-add
-pop static 0
-push static 1
-push constant 1
-add
-pop static 1
-label IF_FALSE2
-push static 0
-push constant 32
-eq
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
-call MYPONG.Output_println 0
-pop temp 0
-goto IF_END3
-label IF_FALSE3
-push static 2
-not
-pop static 2
-label IF_END3
-label IF_END1
-label IF_END0
-push constant 0
-return
-
-function MYPONG.String_setInt 4
-push argument 0
-pop pointer 0
-push this 0
-push constant 0
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 19
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE0
-push constant 6
-call MYPONG.Array_new 1
-pop local 2
-push argument 1
-push constant 0
-lt
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push constant 0
-not
-pop local 3
-push argument 1
-neg
-pop argument 1
-label IF_FALSE1
-push argument 1
-pop local 1
-label WHILE_EXP0
-push local 1
-push constant 0
-gt
-not
-if-goto WHILE_END0
-push argument 1
-push constant 10
-call MYPONG.Math_divide 2
-pop local 1
-push local 0
-push local 2
-add
-push constant 48
-push argument 1
-push local 1
-push constant 10
-call MYPONG.Math_multiply 2
-sub
-add
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push local 0
-push constant 1
-add
-pop local 0
-push local 1
-pop argument 1
-goto WHILE_EXP0
-label WHILE_END0
-push local 3
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push local 0
-push local 2
-add
-push constant 45
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push local 0
-push constant 1
-add
-pop local 0
-label IF_FALSE2
-push this 0
-push local 0
-lt
-if-goto IF_TRUE3
-goto IF_FALSE3
-label IF_TRUE3
-push constant 19
-call MYPONG.Sys_error 1
-pop temp 0
-label IF_FALSE3
-push local 0
-push constant 0
-eq
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
-push constant 0
-push this 1
-add
-push constant 48
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 1
-pop this 2
-goto IF_END4
-label IF_FALSE4
-push constant 0
-pop this 2
-label WHILE_EXP1
-push this 2
-push local 0
-lt
-not
-if-goto WHILE_END1
-push this 2
-push this 1
-add
-push local 0
-push this 2
-push constant 1
-add
-sub
-push local 2
-add
-pop pointer 1
-push that 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push this 2
-push constant 1
-add
-pop this 2
-goto WHILE_EXP1
-label WHILE_END1
-label IF_END4
-push local 2
-call MYPONG.Array_dispose 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Bat_show 0
-push argument 0
-pop pointer 0
-push constant 0
-not
-call MYPONG.Screen_setColor 1
-pop temp 0
-push pointer 0
-call MYPONG.Bat_draw 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Ball_show 0
-push argument 0
-pop pointer 0
-push constant 0
-not
-call MYPONG.Screen_setColor 1
-pop temp 0
-push pointer 0
-call MYPONG.Ball_draw 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Screen_updateLocation 0
-push static 2
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push argument 0
-push static 1
-add
-push argument 0
-push static 1
-add
-pop pointer 1
-push that 0
-push argument 1
-or
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-goto IF_END0
-label IF_FALSE0
-push argument 0
-push static 1
-add
-push argument 0
-push static 1
-add
-pop pointer 1
-push that 0
-push argument 1
-not
-and
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-label IF_END0
-push constant 0
-return
-
-function MYPONG.Ball_hide 0
-push argument 0
-pop pointer 0
-push constant 0
-call MYPONG.Screen_setColor 1
-pop temp 0
-push pointer 0
-call MYPONG.Ball_draw 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Bat_hide 0
-push argument 0
-pop pointer 0
-push constant 0
-call MYPONG.Screen_setColor 1
-pop temp 0
-push pointer 0
-call MYPONG.Bat_draw 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Output_getMap 1
-push argument 0
-push constant 32
-lt
-push argument 0
-push constant 126
-gt
-or
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 0
-pop argument 0
-label IF_FALSE0
-push static 2
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push argument 0
-push static 5
-add
-pop pointer 1
-push that 0
-pop local 0
-goto IF_END1
-label IF_FALSE1
-push argument 0
-push static 6
-add
-pop pointer 1
-push that 0
-pop local 0
-label IF_END1
-push local 0
-return
-
-function MYPONG.String_newLine 0
-push constant 128
-return
-
-function MYPONG.Output_println 0
-push static 1
-push constant 352
-add
-push static 0
-sub
-pop static 1
-push constant 0
-pop static 0
-push constant 0
-not
-pop static 2
-push static 1
-push constant 8128
-eq
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 32
-pop static 1
-label IF_FALSE0
-push constant 0
-return
-
-function MYPONG.String_backSpace 0
-push constant 129
-return
-
-function MYPONG.Output_backSpace 0
-push static 2
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push static 0
-push constant 0
-gt
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push static 0
-push constant 1
-sub
-pop static 0
-push static 1
-push constant 1
-sub
-pop static 1
-goto IF_END1
-label IF_FALSE1
-push constant 31
-pop static 0
-push static 1
-push constant 32
-eq
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push constant 8128
-pop static 1
-label IF_FALSE2
-push static 1
-push constant 321
-sub
-pop static 1
-label IF_END1
-push constant 0
-pop static 2
-goto IF_END0
-label IF_FALSE0
-push constant 0
-not
-pop static 2
-label IF_END0
-push constant 32
-call MYPONG.Output_drawChar 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Array_dispose 0
-push argument 0
-pop pointer 0
-push pointer 0
-call MYPONG.Memory_deAlloc 1
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Bat_draw 0
-push argument 0
-pop pointer 0
-push this 0
-push this 1
-push this 0
-push this 2
-add
-push this 1
-push this 3
-add
-call MYPONG.Screen_drawRectangle 4
-pop temp 0
-push constant 0
-return
-
-function MYPONG.Ball_draw 0
-push argument 0
-pop pointer 0
-push this 0
-push this 1
-push this 0
-push constant 5
-add
-push this 1
-push constant 5
-add
-call MYPONG.Screen_drawRectangle 4
-pop temp 0
-push constant 0
-return
+@256
+D=A
+@SP
+M=D
+(Sys.init)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@Sys.init:return0
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Memory.init
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.init:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Sys.init:return1
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Math.init
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.init:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Sys.init:return2
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Screen.init
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.init:return2)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Sys.init:return3
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Output.init
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.init:return3)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Sys.init:return4
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Keyboard.init
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.init:return4)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Sys.init:return5
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Main.main
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.init:return5)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Sys.init:return6
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Sys.halt
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.init:return6)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Memory.init)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Memory.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2048
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Memory.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@14334
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2049
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Memory.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@2050
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Math.init)
+@1
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+@16
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.init:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Math.init:return0)
+@Math.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@16
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.init:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Math.init:return1)
+@Math.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Math.init$WHILE_EXP0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE0
+D;JLT
+@SP
+A=M-1
+M=0
+@END0
+0;JMP
+(TRUE0)
+@SP
+A=M-1
+M=-1
+@END0
+0;JMP
+(END0)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Math.init$WHILE_END0
+D;JNE
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@Math.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@Math.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Math.init$WHILE_EXP0
+0;JMP
+(Math.init$WHILE_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Screen.init)
+@1
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+@16384
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@Screen.2
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@17
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.init:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.init:return0)
+@Screen.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Screen.init$WHILE_EXP0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@16
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE1
+D;JLT
+@SP
+A=M-1
+M=0
+@END1
+0;JMP
+(TRUE1)
+@SP
+A=M-1
+M=-1
+@END1
+0;JMP
+(END1)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Screen.init$WHILE_END0
+D;JNE
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@Screen.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@Screen.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Screen.init$WHILE_EXP0
+0;JMP
+(Screen.init$WHILE_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.init)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@16384
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.4
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@Output.2
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.init:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@String.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.init:return0)
+@Output.3
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.init:return1
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Output.initMap
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.init:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Output.init:return2
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Output.createShiftedMap
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.init:return2)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Keyboard.init)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Main.main)
+@1
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+@Main.main:return0
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@PongGame.newInstance
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Main.main:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Main.main:return1
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@PongGame.getInstance
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Main.main:return1)
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Main.main:return2
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@PongGame.run
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Main.main:return2)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Main.main:return3
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@PongGame.dispose
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Main.main:return3)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Sys.halt)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+(Sys.halt$WHILE_EXP0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Sys.halt$WHILE_END0
+D;JNE
+@Sys.halt$WHILE_EXP0
+0;JMP
+(Sys.halt$WHILE_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Array.new)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE2
+D;JGT
+@SP
+A=M-1
+M=0
+@END2
+0;JMP
+(TRUE2)
+@SP
+A=M-1
+M=-1
+@END2
+0;JMP
+(END2)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Array.new$IF_TRUE0
+D;JNE
+@Array.new$IF_FALSE0
+0;JMP
+(Array.new$IF_TRUE0)
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Array.new:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Array.new:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(Array.new$IF_FALSE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Array.new:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.alloc
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Array.new:return1)
+@ROUTINE_OF_RETURN
+0;JMP
+(String.new)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@String.new:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.alloc
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.new:return0)
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE3
+D;JLT
+@SP
+A=M-1
+M=0
+@END3
+0;JMP
+(TRUE3)
+@SP
+A=M-1
+M=-1
+@END3
+0;JMP
+(END3)
+@SP
+M=M-1
+A=M
+D=M
+@String.new$IF_TRUE0
+D;JNE
+@String.new$IF_FALSE0
+0;JMP
+(String.new$IF_TRUE0)
+@14
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@String.new:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.new:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(String.new$IF_FALSE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE4
+D;JGT
+@SP
+A=M-1
+M=0
+@END4
+0;JMP
+(TRUE4)
+@SP
+A=M-1
+M=-1
+@END4
+0;JMP
+(END4)
+@SP
+M=M-1
+A=M
+D=M
+@String.new$IF_TRUE1
+D;JNE
+@String.new$IF_FALSE1
+0;JMP
+(String.new$IF_TRUE1)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@String.new:return2
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.new:return2)
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(String.new$IF_FALSE1)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.initMap)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@127
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return0)
+@Output.5
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return1
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return2
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return2)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@33
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return3
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return3)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@34
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@20
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return4
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return4)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@18
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@18
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@18
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@18
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@18
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@18
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return5
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return5)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@36
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return6
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return6)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@37
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@49
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return7
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return7)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@38
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return8
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return8)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@39
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return9
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return9)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@40
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return10
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return10)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@41
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return11
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return11)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@42
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return12
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return12)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@43
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return13
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return13)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@44
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return14
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return14)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@45
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return15
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return15)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@46
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return16
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return16)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@47
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return17
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return17)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return18
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return18)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@49
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return19
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return19)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@50
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return20
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return20)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return21
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return21)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@52
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@16
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@26
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@25
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@60
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return22
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return22)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@53
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return23
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return23)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return24
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return24)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@55
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@49
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return25
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return25)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@56
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return26
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return26)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@57
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@62
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return27
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return27)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@58
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return28
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return28)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@59
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return29
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return29)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@60
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return30
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return30)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@61
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return31
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return31)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@62
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return32
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return32)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@64
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@59
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@59
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@59
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return33
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return33)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return34
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return34)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@65
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return35
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return35)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@66
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return36
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return36)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@67
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return37
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return37)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@68
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return38
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return38)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@69
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@11
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@11
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return39
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return39)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@70
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@11
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@11
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return40
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return40)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@71
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@59
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@44
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return41
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return41)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@72
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return42
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return42)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@73
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return43
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return43)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@74
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@60
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return44
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return44)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@75
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return45
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return45)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@76
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return46
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return46)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@77
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@33
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return47
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return47)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@78
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@55
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@55
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@59
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@59
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return48
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return48)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@79
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return49
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return49)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@80
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return50
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return50)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@81
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@59
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return51
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return51)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@82
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return52
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return52)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@83
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return53
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return53)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@84
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@45
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return54
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return54)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@85
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return55
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return55)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@86
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return56
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return56)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@87
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@18
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return57
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return57)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@88
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return58
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return58)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@89
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return59
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return59)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@90
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@49
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@35
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return60
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return60)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@91
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return61
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return61)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@92
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return62
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return62)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@93
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return63
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return63)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@94
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@8
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return64
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return64)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@95
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return65
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return65)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@96
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return66
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return66)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@97
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return67
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return67)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@98
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return68
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return68)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@99
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return69
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return69)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@100
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@60
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return70
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return70)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@101
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return71
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return71)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@102
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@38
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return72
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return72)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@103
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@62
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return73
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return73)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@104
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@55
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return74
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return74)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@105
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return75
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return75)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@106
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@56
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return76
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return76)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@107
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return77
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return77)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@108
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return78
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return78)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@109
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@29
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@43
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@43
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@43
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@43
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return79
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return79)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@110
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@29
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return80
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return80)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@111
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return81
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return81)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@112
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return82
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return82)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@113
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@62
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return83
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return83)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@114
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@29
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@55
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@7
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return84
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return84)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@115
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return85
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return85)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@116
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@28
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return86
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return86)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@117
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@54
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return87
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return87)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@118
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return88
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return88)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@119
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@18
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return89
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return89)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@120
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@30
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return90
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return90)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@121
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@62
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@24
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return91
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return91)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@122
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@51
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return92
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return92)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@123
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@56
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@7
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@56
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return93
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return93)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@124
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return94
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return94)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@125
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@7
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@56
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@7
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return95
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return95)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@126
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@38
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@45
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@25
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.initMap:return96
+D=A
+@SP
+A=M
+M=D
+@12
+D=A
+@R13
+M=D
+@Output.create
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.initMap:return96)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.createShiftedMap)
+@4
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+@127
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.createShiftedMap:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.createShiftedMap:return0)
+@Output.6
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.createShiftedMap$WHILE_EXP0)
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@127
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE5
+D;JLT
+@SP
+A=M-1
+M=0
+@END5
+0;JMP
+(TRUE5)
+@SP
+A=M-1
+M=-1
+@END5
+0;JMP
+(END5)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Output.createShiftedMap$WHILE_END0
+D;JNE
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@11
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.createShiftedMap:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.createShiftedMap:return1)
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.6
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.createShiftedMap$WHILE_EXP1)
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@11
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE6
+D;JLT
+@SP
+A=M-1
+M=0
+@END6
+0;JMP
+(TRUE6)
+@SP
+A=M-1
+M=-1
+@END6
+0;JMP
+(END6)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Output.createShiftedMap$WHILE_END1
+D;JNE
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@256
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.createShiftedMap:return2
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.createShiftedMap:return2)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.createShiftedMap$WHILE_EXP1
+0;JMP
+(Output.createShiftedMap$WHILE_END1)
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE7
+D;JEQ
+@SP
+A=M-1
+M=0
+@END7
+0;JMP
+(TRUE7)
+@SP
+A=M-1
+M=-1
+@END7
+0;JMP
+(END7)
+@SP
+M=M-1
+A=M
+D=M
+@Output.createShiftedMap$IF_TRUE0
+D;JNE
+@Output.createShiftedMap$IF_FALSE0
+0;JMP
+(Output.createShiftedMap$IF_TRUE0)
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.createShiftedMap$IF_END0
+0;JMP
+(Output.createShiftedMap$IF_FALSE0)
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.createShiftedMap$IF_END0)
+@Output.createShiftedMap$WHILE_EXP0
+0;JMP
+(Output.createShiftedMap$WHILE_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(PongGame.newInstance)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@PongGame.newInstance:return0
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@PongGame.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.newInstance:return0)
+@PongGame.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(PongGame.getInstance)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@PongGame.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(PongGame.run)
+@1
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+(PongGame.run$WHILE_EXP0)
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.run$WHILE_END0
+D;JNE
+(PongGame.run$WHILE_EXP1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE8
+D;JEQ
+@SP
+A=M-1
+M=0
+@END8
+0;JMP
+(TRUE8)
+@SP
+A=M-1
+M=-1
+@END8
+0;JMP
+(END8)
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.run$WHILE_END1
+D;JNE
+@PongGame.run:return0
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Keyboard.keyPressed
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return0)
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.move
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return2
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@PongGame.moveBall
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return2)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@PongGame.run$WHILE_EXP1
+0;JMP
+(PongGame.run$WHILE_END1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@130
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE9
+D;JEQ
+@SP
+A=M-1
+M=0
+@END9
+0;JMP
+(TRUE9)
+@SP
+A=M-1
+M=-1
+@END9
+0;JMP
+(END9)
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.run$IF_TRUE0
+D;JNE
+@PongGame.run$IF_FALSE0
+0;JMP
+(PongGame.run$IF_TRUE0)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return3
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Bat.setDirection
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return3)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@PongGame.run$IF_END0
+0;JMP
+(PongGame.run$IF_FALSE0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@132
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE10
+D;JEQ
+@SP
+A=M-1
+M=0
+@END10
+0;JMP
+(TRUE10)
+@SP
+A=M-1
+M=-1
+@END10
+0;JMP
+(END10)
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.run$IF_TRUE1
+D;JNE
+@PongGame.run$IF_FALSE1
+0;JMP
+(PongGame.run$IF_TRUE1)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return4
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Bat.setDirection
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return4)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@PongGame.run$IF_END1
+0;JMP
+(PongGame.run$IF_FALSE1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@140
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE11
+D;JEQ
+@SP
+A=M-1
+M=0
+@END11
+0;JMP
+(TRUE11)
+@SP
+A=M-1
+M=-1
+@END11
+0;JMP
+(END11)
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.run$IF_TRUE2
+D;JNE
+@PongGame.run$IF_FALSE2
+0;JMP
+(PongGame.run$IF_TRUE2)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@3
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(PongGame.run$IF_FALSE2)
+(PongGame.run$IF_END1)
+(PongGame.run$IF_END0)
+(PongGame.run$WHILE_EXP2)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE12
+D;JEQ
+@SP
+A=M-1
+M=0
+@END12
+0;JMP
+(TRUE12)
+@SP
+A=M-1
+M=-1
+@END12
+0;JMP
+(END12)
+@SP
+A=M-1
+M=!M
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.run$WHILE_END2
+D;JNE
+@PongGame.run:return5
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Keyboard.keyPressed
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return5)
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return6
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.move
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return6)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return7
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@PongGame.moveBall
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return7)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@PongGame.run$WHILE_EXP2
+0;JMP
+(PongGame.run$WHILE_END2)
+@PongGame.run$WHILE_EXP0
+0;JMP
+(PongGame.run$WHILE_END0)
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.run$IF_TRUE3
+D;JNE
+@PongGame.run$IF_FALSE3
+0;JMP
+(PongGame.run$IF_TRUE3)
+@10
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@27
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return8
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Output.moveCursor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return8)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@9
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return9
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@String.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return9)
+@71
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return10
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return10)
+@97
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return11
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return11)
+@109
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return12
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return12)
+@101
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return13
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return13)
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return14
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return14)
+@79
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return15
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return15)
+@118
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return16
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return16)
+@101
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return17
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return17)
+@114
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.run:return18
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return18)
+@PongGame.run:return19
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.printString
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.run:return19)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(PongGame.run$IF_FALSE3)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(PongGame.dispose)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.dispose:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.dispose
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.dispose:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.dispose:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Ball.dispose
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.dispose:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.dispose:return2
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.deAlloc
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.dispose:return2)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Sys.error)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Sys.error:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@String.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.error:return0)
+@69
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Sys.error:return1
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.error:return1)
+@82
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Sys.error:return2
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.error:return2)
+@82
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Sys.error:return3
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.error:return3)
+@Sys.error:return4
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.printString
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.error:return4)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Sys.error:return5
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.printInt
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.error:return5)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Sys.error:return6
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Sys.halt
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Sys.error:return6)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Memory.alloc)
+@1
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE13
+D;JLT
+@SP
+A=M-1
+M=0
+@END13
+0;JMP
+(TRUE13)
+@SP
+A=M-1
+M=-1
+@END13
+0;JMP
+(END13)
+@SP
+M=M-1
+A=M
+D=M
+@Memory.alloc$IF_TRUE0
+D;JNE
+@Memory.alloc$IF_FALSE0
+0;JMP
+(Memory.alloc$IF_TRUE0)
+@5
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Memory.alloc:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Memory.alloc:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(Memory.alloc$IF_FALSE0)
+@2048
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Memory.alloc$WHILE_EXP0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE14
+D;JLT
+@SP
+A=M-1
+M=0
+@END14
+0;JMP
+(TRUE14)
+@SP
+A=M-1
+M=-1
+@END14
+0;JMP
+(END14)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Memory.alloc$WHILE_END0
+D;JNE
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Memory.alloc$WHILE_EXP0
+0;JMP
+(Memory.alloc$WHILE_END0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@16379
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE15
+D;JGT
+@SP
+A=M-1
+M=0
+@END15
+0;JMP
+(TRUE15)
+@SP
+A=M-1
+M=-1
+@END15
+0;JMP
+(END15)
+@SP
+M=M-1
+A=M
+D=M
+@Memory.alloc$IF_TRUE1
+D;JNE
+@Memory.alloc$IF_FALSE1
+0;JMP
+(Memory.alloc$IF_TRUE1)
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Memory.alloc:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Memory.alloc:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(Memory.alloc$IF_FALSE1)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE16
+D;JGT
+@SP
+A=M-1
+M=0
+@END16
+0;JMP
+(TRUE16)
+@SP
+A=M-1
+M=-1
+@END16
+0;JMP
+(END16)
+@SP
+M=M-1
+A=M
+D=M
+@Memory.alloc$IF_TRUE2
+D;JNE
+@Memory.alloc$IF_FALSE2
+0;JMP
+(Memory.alloc$IF_TRUE2)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE17
+D;JEQ
+@SP
+A=M-1
+M=0
+@END17
+0;JMP
+(TRUE17)
+@SP
+A=M-1
+M=-1
+@END17
+0;JMP
+(END17)
+@SP
+M=M-1
+A=M
+D=M
+@Memory.alloc$IF_TRUE3
+D;JNE
+@Memory.alloc$IF_FALSE3
+0;JMP
+(Memory.alloc$IF_TRUE3)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Memory.alloc$IF_END3
+0;JMP
+(Memory.alloc$IF_FALSE3)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Memory.alloc$IF_END3)
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Memory.alloc$IF_FALSE2)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.create)
+@1
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+@11
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.create:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.create:return0)
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@3
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@4
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@5
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@5
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@6
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@7
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@7
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@8
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@8
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@9
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@9
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@10
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@10
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@11
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Math.multiply)
+@5
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE18
+D;JLT
+@SP
+A=M-1
+M=0
+@END18
+0;JMP
+(TRUE18)
+@SP
+A=M-1
+M=-1
+@END18
+0;JMP
+(END18)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE19
+D;JGT
+@SP
+A=M-1
+M=0
+@END19
+0;JMP
+(TRUE19)
+@SP
+A=M-1
+M=-1
+@END19
+0;JMP
+(END19)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE20
+D;JGT
+@SP
+A=M-1
+M=0
+@END20
+0;JMP
+(TRUE20)
+@SP
+A=M-1
+M=-1
+@END20
+0;JMP
+(END20)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE21
+D;JLT
+@SP
+A=M-1
+M=0
+@END21
+0;JMP
+(TRUE21)
+@SP
+A=M-1
+M=-1
+@END21
+0;JMP
+(END21)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@4
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.multiply:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Math.abs
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Math.multiply:return0)
+@0
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.multiply:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Math.abs
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Math.multiply:return1)
+@1
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE22
+D;JLT
+@SP
+A=M-1
+M=0
+@END22
+0;JMP
+(TRUE22)
+@SP
+A=M-1
+M=-1
+@END22
+0;JMP
+(END22)
+@SP
+M=M-1
+A=M
+D=M
+@Math.multiply$IF_TRUE0
+D;JNE
+@Math.multiply$IF_FALSE0
+0;JMP
+(Math.multiply$IF_TRUE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Math.multiply$IF_FALSE0)
+(Math.multiply$WHILE_EXP0)
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE23
+D;JLT
+@SP
+A=M-1
+M=0
+@END23
+0;JMP
+(TRUE23)
+@SP
+A=M-1
+M=-1
+@END23
+0;JMP
+(END23)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Math.multiply$WHILE_END0
+D;JNE
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE24
+D;JEQ
+@SP
+A=M-1
+M=0
+@END24
+0;JMP
+(TRUE24)
+@SP
+A=M-1
+M=-1
+@END24
+0;JMP
+(END24)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Math.multiply$IF_TRUE1
+D;JNE
+@Math.multiply$IF_FALSE1
+0;JMP
+(Math.multiply$IF_TRUE1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Math.multiply$IF_FALSE1)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Math.multiply$WHILE_EXP0
+0;JMP
+(Math.multiply$WHILE_END0)
+@4
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Math.multiply$IF_TRUE2
+D;JNE
+@Math.multiply$IF_FALSE2
+0;JMP
+(Math.multiply$IF_TRUE2)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Math.multiply$IF_FALSE2)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(PongGame.new)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@7
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.alloc
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return0)
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@PongGame.new:return1
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Screen.clearScreen
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@50
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@230
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@229
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@7
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return2
+D=A
+@SP
+A=M
+M=D
+@4
+D=A
+@R13
+M=D
+@Bat.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return2)
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@253
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@222
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@511
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@229
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return3
+D=A
+@SP
+A=M
+M=D
+@6
+D=A
+@R13
+M=D
+@Ball.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return3)
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@400
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return4
+D=A
+@SP
+A=M
+M=D
+@3
+D=A
+@R13
+M=D
+@Ball.setDestination
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return4)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@238
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@511
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@240
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return5
+D=A
+@SP
+A=M
+M=D
+@4
+D=A
+@R13
+M=D
+@Screen.drawRectangle
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return5)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@22
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return6
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Output.moveCursor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return6)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@8
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return7
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@String.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return7)
+@83
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return8
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return8)
+@99
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return9
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return9)
+@111
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return10
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return10)
+@114
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return11
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return11)
+@101
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return12
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return12)
+@58
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return13
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return13)
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return14
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return14)
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.new:return15
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.appendChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return15)
+@PongGame.new:return16
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.printString
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.new:return16)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@5
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Keyboard.keyPressed)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@24576
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Keyboard.keyPressed:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.peek
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Keyboard.keyPressed:return0)
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.move)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@4
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE25
+D;JEQ
+@SP
+A=M-1
+M=0
+@END25
+0;JMP
+(TRUE25)
+@SP
+A=M-1
+M=-1
+@END25
+0;JMP
+(END25)
+@SP
+M=M-1
+A=M
+D=M
+@Bat.move$IF_TRUE0
+D;JNE
+@Bat.move$IF_FALSE0
+0;JMP
+(Bat.move$IF_TRUE0)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE26
+D;JLT
+@SP
+A=M-1
+M=0
+@END26
+0;JMP
+(TRUE26)
+@SP
+A=M-1
+M=-1
+@END26
+0;JMP
+(END26)
+@SP
+M=M-1
+A=M
+D=M
+@Bat.move$IF_TRUE1
+D;JNE
+@Bat.move$IF_FALSE1
+0;JMP
+(Bat.move$IF_TRUE1)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Bat.move$IF_FALSE1)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.move:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Screen.setColor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.move:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Bat.move:return1
+D=A
+@SP
+A=M
+M=D
+@4
+D=A
+@R13
+M=D
+@Screen.drawRectangle
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.move:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@Bat.move:return2
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Screen.setColor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.move:return2)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Bat.move:return3
+D=A
+@SP
+A=M
+M=D
+@4
+D=A
+@R13
+M=D
+@Screen.drawRectangle
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.move:return3)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Bat.move$IF_END0
+0;JMP
+(Bat.move$IF_FALSE0)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@511
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE27
+D;JGT
+@SP
+A=M-1
+M=0
+@END27
+0;JMP
+(TRUE27)
+@SP
+A=M-1
+M=-1
+@END27
+0;JMP
+(END27)
+@SP
+M=M-1
+A=M
+D=M
+@Bat.move$IF_TRUE2
+D;JNE
+@Bat.move$IF_FALSE2
+0;JMP
+(Bat.move$IF_TRUE2)
+@511
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Bat.move$IF_FALSE2)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.move:return4
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Screen.setColor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.move:return4)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Bat.move:return5
+D=A
+@SP
+A=M
+M=D
+@4
+D=A
+@R13
+M=D
+@Screen.drawRectangle
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.move:return5)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@Bat.move:return6
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Screen.setColor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.move:return6)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Bat.move:return7
+D=A
+@SP
+A=M
+M=D
+@4
+D=A
+@R13
+M=D
+@Screen.drawRectangle
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.move:return7)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(Bat.move$IF_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(PongGame.moveBall)
+@5
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.moveBall:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Ball.move
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.moveBall:return0)
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE28
+D;JGT
+@SP
+A=M-1
+M=0
+@END28
+0;JMP
+(TRUE28)
+@SP
+A=M-1
+M=-1
+@END28
+0;JMP
+(END28)
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@5
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE29
+D;JEQ
+@SP
+A=M-1
+M=0
+@END29
+0;JMP
+(TRUE29)
+@SP
+A=M-1
+M=-1
+@END29
+0;JMP
+(END29)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.moveBall$IF_TRUE0
+D;JNE
+@PongGame.moveBall$IF_FALSE0
+0;JMP
+(PongGame.moveBall$IF_TRUE0)
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@5
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.moveBall:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.getLeft
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.moveBall:return1)
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.moveBall:return2
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.getRight
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.moveBall:return2)
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.moveBall:return3
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Ball.getLeft
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.moveBall:return3)
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.moveBall:return4
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Ball.getRight
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.moveBall:return4)
+@4
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE30
+D;JEQ
+@SP
+A=M-1
+M=0
+@END30
+0;JMP
+(TRUE30)
+@SP
+A=M-1
+M=-1
+@END30
+0;JMP
+(END30)
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.moveBall$IF_TRUE1
+D;JNE
+@PongGame.moveBall$IF_FALSE1
+0;JMP
+(PongGame.moveBall$IF_TRUE1)
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE31
+D;JGT
+@SP
+A=M-1
+M=0
+@END31
+0;JMP
+(TRUE31)
+@SP
+A=M-1
+M=-1
+@END31
+0;JMP
+(END31)
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE32
+D;JLT
+@SP
+A=M-1
+M=0
+@END32
+0;JMP
+(TRUE32)
+@SP
+A=M-1
+M=-1
+@END32
+0;JMP
+(END32)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@3
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.moveBall$IF_TRUE2
+D;JNE
+@PongGame.moveBall$IF_FALSE2
+0;JMP
+(PongGame.moveBall$IF_TRUE2)
+@4
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@10
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE33
+D;JLT
+@SP
+A=M-1
+M=0
+@END33
+0;JMP
+(TRUE33)
+@SP
+A=M-1
+M=-1
+@END33
+0;JMP
+(END33)
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.moveBall$IF_TRUE3
+D;JNE
+@PongGame.moveBall$IF_FALSE3
+0;JMP
+(PongGame.moveBall$IF_TRUE3)
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@PongGame.moveBall$IF_END3
+0;JMP
+(PongGame.moveBall$IF_FALSE3)
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@10
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE34
+D;JGT
+@SP
+A=M-1
+M=0
+@END34
+0;JMP
+(TRUE34)
+@SP
+A=M-1
+M=-1
+@END34
+0;JMP
+(END34)
+@SP
+M=M-1
+A=M
+D=M
+@PongGame.moveBall$IF_TRUE4
+D;JNE
+@PongGame.moveBall$IF_FALSE4
+0;JMP
+(PongGame.moveBall$IF_TRUE4)
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(PongGame.moveBall$IF_FALSE4)
+(PongGame.moveBall$IF_END3)
+@6
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@6
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.moveBall:return5
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Bat.setWidth
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.moveBall:return5)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@4
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@4
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@22
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@7
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.moveBall:return6
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Output.moveCursor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.moveBall:return6)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@4
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.moveBall:return7
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.printInt
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.moveBall:return7)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(PongGame.moveBall$IF_FALSE2)
+(PongGame.moveBall$IF_FALSE1)
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@PongGame.moveBall:return8
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Ball.bounce
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(PongGame.moveBall:return8)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(PongGame.moveBall$IF_FALSE0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.setDirection)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.moveCursor)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE35
+D;JLT
+@SP
+A=M-1
+M=0
+@END35
+0;JMP
+(TRUE35)
+@SP
+A=M-1
+M=-1
+@END35
+0;JMP
+(END35)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@22
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE36
+D;JGT
+@SP
+A=M-1
+M=0
+@END36
+0;JMP
+(TRUE36)
+@SP
+A=M-1
+M=-1
+@END36
+0;JMP
+(END36)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE37
+D;JLT
+@SP
+A=M-1
+M=0
+@END37
+0;JMP
+(TRUE37)
+@SP
+A=M-1
+M=-1
+@END37
+0;JMP
+(END37)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@63
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE38
+D;JGT
+@SP
+A=M-1
+M=0
+@END38
+0;JMP
+(TRUE38)
+@SP
+A=M-1
+M=-1
+@END38
+0;JMP
+(END38)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@SP
+M=M-1
+A=M
+D=M
+@Output.moveCursor$IF_TRUE0
+D;JNE
+@Output.moveCursor$IF_FALSE0
+0;JMP
+(Output.moveCursor$IF_TRUE0)
+@20
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.moveCursor:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.moveCursor:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(Output.moveCursor$IF_FALSE0)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.moveCursor:return1
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.moveCursor:return1)
+@Output.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@352
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.moveCursor:return2
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.moveCursor:return2)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Output.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Output.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.moveCursor:return3
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.moveCursor:return3)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE39
+D;JEQ
+@SP
+A=M-1
+M=0
+@END39
+0;JMP
+(TRUE39)
+@SP
+A=M-1
+M=-1
+@END39
+0;JMP
+(END39)
+@Output.2
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.moveCursor:return4
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.drawChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.moveCursor:return4)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(String.appendChar)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE40
+D;JEQ
+@SP
+A=M-1
+M=0
+@END40
+0;JMP
+(TRUE40)
+@SP
+A=M-1
+M=-1
+@END40
+0;JMP
+(END40)
+@SP
+M=M-1
+A=M
+D=M
+@String.appendChar$IF_TRUE0
+D;JNE
+@String.appendChar$IF_FALSE0
+0;JMP
+(String.appendChar$IF_TRUE0)
+@17
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@String.appendChar:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.appendChar:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(String.appendChar$IF_FALSE0)
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.printString)
+@2
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.printString:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@String.length
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printString:return0)
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.printString$WHILE_EXP0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE41
+D;JLT
+@SP
+A=M-1
+M=0
+@END41
+0;JMP
+(TRUE41)
+@SP
+A=M-1
+M=-1
+@END41
+0;JMP
+(END41)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Output.printString$WHILE_END0
+D;JNE
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.printString:return1
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.charAt
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printString:return1)
+@Output.printString:return2
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.printChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printString:return2)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.printString$WHILE_EXP0
+0;JMP
+(Output.printString$WHILE_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.dispose)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.dispose:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.deAlloc
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.dispose:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.dispose)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.dispose:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.deAlloc
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.dispose:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Memory.deAlloc)
+@2
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE42
+D;JEQ
+@SP
+A=M-1
+M=0
+@END42
+0;JMP
+(TRUE42)
+@SP
+A=M-1
+M=-1
+@END42
+0;JMP
+(END42)
+@SP
+M=M-1
+A=M
+D=M
+@Memory.deAlloc$IF_TRUE0
+D;JNE
+@Memory.deAlloc$IF_FALSE0
+0;JMP
+(Memory.deAlloc$IF_TRUE0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Memory.deAlloc$IF_END0
+0;JMP
+(Memory.deAlloc$IF_FALSE0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE43
+D;JEQ
+@SP
+A=M-1
+M=0
+@END43
+0;JMP
+(TRUE43)
+@SP
+A=M-1
+M=-1
+@END43
+0;JMP
+(END43)
+@SP
+M=M-1
+A=M
+D=M
+@Memory.deAlloc$IF_TRUE1
+D;JNE
+@Memory.deAlloc$IF_FALSE1
+0;JMP
+(Memory.deAlloc$IF_TRUE1)
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Memory.deAlloc$IF_END1
+0;JMP
+(Memory.deAlloc$IF_FALSE1)
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Memory.deAlloc$IF_END1)
+(Memory.deAlloc$IF_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.printInt)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@Output.3
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.printInt:return0
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@String.setInt
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printInt:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Output.3
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.printInt:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.printString
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printInt:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Math.abs)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE44
+D;JLT
+@SP
+A=M-1
+M=0
+@END44
+0;JMP
+(TRUE44)
+@SP
+A=M-1
+M=-1
+@END44
+0;JMP
+(END44)
+@SP
+M=M-1
+A=M
+D=M
+@Math.abs$IF_TRUE0
+D;JNE
+@Math.abs$IF_FALSE0
+0;JMP
+(Math.abs$IF_TRUE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@0
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Math.abs$IF_FALSE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Screen.clearScreen)
+@1
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+(Screen.clearScreen$WHILE_EXP0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@8192
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE45
+D;JLT
+@SP
+A=M-1
+M=0
+@END45
+0;JMP
+(TRUE45)
+@SP
+A=M-1
+M=-1
+@END45
+0;JMP
+(END45)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Screen.clearScreen$WHILE_END0
+D;JNE
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Screen.clearScreen$WHILE_EXP0
+0;JMP
+(Screen.clearScreen$WHILE_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.new)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@5
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.new:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.alloc
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.new:return0)
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.new:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.show
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.new:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.new)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.new:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.alloc
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.new:return0)
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@10
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@11
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@4
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@5
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@13
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.new:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Ball.show
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.new:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.setDestination)
+@3
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@3
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.setDestination:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Math.abs
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.setDestination:return0)
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.setDestination:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Math.abs
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.setDestination:return1)
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE46
+D;JLT
+@SP
+A=M-1
+M=0
+@END46
+0;JMP
+(TRUE46)
+@SP
+A=M-1
+M=-1
+@END46
+0;JMP
+(END46)
+@7
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@7
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Ball.setDestination$IF_TRUE0
+D;JNE
+@Ball.setDestination$IF_FALSE0
+0;JMP
+(Ball.setDestination$IF_TRUE0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE47
+D;JLT
+@SP
+A=M-1
+M=0
+@END47
+0;JMP
+(TRUE47)
+@SP
+A=M-1
+M=-1
+@END47
+0;JMP
+(END47)
+@8
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE48
+D;JLT
+@SP
+A=M-1
+M=0
+@END48
+0;JMP
+(TRUE48)
+@SP
+A=M-1
+M=-1
+@END48
+0;JMP
+(END48)
+@9
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.setDestination$IF_END0
+0;JMP
+(Ball.setDestination$IF_FALSE0)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE49
+D;JLT
+@SP
+A=M-1
+M=0
+@END49
+0;JMP
+(TRUE49)
+@SP
+A=M-1
+M=-1
+@END49
+0;JMP
+(END49)
+@8
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE50
+D;JLT
+@SP
+A=M-1
+M=0
+@END50
+0;JMP
+(TRUE50)
+@SP
+A=M-1
+M=-1
+@END50
+0;JMP
+(END50)
+@9
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.setDestination$IF_END0)
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.setDestination:return2
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.setDestination:return2)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@4
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.setDestination:return3
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.setDestination:return3)
+@5
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@Ball.setDestination:return4
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.setDestination:return4)
+@6
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Screen.drawRectangle)
+@9
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE51
+D;JGT
+@SP
+A=M-1
+M=0
+@END51
+0;JMP
+(TRUE51)
+@SP
+A=M-1
+M=-1
+@END51
+0;JMP
+(END51)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE52
+D;JGT
+@SP
+A=M-1
+M=0
+@END52
+0;JMP
+(TRUE52)
+@SP
+A=M-1
+M=-1
+@END52
+0;JMP
+(END52)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE53
+D;JLT
+@SP
+A=M-1
+M=0
+@END53
+0;JMP
+(TRUE53)
+@SP
+A=M-1
+M=-1
+@END53
+0;JMP
+(END53)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@511
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE54
+D;JGT
+@SP
+A=M-1
+M=0
+@END54
+0;JMP
+(TRUE54)
+@SP
+A=M-1
+M=-1
+@END54
+0;JMP
+(END54)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE55
+D;JLT
+@SP
+A=M-1
+M=0
+@END55
+0;JMP
+(TRUE55)
+@SP
+A=M-1
+M=-1
+@END55
+0;JMP
+(END55)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@3
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@255
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE56
+D;JGT
+@SP
+A=M-1
+M=0
+@END56
+0;JMP
+(TRUE56)
+@SP
+A=M-1
+M=-1
+@END56
+0;JMP
+(END56)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@SP
+M=M-1
+A=M
+D=M
+@Screen.drawRectangle$IF_TRUE0
+D;JNE
+@Screen.drawRectangle$IF_FALSE0
+0;JMP
+(Screen.drawRectangle$IF_TRUE0)
+@9
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.drawRectangle:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(Screen.drawRectangle$IF_FALSE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@16
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.drawRectangle:return1
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return1)
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@16
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.drawRectangle:return2
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return2)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@7
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@16
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.drawRectangle:return3
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return3)
+@4
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@16
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.drawRectangle:return4
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return4)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@8
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@7
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+A=M-1
+M=!M
+@6
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@8
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Screen.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@5
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.drawRectangle:return5
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return5)
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@4
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Screen.drawRectangle$WHILE_EXP0)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE57
+D;JGT
+@SP
+A=M-1
+M=0
+@END57
+0;JMP
+(TRUE57)
+@SP
+A=M-1
+M=-1
+@END57
+0;JMP
+(END57)
+@SP
+A=M-1
+M=!M
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Screen.drawRectangle$WHILE_END0
+D;JNE
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE58
+D;JEQ
+@SP
+A=M-1
+M=0
+@END58
+0;JMP
+(TRUE58)
+@SP
+A=M-1
+M=-1
+@END58
+0;JMP
+(END58)
+@SP
+M=M-1
+A=M
+D=M
+@Screen.drawRectangle$IF_TRUE1
+D;JNE
+@Screen.drawRectangle$IF_FALSE1
+0;JMP
+(Screen.drawRectangle$IF_TRUE1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@5
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@Screen.drawRectangle:return6
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Screen.updateLocation
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return6)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Screen.drawRectangle$IF_END1
+0;JMP
+(Screen.drawRectangle$IF_FALSE1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.drawRectangle:return7
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Screen.updateLocation
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return7)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Screen.drawRectangle$WHILE_EXP1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE59
+D;JLT
+@SP
+A=M-1
+M=0
+@END59
+0;JMP
+(TRUE59)
+@SP
+A=M-1
+M=-1
+@END59
+0;JMP
+(END59)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Screen.drawRectangle$WHILE_END1
+D;JNE
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@Screen.drawRectangle:return8
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Screen.updateLocation
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return8)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Screen.drawRectangle$WHILE_EXP1
+0;JMP
+(Screen.drawRectangle$WHILE_END1)
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@5
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.drawRectangle:return9
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Screen.updateLocation
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Screen.drawRectangle:return9)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(Screen.drawRectangle$IF_END1)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Screen.drawRectangle$WHILE_EXP0
+0;JMP
+(Screen.drawRectangle$WHILE_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Memory.peek)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Memory.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Screen.setColor)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.2
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.move)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.move:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Ball.hide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.move:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@4
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE60
+D;JLT
+@SP
+A=M-1
+M=0
+@END60
+0;JMP
+(TRUE60)
+@SP
+A=M-1
+M=-1
+@END60
+0;JMP
+(END60)
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE0
+D;JNE
+@Ball.move$IF_FALSE0
+0;JMP
+(Ball.move$IF_TRUE0)
+@4
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@5
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@4
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.move$IF_END0
+0;JMP
+(Ball.move$IF_FALSE0)
+@4
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@6
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@4
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@9
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE1
+D;JNE
+@Ball.move$IF_FALSE1
+0;JMP
+(Ball.move$IF_TRUE1)
+@7
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE2
+D;JNE
+@Ball.move$IF_FALSE2
+0;JMP
+(Ball.move$IF_TRUE2)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.move$IF_END2
+0;JMP
+(Ball.move$IF_FALSE2)
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.move$IF_END2)
+@Ball.move$IF_END1
+0;JMP
+(Ball.move$IF_FALSE1)
+@7
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE3
+D;JNE
+@Ball.move$IF_FALSE3
+0;JMP
+(Ball.move$IF_TRUE3)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.move$IF_END3
+0;JMP
+(Ball.move$IF_FALSE3)
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.move$IF_END3)
+(Ball.move$IF_END1)
+(Ball.move$IF_END0)
+@8
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE4
+D;JNE
+@Ball.move$IF_FALSE4
+0;JMP
+(Ball.move$IF_TRUE4)
+@7
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE5
+D;JNE
+@Ball.move$IF_FALSE5
+0;JMP
+(Ball.move$IF_TRUE5)
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.move$IF_END5
+0;JMP
+(Ball.move$IF_FALSE5)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.move$IF_END5)
+@Ball.move$IF_END4
+0;JMP
+(Ball.move$IF_FALSE4)
+@7
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE6
+D;JNE
+@Ball.move$IF_FALSE6
+0;JMP
+(Ball.move$IF_TRUE6)
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.move$IF_END6
+0;JMP
+(Ball.move$IF_FALSE6)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.move$IF_END6)
+(Ball.move$IF_END4)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@10
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE61
+D;JGT
+@SP
+A=M-1
+M=0
+@END61
+0;JMP
+(TRUE61)
+@SP
+A=M-1
+M=-1
+@END61
+0;JMP
+(END61)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE7
+D;JNE
+@Ball.move$IF_FALSE7
+0;JMP
+(Ball.move$IF_TRUE7)
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@10
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.move$IF_FALSE7)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@11
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE62
+D;JLT
+@SP
+A=M-1
+M=0
+@END62
+0;JMP
+(TRUE62)
+@SP
+A=M-1
+M=-1
+@END62
+0;JMP
+(END62)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE8
+D;JNE
+@Ball.move$IF_FALSE8
+0;JMP
+(Ball.move$IF_TRUE8)
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@11
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.move$IF_FALSE8)
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@12
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE63
+D;JGT
+@SP
+A=M-1
+M=0
+@END63
+0;JMP
+(TRUE63)
+@SP
+A=M-1
+M=-1
+@END63
+0;JMP
+(END63)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE9
+D;JNE
+@Ball.move$IF_FALSE9
+0;JMP
+(Ball.move$IF_TRUE9)
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@12
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.move$IF_FALSE9)
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@13
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE64
+D;JLT
+@SP
+A=M-1
+M=0
+@END64
+0;JMP
+(TRUE64)
+@SP
+A=M-1
+M=-1
+@END64
+0;JMP
+(END64)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Ball.move$IF_TRUE10
+D;JNE
+@Ball.move$IF_FALSE10
+0;JMP
+(Ball.move$IF_TRUE10)
+@4
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@14
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@13
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.move$IF_FALSE10)
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.move:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Ball.show
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.move:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@14
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.getLeft)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.getRight)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.getLeft)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.getRight)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@5
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.setWidth)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.setWidth:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.hide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.setWidth:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.setWidth:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.show
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.setWidth:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.bounce)
+@5
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@10
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return0
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return0)
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@10
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return1
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return1)
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE65
+D;JEQ
+@SP
+A=M-1
+M=0
+@END65
+0;JMP
+(TRUE65)
+@SP
+A=M-1
+M=-1
+@END65
+0;JMP
+(END65)
+@SP
+M=M-1
+A=M
+D=M
+@Ball.bounce$IF_TRUE0
+D;JNE
+@Ball.bounce$IF_FALSE0
+0;JMP
+(Ball.bounce$IF_TRUE0)
+@10
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.bounce$IF_END0
+0;JMP
+(Ball.bounce$IF_FALSE0)
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE66
+D;JLT
+@SP
+A=M-1
+M=0
+@END66
+0;JMP
+(TRUE66)
+@SP
+A=M-1
+M=-1
+@END66
+0;JMP
+(END66)
+@SP
+A=M-1
+M=!M
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE67
+D;JEQ
+@SP
+A=M-1
+M=0
+@END67
+0;JMP
+(TRUE67)
+@SP
+A=M-1
+M=-1
+@END67
+0;JMP
+(END67)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE68
+D;JLT
+@SP
+A=M-1
+M=0
+@END68
+0;JMP
+(TRUE68)
+@SP
+A=M-1
+M=-1
+@END68
+0;JMP
+(END68)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE69
+D;JEQ
+@SP
+A=M-1
+M=0
+@END69
+0;JMP
+(TRUE69)
+@SP
+A=M-1
+M=-1
+@END69
+0;JMP
+(END69)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@SP
+M=M-1
+A=M
+D=M
+@Ball.bounce$IF_TRUE1
+D;JNE
+@Ball.bounce$IF_FALSE1
+0;JMP
+(Ball.bounce$IF_TRUE1)
+@20
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.bounce$IF_END1
+0;JMP
+(Ball.bounce$IF_FALSE1)
+@5
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.bounce$IF_END1)
+(Ball.bounce$IF_END0)
+@14
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE70
+D;JEQ
+@SP
+A=M-1
+M=0
+@END70
+0;JMP
+(TRUE70)
+@SP
+A=M-1
+M=-1
+@END70
+0;JMP
+(END70)
+@SP
+M=M-1
+A=M
+D=M
+@Ball.bounce$IF_TRUE2
+D;JNE
+@Ball.bounce$IF_FALSE2
+0;JMP
+(Ball.bounce$IF_TRUE2)
+@506
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@50
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@Ball.bounce:return2
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return2)
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return3
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return3)
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return4
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return4)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.bounce$IF_END2
+0;JMP
+(Ball.bounce$IF_FALSE2)
+@14
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE71
+D;JEQ
+@SP
+A=M-1
+M=0
+@END71
+0;JMP
+(TRUE71)
+@SP
+A=M-1
+M=-1
+@END71
+0;JMP
+(END71)
+@SP
+M=M-1
+A=M
+D=M
+@Ball.bounce$IF_TRUE3
+D;JNE
+@Ball.bounce$IF_FALSE3
+0;JMP
+(Ball.bounce$IF_TRUE3)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@50
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return5
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return5)
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return6
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return6)
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return7
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return7)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.bounce$IF_END3
+0;JMP
+(Ball.bounce$IF_FALSE3)
+@14
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE72
+D;JEQ
+@SP
+A=M-1
+M=0
+@END72
+0;JMP
+(TRUE72)
+@SP
+A=M-1
+M=-1
+@END72
+0;JMP
+(END72)
+@SP
+M=M-1
+A=M
+D=M
+@Ball.bounce$IF_TRUE4
+D;JNE
+@Ball.bounce$IF_FALSE4
+0;JMP
+(Ball.bounce$IF_TRUE4)
+@250
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@25
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@Ball.bounce:return8
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return8)
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return9
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return9)
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return10
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return10)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Ball.bounce$IF_END4
+0;JMP
+(Ball.bounce$IF_FALSE4)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@25
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return11
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return11)
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return12
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return12)
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@4
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return13
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return13)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Ball.bounce$IF_END4)
+(Ball.bounce$IF_END3)
+(Ball.bounce$IF_END2)
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.bounce:return14
+D=A
+@SP
+A=M
+M=D
+@3
+D=A
+@R13
+M=D
+@Ball.setDestination
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.bounce:return14)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Math.divide)
+@4
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE73
+D;JEQ
+@SP
+A=M-1
+M=0
+@END73
+0;JMP
+(TRUE73)
+@SP
+A=M-1
+M=-1
+@END73
+0;JMP
+(END73)
+@SP
+M=M-1
+A=M
+D=M
+@Math.divide$IF_TRUE0
+D;JNE
+@Math.divide$IF_FALSE0
+0;JMP
+(Math.divide$IF_TRUE0)
+@3
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.divide:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Math.divide:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(Math.divide$IF_FALSE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE74
+D;JLT
+@SP
+A=M-1
+M=0
+@END74
+0;JMP
+(TRUE74)
+@SP
+A=M-1
+M=-1
+@END74
+0;JMP
+(END74)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE75
+D;JGT
+@SP
+A=M-1
+M=0
+@END75
+0;JMP
+(TRUE75)
+@SP
+A=M-1
+M=-1
+@END75
+0;JMP
+(END75)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE76
+D;JGT
+@SP
+A=M-1
+M=0
+@END76
+0;JMP
+(TRUE76)
+@SP
+A=M-1
+M=-1
+@END76
+0;JMP
+(END76)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE77
+D;JLT
+@SP
+A=M-1
+M=0
+@END77
+0;JMP
+(TRUE77)
+@SP
+A=M-1
+M=-1
+@END77
+0;JMP
+(END77)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.divide:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Math.abs
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Math.divide:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.divide:return2
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Math.abs
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Math.divide:return2)
+@0
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Math.divide$WHILE_EXP0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE78
+D;JLT
+@SP
+A=M-1
+M=0
+@END78
+0;JMP
+(TRUE78)
+@SP
+A=M-1
+M=-1
+@END78
+0;JMP
+(END78)
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Math.divide$WHILE_END0
+D;JNE
+@32767
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE79
+D;JLT
+@SP
+A=M-1
+M=0
+@END79
+0;JMP
+(TRUE79)
+@SP
+A=M-1
+M=-1
+@END79
+0;JMP
+(END79)
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Math.divide$IF_TRUE1
+D;JNE
+@Math.divide$IF_FALSE1
+0;JMP
+(Math.divide$IF_TRUE1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Math.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Math.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE80
+D;JGT
+@SP
+A=M-1
+M=0
+@END80
+0;JMP
+(TRUE80)
+@SP
+A=M-1
+M=-1
+@END80
+0;JMP
+(END80)
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Math.divide$IF_TRUE2
+D;JNE
+@Math.divide$IF_FALSE2
+0;JMP
+(Math.divide$IF_TRUE2)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Math.divide$IF_FALSE2)
+(Math.divide$IF_FALSE1)
+@Math.divide$WHILE_EXP0
+0;JMP
+(Math.divide$WHILE_END0)
+(Math.divide$WHILE_EXP1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE81
+D;JGT
+@SP
+A=M-1
+M=0
+@END81
+0;JMP
+(TRUE81)
+@SP
+A=M-1
+M=-1
+@END81
+0;JMP
+(END81)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Math.divide$WHILE_END1
+D;JNE
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE82
+D;JGT
+@SP
+A=M-1
+M=0
+@END82
+0;JMP
+(TRUE82)
+@SP
+A=M-1
+M=-1
+@END82
+0;JMP
+(END82)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Math.divide$IF_TRUE3
+D;JNE
+@Math.divide$IF_FALSE3
+0;JMP
+(Math.divide$IF_TRUE3)
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Math.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Math.divide$IF_FALSE3)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Math.divide$WHILE_EXP1
+0;JMP
+(Math.divide$WHILE_END1)
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Math.divide$IF_TRUE4
+D;JNE
+@Math.divide$IF_FALSE4
+0;JMP
+(Math.divide$IF_TRUE4)
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Math.divide$IF_FALSE4)
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.drawChar)
+@4
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.drawChar:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.getMap
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.drawChar:return0)
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.drawChar$WHILE_EXP0)
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@11
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE83
+D;JLT
+@SP
+A=M-1
+M=0
+@END83
+0;JMP
+(TRUE83)
+@SP
+A=M-1
+M=-1
+@END83
+0;JMP
+(END83)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Output.drawChar$WHILE_END0
+D;JNE
+@Output.2
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Output.drawChar$IF_TRUE0
+D;JNE
+@Output.drawChar$IF_FALSE0
+0;JMP
+(Output.drawChar$IF_TRUE0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.4
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@256
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.drawChar$IF_END0
+0;JMP
+(Output.drawChar$IF_FALSE0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.4
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@255
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.drawChar$IF_END0)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.4
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.drawChar$WHILE_EXP0
+0;JMP
+(Output.drawChar$WHILE_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(String.length)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(String.charAt)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE84
+D;JLT
+@SP
+A=M-1
+M=0
+@END84
+0;JMP
+(TRUE84)
+@SP
+A=M-1
+M=-1
+@END84
+0;JMP
+(END84)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE85
+D;JGT
+@SP
+A=M-1
+M=0
+@END85
+0;JMP
+(TRUE85)
+@SP
+A=M-1
+M=-1
+@END85
+0;JMP
+(END85)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE86
+D;JEQ
+@SP
+A=M-1
+M=0
+@END86
+0;JMP
+(TRUE86)
+@SP
+A=M-1
+M=-1
+@END86
+0;JMP
+(END86)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@SP
+M=M-1
+A=M
+D=M
+@String.charAt$IF_TRUE0
+D;JNE
+@String.charAt$IF_FALSE0
+0;JMP
+(String.charAt$IF_TRUE0)
+@15
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@String.charAt:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.charAt:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(String.charAt$IF_FALSE0)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.printChar)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.printChar:return0
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@String.newLine
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printChar:return0)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE87
+D;JEQ
+@SP
+A=M-1
+M=0
+@END87
+0;JMP
+(TRUE87)
+@SP
+A=M-1
+M=-1
+@END87
+0;JMP
+(END87)
+@SP
+M=M-1
+A=M
+D=M
+@Output.printChar$IF_TRUE0
+D;JNE
+@Output.printChar$IF_FALSE0
+0;JMP
+(Output.printChar$IF_TRUE0)
+@Output.printChar:return1
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Output.println
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printChar:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Output.printChar$IF_END0
+0;JMP
+(Output.printChar$IF_FALSE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.printChar:return2
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@String.backSpace
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printChar:return2)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE88
+D;JEQ
+@SP
+A=M-1
+M=0
+@END88
+0;JMP
+(TRUE88)
+@SP
+A=M-1
+M=-1
+@END88
+0;JMP
+(END88)
+@SP
+M=M-1
+A=M
+D=M
+@Output.printChar$IF_TRUE1
+D;JNE
+@Output.printChar$IF_FALSE1
+0;JMP
+(Output.printChar$IF_TRUE1)
+@Output.printChar:return3
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Output.backSpace
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printChar:return3)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Output.printChar$IF_END1
+0;JMP
+(Output.printChar$IF_FALSE1)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.printChar:return4
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.drawChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printChar:return4)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Output.2
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@Output.printChar$IF_TRUE2
+D;JNE
+@Output.printChar$IF_FALSE2
+0;JMP
+(Output.printChar$IF_TRUE2)
+@Output.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Output.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Output.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.printChar$IF_FALSE2)
+@Output.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE89
+D;JEQ
+@SP
+A=M-1
+M=0
+@END89
+0;JMP
+(TRUE89)
+@SP
+A=M-1
+M=-1
+@END89
+0;JMP
+(END89)
+@SP
+M=M-1
+A=M
+D=M
+@Output.printChar$IF_TRUE3
+D;JNE
+@Output.printChar$IF_FALSE3
+0;JMP
+(Output.printChar$IF_TRUE3)
+@Output.printChar:return5
+D=A
+@SP
+A=M
+M=D
+@0
+D=A
+@R13
+M=D
+@Output.println
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.printChar:return5)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@Output.printChar$IF_END3
+0;JMP
+(Output.printChar$IF_FALSE3)
+@Output.2
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@Output.2
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.printChar$IF_END3)
+(Output.printChar$IF_END1)
+(Output.printChar$IF_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(String.setInt)
+@4
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE90
+D;JEQ
+@SP
+A=M-1
+M=0
+@END90
+0;JMP
+(TRUE90)
+@SP
+A=M-1
+M=-1
+@END90
+0;JMP
+(END90)
+@SP
+M=M-1
+A=M
+D=M
+@String.setInt$IF_TRUE0
+D;JNE
+@String.setInt$IF_FALSE0
+0;JMP
+(String.setInt$IF_TRUE0)
+@19
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@String.setInt:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.setInt:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(String.setInt$IF_FALSE0)
+@6
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@String.setInt:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.new
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.setInt:return1)
+@2
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE91
+D;JLT
+@SP
+A=M-1
+M=0
+@END91
+0;JMP
+(TRUE91)
+@SP
+A=M-1
+M=-1
+@END91
+0;JMP
+(END91)
+@SP
+M=M-1
+A=M
+D=M
+@String.setInt$IF_TRUE1
+D;JNE
+@String.setInt$IF_FALSE1
+0;JMP
+(String.setInt$IF_TRUE1)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@3
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=-M
+@1
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(String.setInt$IF_FALSE1)
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(String.setInt$WHILE_EXP0)
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE92
+D;JGT
+@SP
+A=M-1
+M=0
+@END92
+0;JMP
+(TRUE92)
+@SP
+A=M-1
+M=-1
+@END92
+0;JMP
+(END92)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@String.setInt$WHILE_END0
+D;JNE
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@10
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@String.setInt:return2
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.divide
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.setInt:return2)
+@1
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@10
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@String.setInt:return3
+D=A
+@SP
+A=M
+M=D
+@2
+D=A
+@R13
+M=D
+@Math.multiply
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.setInt:return3)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@String.setInt$WHILE_EXP0
+0;JMP
+(String.setInt$WHILE_END0)
+@3
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@String.setInt$IF_TRUE2
+D;JNE
+@String.setInt$IF_FALSE2
+0;JMP
+(String.setInt$IF_TRUE2)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@45
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(String.setInt$IF_FALSE2)
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE93
+D;JLT
+@SP
+A=M-1
+M=0
+@END93
+0;JMP
+(TRUE93)
+@SP
+A=M-1
+M=-1
+@END93
+0;JMP
+(END93)
+@SP
+M=M-1
+A=M
+D=M
+@String.setInt$IF_TRUE3
+D;JNE
+@String.setInt$IF_FALSE3
+0;JMP
+(String.setInt$IF_TRUE3)
+@19
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@String.setInt:return4
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Sys.error
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.setInt:return4)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+(String.setInt$IF_FALSE3)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE94
+D;JEQ
+@SP
+A=M-1
+M=0
+@END94
+0;JMP
+(TRUE94)
+@SP
+A=M-1
+M=-1
+@END94
+0;JMP
+(END94)
+@SP
+M=M-1
+A=M
+D=M
+@String.setInt$IF_TRUE4
+D;JNE
+@String.setInt$IF_FALSE4
+0;JMP
+(String.setInt$IF_TRUE4)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@48
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@String.setInt$IF_END4
+0;JMP
+(String.setInt$IF_FALSE4)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(String.setInt$WHILE_EXP1)
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE95
+D;JLT
+@SP
+A=M-1
+M=0
+@END95
+0;JMP
+(TRUE95)
+@SP
+A=M-1
+M=-1
+@END95
+0;JMP
+(END95)
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+@String.setInt$WHILE_END1
+D;JNE
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@2
+D=A
+@THIS
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@String.setInt$WHILE_EXP1
+0;JMP
+(String.setInt$WHILE_END1)
+(String.setInt$IF_END4)
+@2
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@String.setInt:return5
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Array.dispose
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(String.setInt:return5)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.show)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@Bat.show:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Screen.setColor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.show:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.show:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.draw
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.show:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.show)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@Ball.show:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Screen.setColor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.show:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.show:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Ball.draw
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.show:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Screen.updateLocation)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@Screen.2
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Screen.updateLocation$IF_TRUE0
+D;JNE
+@Screen.updateLocation$IF_FALSE0
+0;JMP
+(Screen.updateLocation$IF_TRUE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Screen.updateLocation$IF_END0
+0;JMP
+(Screen.updateLocation$IF_FALSE0)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Screen.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D&M
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THAT
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Screen.updateLocation$IF_END0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.hide)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.hide:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Screen.setColor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.hide:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Ball.hide:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Ball.draw
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.hide:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.hide)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.hide:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Screen.setColor
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.hide:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Bat.hide:return1
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Bat.draw
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.hide:return1)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.getMap)
+@1
+D=A
+@SP
+M=M+D
+A=M-D
+M=0
+A=A+1
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE96
+D;JLT
+@SP
+A=M-1
+M=0
+@END96
+0;JMP
+(TRUE96)
+@SP
+A=M-1
+M=-1
+@END96
+0;JMP
+(END96)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@126
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE97
+D;JGT
+@SP
+A=M-1
+M=0
+@END97
+0;JMP
+(TRUE97)
+@SP
+A=M-1
+M=-1
+@END97
+0;JMP
+(END97)
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D|M
+@SP
+M=M-1
+A=M
+D=M
+@Output.getMap$IF_TRUE0
+D;JNE
+@Output.getMap$IF_FALSE0
+0;JMP
+(Output.getMap$IF_TRUE0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@ARG
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.getMap$IF_FALSE0)
+@Output.2
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Output.getMap$IF_TRUE1
+D;JNE
+@Output.getMap$IF_FALSE1
+0;JMP
+(Output.getMap$IF_TRUE1)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.5
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.getMap$IF_END1
+0;JMP
+(Output.getMap$IF_FALSE1)
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.6
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@SP
+AM=M-1
+D=M
+@THAT
+M=D
+@0
+D=A
+@THAT
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@LCL
+D=D+M
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.getMap$IF_END1)
+@0
+D=A
+@LCL
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(String.newLine)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@128
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.println)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@Output.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@352
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Output.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@Output.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@Output.2
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@8128
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE98
+D;JEQ
+@SP
+A=M-1
+M=0
+@END98
+0;JMP
+(TRUE98)
+@SP
+A=M-1
+M=-1
+@END98
+0;JMP
+(END98)
+@SP
+M=M-1
+A=M
+D=M
+@Output.println$IF_TRUE0
+D;JNE
+@Output.println$IF_FALSE0
+0;JMP
+(Output.println$IF_TRUE0)
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.println$IF_FALSE0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(String.backSpace)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@129
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Output.backSpace)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@Output.2
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@Output.backSpace$IF_TRUE0
+D;JNE
+@Output.backSpace$IF_FALSE0
+0;JMP
+(Output.backSpace$IF_TRUE0)
+@Output.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE99
+D;JGT
+@SP
+A=M-1
+M=0
+@END99
+0;JMP
+(TRUE99)
+@SP
+A=M-1
+M=-1
+@END99
+0;JMP
+(END99)
+@SP
+M=M-1
+A=M
+D=M
+@Output.backSpace$IF_TRUE1
+D;JNE
+@Output.backSpace$IF_FALSE1
+0;JMP
+(Output.backSpace$IF_TRUE1)
+@Output.0
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@Output.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@Output.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.backSpace$IF_END1
+0;JMP
+(Output.backSpace$IF_FALSE1)
+@31
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.0
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+D=M-D
+@TRUE100
+D;JEQ
+@SP
+A=M-1
+M=0
+@END100
+0;JMP
+(TRUE100)
+@SP
+A=M-1
+M=-1
+@END100
+0;JMP
+(END100)
+@SP
+M=M-1
+A=M
+D=M
+@Output.backSpace$IF_TRUE2
+D;JNE
+@Output.backSpace$IF_FALSE2
+0;JMP
+(Output.backSpace$IF_TRUE2)
+@8128
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.backSpace$IF_FALSE2)
+@Output.1
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@321
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=M-D
+@Output.1
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.backSpace$IF_END1)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.2
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+@Output.backSpace$IF_END0
+0;JMP
+(Output.backSpace$IF_FALSE0)
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+A=M-1
+M=!M
+@Output.2
+D=A
+@R13
+M=D
+@SP
+M=M-1
+A=M
+D=M
+@R13
+A=M
+M=D
+(Output.backSpace$IF_END0)
+@32
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@Output.backSpace:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Output.drawChar
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Output.backSpace:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Array.dispose)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@THIS
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@Array.dispose:return0
+D=A
+@SP
+A=M
+M=D
+@1
+D=A
+@R13
+M=D
+@Memory.deAlloc
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Array.dispose:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Bat.draw)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@2
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@3
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Bat.draw:return0
+D=A
+@SP
+A=M
+M=D
+@4
+D=A
+@R13
+M=D
+@Screen.drawRectangle
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Bat.draw:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(Ball.draw)
+@0
+D=A
+@SP
+M=M+D
+A=M-D
+@0
+D=A
+@ARG
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+AM=M-1
+D=M
+@THIS
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@0
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@5
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@1
+D=A
+@THIS
+A=D+M
+D=M
+@SP
+M=M+1
+A=M-1
+M=D
+@5
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@SP
+M=M-1
+A=M
+D=M
+A=A-1
+M=D+M
+@Ball.draw:return0
+D=A
+@SP
+A=M
+M=D
+@4
+D=A
+@R13
+M=D
+@Screen.drawRectangle
+D=A
+@R14
+M=D
+@ROUTINE_OF_CALL
+0;JMP
+(Ball.draw:return0)
+@SP
+AM=M-1
+D=M
+@5
+M=D
+@0
+D=A
+@SP
+M=M+1
+A=M-1
+M=D
+@ROUTINE_OF_RETURN
+0;JMP
+(ROUTINE_OF_RETURN)
+@5
+D=A
+@LCL
+A=M-D
+D=M
+@R13
+M=D
+@SP
+D=M
+@LCL
+D=M-D
+@NO_RETURN_VALUE
+D;JEQ
+@SP
+A=M-1
+D=M
+@ARG
+A=M
+M=D
+@ARG
+D=M+1
+@SP
+M=D
+@RESUME_RETURN
+0;JMP
+(NO_RETURN_VALUE)
+@ARG
+D=M
+@SP
+M=D
+(RESUME_RETURN)
+@LCL
+AM=M-1
+D=M
+@THAT
+M=D
+@LCL
+AM=M-1
+D=M
+@THIS
+M=D
+@LCL
+AM=M-1
+D=M
+@ARG
+M=D
+@LCL
+AM=M-1
+D=M
+@LCL
+M=D
+@R13
+A=M
+0;JMP
+(ROUTINE_OF_CALL)
+@LCL
+D=M
+@SP
+AM=M+1
+M=D
+@ARG
+D=M
+@SP
+AM=M+1
+M=D
+@THIS
+D=M
+@SP
+AM=M+1
+M=D
+@THAT
+D=M
+@SP
+AM=M+1
+M=D
+@SP
+MD=M+1
+@LCL
+M=D
+@5
+D=A
+@R13
+D=D+M
+@SP
+D=M-D
+@ARG
+M=D
+@R14
+A=M
+0;JMP

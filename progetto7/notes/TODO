@@ -1,10 +1,6 @@
 ----------------------------- TODO LIST --------------------------------
 (In ordine di priorita')
 
-Unire i due traduttori
-
-Implementare correttamente la traduzione di static nei multifile
-
 Ottimizzare:
 	-	gt, lt, eq
 	- Alcuni comandi asm

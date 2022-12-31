@@ -29,6 +29,12 @@ int main(int argc, char** argv) {
 
 	//Apro il file di output e se non esiste lo creo
 	FILE* fileO = open_fileO (pathI);
+	
+	//CREAZIONE LISTA CON I VARI COMANDI
+	list_of_command = insert_predefined (list_of_command);
+
+	// INIZIALIZZAZIONI NECESARIE
+	fprintf(fileO, "@256\nD=A\n@SP\nM=D\n");	//SP = 256;
 
 	if (is_a_dir (pathI) == 1) {
 		printf ("E' una directory\n");
@@ -54,6 +60,17 @@ int main(int argc, char** argv) {
 		}
 		
 		traduci (fileI, fileO);
+	}
+
+	char O[MAX_INST_LEN]; O[0] = '\0';
+
+	//Aggiungo le routine solo se ho effettivamente delle funzioni
+	if (strlen (function_name) != 0) {
+		get_routine_of_return (O);
+		fprintf (fileO, "%s\n", O);
+		
+		get_routine_of_call (O);
+		fprintf (fileO, "%s\n", O);
 	}
 
 	return (0);

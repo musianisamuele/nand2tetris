@@ -27,4 +27,4 @@ clean:
 	rm -f *.o
 
 deb:
-	gcc -g -o VMtranslator library.c list.c string.c translater.c main.c
+	gcc -g -o VMtranslator library.c list.c string.c translater.c dir.c function_organizer.c main.c

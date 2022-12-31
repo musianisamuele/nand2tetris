@@ -20,7 +20,7 @@ void multi_file_translater (plistaf functions, FILE* file) {
 		int status = is_already_translated (functions, da_tradurre->val);
 
 		if (status == 0) {		//Devo ancora tradurla
-			//printf ("Devo tradurre %s\n", da_tradurre->val);
+			printf ("Devo tradurre %s\n", da_tradurre->val);
 
 			plistas function_body = get_function_body (functions, da_tradurre->val);
 
@@ -58,24 +58,27 @@ int is_a_call (char* s) {
 
 
 plistas traduci_function (plistas funzione_corrente, plistas dependencies, FILE* file) {
-	char O[1000];
+	char I[MAX_INST_LEN]; I[0] = '\0';
+	char O[MAX_INST_LEN]; O[0] = '\0';
 	while (funzione_corrente != NULL) {
+		O[0] = '\0';
 		//Devo tradurre istruzione per istruzione
 	
 		//printf ("\t%s", funzione_corrente->val);
-		strcpy (O, funzione_corrente->val);
+		strcpy (I, funzione_corrente->val);
 		
 		//Rimuovo spiacevoli '\r' e '\n'
-		if ( O [strlen (O) - 2] == '\r' )
-			O [strlen (O) - 2] = '\n';
+		if ( I [strlen (I) - 2] == '\r' )
+			I [strlen (I) - 2] = '\n';
 
-		if ( O [strlen (O) - 1] == '\n' && O [strlen (O) - 2] == '\n' )
-			O [strlen (O) - 1] = '\0';
+		if ( I [strlen (I) - 1] == '\n' && I [strlen (I) - 2] == '\n' )
+			I [strlen (I) - 1] = '\0';
 
+		/*
 		//Stampo su file l'istruzione
 		if ( is_a_function (O) == 1 ) {
 			char tmp[1000];
-			strcpy (tmp, "\nfunction MYPONG.");
+			strcpy (tmp, "\nfunction ");
 			char name[1000];
 			get_function_name (name, O);
 
@@ -107,7 +110,26 @@ plistas traduci_function (plistas funzione_corrente, plistas dependencies, FILE*
 			strcpy (O, tmp);
 		}
 
-		fprintf (file, O);
+		*/
+
+		//Faccio la traduzione
+
+		clean_string (I);
+		int I_type = detect_instruction (I);
+
+		if (I_type == 0)
+			translate_instruction_of_type_arithm (I, O);
+		else if (I_type == 1)
+			translate_instruction_of_type_memory (I, O);
+		else if (I_type == 2)
+			translate_instruction_of_type_program (I, O);
+		else if (I_type == 3)
+			translate_instruction_of_type_function (I, O);
+
+		//Se ho riconosciuto l'istruzione e non ci sono stati problemi 
+		//durante la traduzione la scrivo sul file
+		if (I_type != -1)
+			fprintf (file, "%s\n", O);
 
 		//Se chiamo una funzione la inserisco nelle dipendeze da risolvere
 		if ( is_a_call (funzione_corrente->val) == 1 ) {
