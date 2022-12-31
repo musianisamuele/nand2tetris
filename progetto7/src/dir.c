@@ -53,6 +53,7 @@ plistaf get_functions_from_file (plistaf list_of_function, char* path) {
 	FILE* file = NULL;
 	file = fopen (path, "r");
 
+
 	//Controllo di aver aperto correttamente il file
 
 	if (file == NULL) {
@@ -61,6 +62,8 @@ plistaf get_functions_from_file (plistaf list_of_function, char* path) {
 	}
 
 	//Procedo in quanto il file è stato aperto correttamente
+	
+	file_name = estrai_nome (path);
 	
 	char I[1000];
 
@@ -84,7 +87,7 @@ plistaf get_functions_from_file (plistaf list_of_function, char* path) {
 		}
 
 		if ( is_a_return (I) == 1 && inside_a_function == 1 ) {
-			list_of_function = insert_function (list_of_function, name, function_body);
+			list_of_function = insert_function (list_of_function, name, function_body, file_name);
 			inside_a_function = 0;
 		}
 	}

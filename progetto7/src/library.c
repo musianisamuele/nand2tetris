@@ -1,7 +1,7 @@
 #include "global.h"
 
 	/* VARIABILI GLOBALI */
-plista list_of_command;						//Lista con tutti i comandi della VM e il loro tipo
+plistai list_of_command;						//Lista con tutti i comandi della VM e il loro tipo
 int JMP_counter = 0; 							//Variabile globale che mi sere per differenziare i jump nelle istruzioni eq, gt e lt
 char* file_name;									//Nome del file da cui sto traducendo codice vm
 char function_name [400] = "";	 	//Nome della funzione in cui sono attualmente

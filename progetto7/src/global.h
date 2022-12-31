@@ -3,8 +3,14 @@
 #include <string.h>
 #include <dirent.h>
 
-struct lista;
-typedef struct lista* plista;
+struct lista_of_possible_instructions;
+typedef struct lista_of_possible_instructions* plistai;
+
+struct lista_of_possible_instructions;
+typedef struct string_list* plistas;
+
+struct lista_function;
+typedef struct lista_function* plistaf;
 
 #define MAX_INST_LEN 2000
 
@@ -12,7 +18,7 @@ typedef struct lista* plista;
 #define ROUTINE_OF_CALL "ROUTINE_OF_CALL"
 
 //VARIABILI GLOBALI
-extern plista list_of_command;
+extern plistai list_of_command;
 extern int JMP_counter; 					
 extern char* file_name;						
 extern char function_name [400]; 	
@@ -36,23 +42,23 @@ void get_routine_of_return (char* O);
 void get_routine_of_call (char* O);
 
 
-	/* LISTE */
+	/* FUNCTION_ORGANIZER	*/
 
-plista insert (plista h, char* val, int instruction_type); 
-int get_type (plista h, char* val); 
-plista insert_predefined (plista h); 
+void multi_file_translater (plistaf functions, FILE* file);
+plistas traduci_function (plistas funzione_corrente, plistas dependencies, FILE* file);
 
-
-	/* STRINGE */
-
-void clean_string (char* s);
-char* estrai_nome (char* path);
-void int_to_string (char s[], int n);
-void ex_next_word (char* s, char* d, int pos);
-
-/*------------------------------ NUOVO ------------------------------ */
 
 	/* LISTE */
+
+#ifndef DEF_lista_of_possible_instructions
+#define DEF_lista_of_possible_instructions
+struct lista_of_possible_instructions {
+	char* val;
+	int instruction_type;
+	struct lista_of_possible_instructions* next;
+};
+#endif
+
 
 #ifndef DEF_string_list
 #define DEF_string_list
@@ -68,15 +74,19 @@ typedef struct string_list* plistas;
 #define DEF_string_function
 struct lista_function {
 	char* name;
-	struct string_list* val;
+	plistas val;
 	int translated;			//0 -> flase, 1 -> true
-	struct lista_function* next;
+	char* file;
+	plistaf next;
 };
 typedef struct lista_function* plistaf;
 #endif
 
+plistai insert (plistai h, char* val, int instruction_type); 
+int get_type (plistai h, char* val); 
+plistai insert_predefined (plistai h); 
 
-plistaf insert_function (plistaf h, char* name, plistas val);
+plistaf insert_function (plistaf h, char* name, plistas val, char* file_name);
 plistas insert_instruction (plistas h, char* val); 
 plistas remove_function (plistas h); 
 plistas tail_insert (plistas s, char* val);
@@ -96,7 +106,12 @@ int is_a_function (char* s);
 int is_a_return (char* s);
 void get_function_name (char* d, char* s); 
 
-	/* TRANSLATER	*/
 
-void multi_file_translater (plistaf functions, FILE* file);
-plistas traduci_function (plistas funzione_corrente, plistas dependencies, FILE* file);
+
+	/* STRINGE */
+
+void clean_string (char* s);
+char* estrai_nome (char* path);
+void int_to_string (char s[], int n);
+void ex_next_word (char* s, char* d, int pos);
+

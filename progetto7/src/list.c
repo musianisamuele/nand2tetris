@@ -1,10 +1,5 @@
 #include "global.h"
 
-struct lista {
-	char* val;
-	int instruction_type;
-	struct lista* next;
-};
 
 
 //Precondizione: Prende un puntatore ad un lista, e i valori che devono
@@ -12,8 +7,8 @@ struct lista {
 //
 //Postcondizione: Ritorna un puntatore alla lista con il nuovo elemento inserito
 
-plista insert (plista h, char* val, int instruction_type) {
-	plista tmp = (plista) malloc (sizeof (struct lista));
+plistai insert (plistai h, char* val, int instruction_type) {
+	plistai tmp = (plistai) malloc (sizeof (struct lista_of_possible_instructions));
 
 	//Alloco dinamicamente la grandezza di val in modo da risparmiare spazio
 	tmp->val = (char*) malloc ((strlen(val) + 1 ) * sizeof(char));
@@ -30,7 +25,7 @@ plista insert (plista h, char* val, int instruction_type) {
 //Postcondizione: Se trova la stringa presa in input restituisce il relativo
 //valore dell'istruzione ad essa associata associata (instruction_type), se no ritorna -1;
 
-int get_type (plista h, char* val) {
+int get_type (plistai h, char* val) {
 	if (h == NULL)
 		return (-1);		//L'istruzione non è stata trovata o la lista è vuota
 	else {
@@ -50,7 +45,7 @@ int get_type (plista h, char* val) {
 //		2 -> program
 //		3 -> function
 
-plista insert_predefined (plista h) {
+plistai insert_predefined (plistai h) {
 	char val[10];
 	int instruction_type;
 
@@ -110,18 +105,21 @@ plista insert_predefined (plista h) {
 
 /* ------------------------------ NUOVO ------------------------------ */    
 
-plistaf insert_function (plistaf h, char* name, plistas val) {
+plistaf insert_function (plistaf h, char* name, plistas val, char* file) {
 	if (h == NULL) {
 		h = malloc ( sizeof (struct lista_function) );
-		h->name = malloc ( (strlen (name) + 1) * sizeof (char));
+		h->name = malloc ((strlen (name) + 1) * sizeof (char));
 		strcpy (h->name, name);
+
+		h->file = malloc ((strlen (file) + 1) * sizeof (char));
+		strcpy (h->file, file);
 
 		h->val = val;
 		h->translated = 0;
 		h->next = NULL;
 		return h;
 	} else {
-		h->next = insert_function (h->next, name, val);
+		h->next = insert_function (h->next, name, val, file);
 		return h;
 	}
 }
@@ -182,7 +180,8 @@ void print_lista_string (plistas h) {
 
 void print_lista (plistaf h) {
 	while (h != NULL) {
-		printf ("%s->\n", h->name);
+		printf ("name: %s\n", h->name);
+		printf ("file: %s->\n", h->file);
 		print_lista_string (h->val);
 		h = h->next;
 	}
