@@ -15,6 +15,7 @@ void translate_instruction_of_type_arithm (char* I, char* O) {
 		strcpy (O, "@SP\nA=M-1\nM=!M");	
 	} else if ( strcmp (I, "eq") == 0 || strcmp (I, "gt") == 0 || strcmp (I, "lt") == 0) {
 		
+		/*
 		//La cosa bella di queste istruzioni è che sono praticamente uguali.
 		//Quello che cambia è solo l'istruzione JEQ, JGT o JLT
 		strcpy (O, "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@TRUE");
@@ -24,7 +25,7 @@ void translate_instruction_of_type_arithm (char* I, char* O) {
 		//non ci sara' confusione
 
 		//Per inserire un numero con strcat devo prima convertirlo in stinga
-		char JMP_counter_str[30];
+		char JMP_counter_str[5];
 		int_to_string (JMP_counter_str, JMP_counter);
 		JMP_counter++; //Incremento per la prossima volta
 
@@ -49,6 +50,27 @@ void translate_instruction_of_type_arithm (char* I, char* O) {
 		strcat (O, "\n0;JMP\n(END");
 		strcat (O, JMP_counter_str);
 		strcat (O, ")");
+		*/
+
+		/* ----------------------- NUOVA IMPLEMENTAZIONE ------------------------ */
+
+		char JMP_counter_str[5];
+		int_to_string (JMP_counter_str, JMP_counter);
+		JMP_counter++; //Incremento per la prossima volta
+		
+		strcpy (O, "@bool"); strcat (O, JMP_counter_str);
+		strcat (O, "\nD=A\n@R13\nM=D\n@");
+
+		if ( strcmp (I, "eq") == 0 )
+			strcat (O, ROUTINE_OF_EQ);
+		else if ( strcmp (I, "gt") == 0 )
+			strcat (O, ROUTINE_OF_GT);
+		else
+			strcat (O, ROUTINE_OF_LT);
+
+		strcat (O, "\n0;JMP\n");
+		strcat (O, "(bool"); strcat (O, JMP_counter_str); strcat (O, ")");
+
 	} else { 
 		printf ("ERROR: istruzione di tipo arithm non riconosciuta!\n");
 		printf ("Istruzione: %s\n", I);
@@ -328,3 +350,25 @@ void get_routine_of_call (char* O) {
 	strcat (O, "@R14\nA=M\n0;JMP");
 }
 
+void get_routine_of_bool (char* O) {
+	strcpy (O, "("); strcat (O, ROUTINE_OF_EQ); strcat (O, ")\n");
+	strcat (O, "@SP\nAM=M-1\nD=M\nA=A-1\nD=M-D\n@");
+	strcat (O, ROUTINE_OF_EQ); strcat (O, ":TRUE\n");
+	strcat (O, "D;JEQ\n@SP\nA=M-1\nM=0\n@R13\nA=M\n0;JMP\n");
+	strcat (O, "("); strcat (O, ROUTINE_OF_EQ); strcat (O, ":TRUE)\n");
+	strcat (O, "@SP\nA=M-1\nM=-1\n@R13\nA=M\n0;JMP\n");
+
+	strcat (O, "("); strcat (O, ROUTINE_OF_GT); strcat (O, ")\n");
+	strcat (O, "@SP\nAM=M-1\nD=M\nA=A-1\nD=M-D\n@");
+	strcat (O, ROUTINE_OF_GT); strcat (O, ":TRUE\n");
+	strcat (O, "D;JGT\n@SP\nA=M-1\nM=0\n@R13\nA=M\n0;JMP\n");
+	strcat (O, "("); strcat (O, ROUTINE_OF_GT); strcat (O, ":TRUE)\n");
+	strcat (O, "@SP\nA=M-1\nM=-1\n@R13\nA=M\n0;JMP\n");
+
+	strcat (O, "("); strcat (O, ROUTINE_OF_LT); strcat (O, ")\n");
+	strcat (O, "@SP\nAM=M-1\nD=M\nA=A-1\nD=M-D\n@");
+	strcat (O, ROUTINE_OF_LT); strcat (O, ":TRUE\n");
+	strcat (O, "D;JLT\n@SP\nA=M-1\nM=0\n@R13\nA=M\n0;JMP\n");
+	strcat (O, "("); strcat (O, ROUTINE_OF_LT); strcat (O, ":TRUE)\n");
+	strcat (O, "@SP\nA=M-1\nM=-1\n@R13\nA=M\n0;JMP");
+}

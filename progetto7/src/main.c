@@ -73,5 +73,8 @@ int main(int argc, char** argv) {
 		fprintf (fileO, "%s\n", O);
 	}
 
+	get_routine_of_bool (O);
+	fprintf (fileO, "%s\n", O);
+
 	return (0);
 }

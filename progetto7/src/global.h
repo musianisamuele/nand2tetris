@@ -16,6 +16,9 @@ typedef struct lista_function* plistaf;
 
 #define ROUTINE_OF_RETURN "ROUTINE_OF_RETURN"
 #define ROUTINE_OF_CALL "ROUTINE_OF_CALL"
+#define ROUTINE_OF_EQ "ROUTINE_OF_EQ"
+#define ROUTINE_OF_GT "ROUTINE_OF_GT"
+#define ROUTINE_OF_LT "ROUTINE_OF_LT"
 
 //VARIABILI GLOBALI
 extern plistai list_of_command;
@@ -40,6 +43,7 @@ void translate_instruction_of_type_program (char* I, char* O);
 void translate_instruction_of_type_function (char* I, char* O);
 void get_routine_of_return (char* O);
 void get_routine_of_call (char* O);
+void get_routine_of_bool (char* O);
 
 
 	/* FUNCTION_ORGANIZER	*/
