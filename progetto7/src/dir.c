@@ -14,8 +14,8 @@ plistaf read_dir (char* path) {
 
 	//Procendo in quanto la cartella si e' aperta
 
-	printf ("Cartella aperta con successo\n");
-	printf ("\n\tCONTENUTO:\n");
+	//printf ("Cartella aperta con successo\n");
+	//printf ("\n\tCONTENUTO:\n");
 
 	//In linux per leggere una cartella ti viene restituito un puntatore ad
 	//una struttura che contiene vari parametri.
@@ -27,10 +27,10 @@ plistaf read_dir (char* path) {
 	plistaf list_of_function = NULL;		//Lista in cui ci sono tutte le funzioni e il loro codice vm
 
 	while ( NULL != ( pippo = readdir(dir)) ) {
-		if ( is_a_dir (pippo->d_name) == 1 )
-			printf ("DIR:\t%s", pippo->d_name);
-		else {
-			printf ("FILE:\t%s\n", pippo->d_name);
+		if ( is_a_dir (pippo->d_name) == 0 ) {
+			//printf ("DIR:\t%s", pippo->d_name);
+		//else {
+			//printf ("FILE:\t%s\n", pippo->d_name);
 			char path_file[400];
 
 			genera_path_to_file (path_file, path, pippo->d_name);
@@ -38,7 +38,7 @@ plistaf read_dir (char* path) {
 			list_of_function = get_functions_from_file (list_of_function, path_file);
 		}
 
-		printf("\n");
+		//printf("\n");
 	}
 
 	//printf ("\n\nFUNZIONI:\n");

@@ -1,8 +1,0 @@
-function funzione1 0
-call funzione2 0
-return
-
-
-function funzione2 0
-call funzione3 0
-return

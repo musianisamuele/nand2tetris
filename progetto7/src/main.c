@@ -13,49 +13,48 @@
 #include "global.h"
 
 int main(int argc, char** argv) {
-	if (argc == 2) {
-		char* file_pathI = *(argv + 1);
-		
-		file_name= estrai_nome (file_pathI);	//Mi serve il nome del file per nominare le variabili
-																					//durate la push e la pop
-
-		FILE* fileI;
-
-		fileI = fopen (file_pathI, "r");
-
-		if (fileI != NULL) {
-
-			FILE* fileO;
-			char* file_pathO = (char* ) malloc ( (strlen (file_pathI) + 2) * sizeof (char) );
-
-			strcpy (file_pathO, file_pathI);
-
-			file_pathO[ strlen(file_pathO) - 2 ] = '\0';	//Un po' brutale, ma cambio l'estensione al file
-			strcat (file_pathO, "asm");
-
-			fileO = fopen (file_pathO, "w");
-			free (file_pathO);
-			file_pathO = NULL;
-
-			if (fileO != NULL) {
-				traduci (fileI, fileO);
-			} else {
-				printf ("Impossibile aprire il file di output (%s)", file_pathO);
-				abort ();
-			}
-		} else {
-			printf ("Impossibile aprire il file di input (%s)", file_pathI);
-			abort ();
-		}
-	} else if (argc > 1) {
-		printf ("ERRORE: troppi argomenti inseriti!\n");
-		abort ();
-	}
-	else {
+	if (argc == 1) {
 		printf ("ERRORE: inserire un file di input!\n");
 		abort ();
 	}
 
+	if (argc > 2) {
+		printf ("ERRORE: troppi argomenti inseriti!\n");
+		abort ();
+	}
+
+	//argc == 2
+
+	char* pathI = *(argv + 1);
+
+	//Apro il file di output e se non esiste lo creo
+	FILE* fileO = open_fileO (pathI);
+
+	if (is_a_dir (pathI) == 1) {
+		printf ("E' una directory\n");
+
+		//Leggo tutti i file dentro la directory e copio le funzioni e il loro corpo nella lista F
+		plistaf F = NULL;
+		F = read_dir (pathI);
+
+		multi_file_translater (F, fileO);
+
+	} else {
+		printf ("E' un file\n");
+		//Fai le stesse cose che hai sempre fatto
+		
+		//Mi serve il nome del file per nominare le variabili durate la push e la pop
+		file_name= estrai_nome (pathI);
+
+		FILE* fileI = fopen (pathI, "r");
+		
+		if (fileI == NULL) {
+			printf ("Impossibile aprire il file di input (%s)", pathI);
+			abort ();
+		}
+		
+		traduci (fileI, fileO);
+	}
+
 	return (0);
 }
-

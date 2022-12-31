@@ -93,3 +93,30 @@ int my_log10 (int n) {
 	}
 	return (i - 1);
 }
+
+FILE* open_fileO (char* pathI) {
+	char* pathO = (char*) malloc ( (strlen (pathI) + 5) * sizeof (char) );
+
+	strcpy (pathO, pathI);
+	
+	int len = strlen (pathO);
+
+	if (is_a_dir (pathI) == 1) {
+		if (pathO [len - 1] == '/')
+			pathO [len - 1] = '\0';
+
+	} else
+		pathO [len - 3] = '\0';
+	
+	strcat (pathO, ".asm");
+	
+	FILE* fileO = fopen (pathO, "w");
+	
+	if (fileO == NULL) {
+		printf ("Impossibile aprire il file di output (%s)", pathO);
+		abort ();
+	}
+
+	free (pathO);
+	return (fileO);
+}
