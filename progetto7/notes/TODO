@@ -1,9 +1,9 @@
 ----------------------------- TODO LIST --------------------------------
 (In ordine di priorita')
 
-Implementare correttamente la traduzione di static nei multifile
-
 Unire i due traduttori
+
+Implementare correttamente la traduzione di static nei multifile
 
 Ottimizzare:
 	-	gt, lt, eq

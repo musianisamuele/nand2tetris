@@ -51,11 +51,14 @@ void traduci (FILE* fileI, FILE* fileO) {
 			fprintf (fileO, "%s\n", O);
 	}
 
-	get_routine_of_return (O);
-	fprintf (fileO, "%s\n", O);
-	
-	get_routine_of_call (O);
-	fprintf (fileO, "%s\n", O);
+	//Aggiungo le routine solo se ho effettivamente delle funzioni
+	if (strlen (function_name) != 0) {
+		get_routine_of_return (O);
+		fprintf (fileO, "%s\n", O);
+		
+		get_routine_of_call (O);
+		fprintf (fileO, "%s\n", O);
+	}
 }
 
 /* Postocondizione: Presa in input una stringa restituisce
