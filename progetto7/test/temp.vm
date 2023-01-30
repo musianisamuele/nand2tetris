@@ -1,0 +1,12 @@
+push constant 200
+push constant 201
+push constant 202
+push constant 203
+push constant 204
+push constant 205
+pop temp 0
+pop temp 3
+pop temp 4
+pop temp 5
+pop temp 7
+pop temp 1

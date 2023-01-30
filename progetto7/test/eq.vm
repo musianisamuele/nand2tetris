@@ -1,0 +1,8 @@
+push constant 354
+push constant 354
+eq
+push constant 998
+push constant 1000
+eq
+label PIPPO
+goto PIPPO

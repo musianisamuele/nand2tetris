@@ -1,0 +1,6 @@
+push constant 3000
+pop pointer 1
+push constant 111
+pop that 5
+push constant 999
+push that 5

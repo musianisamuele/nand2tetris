@@ -1,0 +1,540 @@
+---------------------------------------- NEW NOTES  --------------------------------------------------
+
+Devo implementare nuove funzioni sulla VM, in particolare:
+	- this
+	- that
+	- pointer
+	- temp
+	- static fa quello che dico io
+	- invocazione su directories e non su file singoli
+
+
+Implementazione su directories:
+	Quando chiamo il VMtranslator su una directory e non su un file (lo capisco perché non ha estensione)
+	devo chiamare Sys.init e poi chiamare Main. Da Main qualsiasi altra funzione che viene chiamata deve
+	essere trovata e tradotta.
+
+
+	FLOW:
+		- La mia idea è di leggere tutti i file nella cartella, trovare solo quelli con estensione .vm e
+			inserirli in una struttura.
+
+		- Successivamente li leggo tutti e memorizzo qualsiasi funzione che è stata definita insieme alla 
+			sua posizione e al nome del file in cui è definita.
+		
+		- Per la traduzione traduco ogni funzione per volta. In pratica inserisco le funzioni che devo
+			tradurre in una coda e termino il programma quando non ho più funzioni da tradurre. Se durante
+			la traduzione di una funzione ne incontro un'altra NON ancora tradotta (ciclo infinito?) la inserisco
+			in coda e continuo la mia traduzione. In questo modo dovrei essere in grado di tradurre solo le funzioni
+			strettamente necessarie e salvare spazio.
+
+		- Prima dela traduzione devo inserire nella lista Sys.init e Main
+
+	
+	Lookup delle funzioni:
+		Quando ho una nuova funzione da tradurre vado a vedere in che file si trova (l'ho implementato come una lista),
+		grazia alla scansione fatta inizialmente. Se non la trovo blocco tutto.
+
+Implementazione segmenti:
+	- this, that:
+			General-purpose segments. Can be made to correspond to different areas in the heap.
+			Serve various programming needs. 
+			Any VM function can use these segments to manipulate selected areas on the heap.
+
+			this -> RAM[3]
+			that -> RAM[4]
+
+
+			this e that vengono associati ai comandi push e pop. Inoltre sono seguiti da un numero. Bisogna
+			rispettivamente prendere il valore in RAM[3] o RAM[4], sommarci quel numero ed eseguire 
+			l'operazione richiesta (push o pop) sull'indirizzo di memoria che viene calcolato dopo la somma.
+
+	- pointer:
+			A two-entry segment that holds the base addresses of the this and that segments.
+			Any VM function can set pointer 0 (or 1) to some address. This has the effect of aligning
+			the this (or that) segment to the heap area beginning in that address.
+
+			pointer -> RAM[3..4]
+
+			In pratica di pointer 0 è mappato su RAM[3] e pointer 1 è mappato su RAM[4]. Questo permette
+			di modificare la ram in modo che poi si possa accedere ad indirizzi di memoria genereici
+			tramite this e that.
+
+			Esempio:
+					array[5] = 222
+					//Ipotizzo che sia una funzione e di avere come argomento l'indirizzo base dell'array
+
+					push argument 0		//Prendo indirizzo base array
+					pop pointer 0			//Lo memorizzo in RAM[3]
+					push constant 222
+					pop this 5				//RAM [ RAM[3] + 5] = 222
+
+			IMPLEMENTAZIONE:
+					pop pointer x = 			if (x == 0) {
+																	@SP
+																	AM=M-1
+																	D=M
+																	@THIS
+																	M=D
+																} else { //x == 1
+																	@SP
+																	AM=M-1
+																	D=M
+																	@THAT
+																	M=D
+																}
+
+
+					push pointer x = 			if (x == 0) {
+																	@THIS
+																	D=M
+																	@SP
+																	M=M+1
+																	A=M-1
+																	M=D
+																} else { //x == 1
+																	@THAT
+																	D=M
+																	@SP
+																	M=M+1
+																	A=M-1
+																	M=D
+																}
+
+	- temp:
+			Fixed eight-entry segment that holds temporary variables for general use.
+			May be used by any VM function for any purpose. Shared by all functions in the program.
+
+			temp -> RAM[5..12]
+
+			In pratica si traduce partendo da 5 e sommando il numero che segue:
+
+			push constant 99
+			pop temp 3 				//RAM [5 + 3] = 99
+			
+
+			IMPLEMENTAZIONE:
+					pop temp x =						if ( x < 5 ) { //Cioè la destinazione non supera RAM[9]
+																		@SP
+																		AM=M-1
+																		D=M
+																		@(x+5)
+																		M=D
+																	} else { //x > 5, cioè la destinazione è tra RAM[10] e RAM[12]
+																		@SP
+																		AM=M-1
+																		D=M
+																		@1(x-5) 	//Va incollato dietro all'1
+																		M=D
+																	}
+
+																	Seconda implementazione:
+																	@SP
+																	AM=M-1
+																	D=M
+																	@(x+5)
+																	M=D
+
+					push temp x =						@(x+5)
+																	D=M
+																	@SP
+																	M=M+1
+																	A=M-1
+																	M=D
+
+---------------------------------------- OLD NOTES  --------------------------------------------------
+
+COMANDI:
+	Aritmetic:
+		add
+		sub
+		neg
+		eq
+		gt
+		lt
+		and
+		or
+		not
+	
+	Memory access:
+		pop x
+		push y
+
+	Program flow:
+		label (declaration)
+		goto (label)
+		if-goto (label)
+	
+	Function:
+		function (declaration)
+		call (a function)
+		return
+
+SEGMENTI:
+	argument 	-> argometi di una funzione (per ogni singola funzione)
+	local 		-> variabili locali (per ogni singola funzione)
+
+	static 		-> variabili globali (condivisio da tutte le funzioni)
+
+	constant 	-> non esiste, serve solo per fare l'input di costanti
+
+
+MEMORIA:
+	[0]: SP 	-> stack pointer
+	[1]: LCL 	-> local segment pointer
+	[2]: ARG 	-> argument segment pointer
+	[3]: THIS -> ?
+	[4]: THAT -> ?
+	[5-12]: TEMP -> ?
+	[13-15]: General porpuse -> Posso farci quello che voglio
+	[16-255]: Statics
+	[256-2047]: stack + argument e local	
+	[2048+]: Heap -> ?
+
+
+TRADUZIONE VM:
+															ASM / VM
+	Aritmetic:
+		add =											@SP				//@0
+															M=M-1			//A = M[0] - 1
+															A=M
+															D=M				//D = M[M[0] - 1]
+															A=A-1			//A = A - 1 = M[0] - 2
+															M=D+M;		//M = D + M[M[0] - 2];
+		
+		sub =											@SP				//@0
+															M=M-1			//A = M[0] - 1
+															A=M
+															D=M				//D = M[M[0] - 1]
+															A=A-1			//A = A - 1 = M[0] - 2			
+															M=M-D;		//M = -D + M[M[0] - 2];
+		
+		neg	=											@SP
+															A=M-1
+															M=-M
+
+		eq =											Faccio la sottrazione tra i due valori nello stack
+															e poi se è uguale a zero facci un jmp ad un'istruzione che mi
+															mette -1 (true) nello stack. Se no faccio un jmp ad un'istruzione che
+															mi mette 0 (false) nello stack. È un po' lunga però... :(
+															
+															@SP
+															M=M-1
+															A=M
+															D=M
+															A=A-1
+															D=M-D
+															@TRUE_N							//Devo indicizzare bene in base al programma
+															D;JEQ
+
+															@SP
+															A=M-1;
+															M=0;
+															@END_N
+															0;JMP
+															
+															(TRUE_N)
+															@SP
+															A=M-1
+															M=-1;
+															@END_N
+															0;JMP
+
+															(END_N)
+
+		gt = 											@SP
+															M=M-1
+															A=M
+															D=M
+															A=A-1
+															D=M-D
+															@TRUE_N							//Devo indicizzare bene in base al programma
+															D;JGT
+
+															@SP
+															A=M-1;
+															M=0;
+															@END_N
+															0;JMP
+															
+															(TRUE_N)
+															@SP
+															A=M-1
+															M=-1;
+															@END_N
+															0;JMP
+
+															(END_N)
+
+		lt =  										@SP
+															M=M-1
+															A=M
+															D=M
+															A=A-1
+															D=M-D
+															@TRUE_N							//Devo indicizzare bene in base al programma
+															D;JGT
+
+															@SP
+															A=M-1;
+															M=0;
+															@END_N
+															0;JLT
+															
+															(TRUE_N)
+															@SP
+															A=M-1
+															M=-1;
+															@END_N
+															0;JMP
+
+															(END_N)
+
+
+		and =											@SP				//@0
+															M=M-1			//A = M[0] - 1
+															A=M
+															D=M				//D = M[M[0] - 1]
+															A=A-1			//A = A - 1 = M[0] - 2
+															M=D&M;		//M = D + M[M[0] - 2];
+		
+		or =											@SP				//@0
+															M=M-1			//A = M[0] - 1
+															A=M
+															D=M				//D = M[M[0] - 1]
+															A=A-1			//A = A - 1 = M[0] - 2
+															M=D|M;		//M = D + M[M[0] - 2];
+
+		not	=											@SP
+															A=M-1
+															M=!M
+
+	Memory access:
+		pop segment x =						@x				//offset da calcolare
+															D=A
+															@segment 	//Qui devo prendere il puntatore in base al segmento
+															D=D+M			//Ora D punta all'elemento a cui devo assegnare il valore
+															@R13
+															M=D				//Salvo l'indirizzo
+															@SP
+															M=M-1
+															A=M
+															D=M				//Salvo il valore in D
+															@R13 			//Registro in cui ho salvato l'indirzzo di pop
+															A=M				//Punto all'indirizzo di pop
+															M=D				//Salvo il valore che avevo memorizzato in D
+
+		push segment y =					@y
+															D=A
+															@segment 	//Per constant è DIVERSO
+															A=D+M
+															D=M
+															@SP
+															M=M+1
+															A=M-1
+															M=D
+															
+
+	Program flow:
+		label PIPPO =							(PIPPO) //QUANDO SONO DENTRO UNA FUNZIONE f$PIPPO
+		
+		goto PIPPO =							@PIPPO
+															0;JMP
+		
+		if-goto PIPPO =						@SP
+															M=M-1
+															A=M
+															D=M
+															@PIPPO
+															D;JNE
+	
+	Function:
+		function f n =						(f)
+															n times: push constat 0	 (inzializzo gli argomenti a 0)
+
+															ASSEMBLY:
+															(f)
+															@n			//Numero di variabili locali
+															D=A
+															@SP
+															M=M+D
+															A=M-D
+															M=0			//Da RIPETERE
+															A=A+1		//Da RIPETERE
+
+		call (f) =								push return-address
+															push LCL
+															push ARG
+															push THIS
+															push THAT
+															ARG = SP - n - 5 (n : number of args)
+															LCL = SP
+															goto f
+															(return-address)
+
+															ASSEMBLY:
+															@5			//Devo fare la push di 5 valori (lo so a priori)
+															D=A			
+															@SP
+															M=M+D		//Aumento lo stack pointer di 5 (tanto lo so a priori)
+															D=M-1		//Vado al contrario per salvare i valori (è più comodo).
+															@R14		//Indirizzo di supporto in cui salvo gli indirizzi in cui scrivere
+															M=D
+															
+															@THAT		//Prendo il valore di that
+															D=M
+															@R14
+															A=M
+															M=D			//Inserisco THAT nello stack
+															
+															@THIS
+															D=M
+															@R14
+															AM=M-1
+															M=D			//Inserisco THIS
+
+
+															@ARG
+															D=M
+															@R14
+															AM=M-1
+															M=D			//Inserisco THIS
+
+															@LCL
+															D=M
+															@R14
+															AM=M-1
+															M=D			//Inserisco THIS
+
+															@f_acctual.return		//Inserisco il valore di return
+															D=A
+															@R14
+															AM=M-1
+															M=D
+
+															@SP				//LCL = SP
+															D=M
+															@LCL
+															M=D
+
+															@n					//ARG = SP - n - 5. MODIFICARE n IN RUNTIME -> NUMERO ARGOMENTI
+															D=A
+															@R14
+															D=M-D
+															@ARG
+															M=D
+
+															@f
+															0;JMP
+
+															(f_actual.return) //Label di ritorno (f è il nome della funzione)
+															ATTENZIONE: SE CHIAMO PIÙ VOLTE LA FUNZIONE I RETURN SONO UGUALI
+
+		
+		//NON FUNZIONE CON 0 ARGOMENTI e 0 VAR LOCALI -> Riscritta nel file IDEAS
+		return =									FRAME = LCL				(FRAME è temporanea)
+															RET = *(FRAME - 5)
+															*ARG = pop()
+															SP = ARG + 1
+															THAT = *(FRAME - 1)
+															THIS = *(FRAME - 2)
+															ARG = *(FRAME - 3)
+															LCL = *(FRAME - 4)
+															goto RET
+
+															ASSEMBLY:
+															@SP
+															A=M-1				//Punto alla return-value
+															D=M					//Salvo la ret-value in D
+															@ARG
+															A=M
+															M=D					//Salvo la return-value nel primo posto di argument (è giusto?)
+
+															D=A+1				//Inizializzazione di SP
+															@SP
+															M=D
+
+															@LCL				//Implementazione di FRAME su R14
+															D=M
+															@R14
+															AM=D-1			//A = M[R14] = M[LCL] - 1
+
+															//A punta a LCL - 1
+
+															D=M
+															@THAT
+															M=D
+
+															@R14
+															AM=M-1
+															D=M
+															@THIS
+															M=D
+														
+															@R14
+															AM=M-1
+															D=M
+															@ARG
+															M=D
+															
+															@R14
+															AM=M-1
+															D=M
+															@LCL
+															M=D
+
+															@R14
+															AM=M-1
+															A=M
+															0;JMP
+
+
+
+NOTE GENERICHE:
+
+	0 -> FALSE
+	-1 -> TRUE
+
+	Per passare parametri alle funzioni devo pusharli nello stack
+	Il valore di ritorno di una funzione spunterà nello stack al posto di quelli passati
+
+	Quando la funzione f() chiama g():
+		1) Devo salvare il return address, cioè l'indirizzo in ROM a cui ritornare (quello dopo la call)
+		2) Salvare i puntatori local e argument di f
+		3) Inizializzare i puntatori local e argument di g
+		4) Passare il controllo all'implementazione di g
+	
+	Quando la funzione g() inzia ad eseguire:
+		1) L'implementazione della VM deve inizializzare tutte le variabili in local a 0
+	
+	Quando g() termina e devo ritornare ad f():
+		1) Devo eliminare i segmenti local e argument lasciandi sullo stack solamente il valore di ritorno
+		2) Ripristinare i segmenti local e argument di f
+		3) Restituire il controllo ad f saltando al return address
+
+	TIPICO STACK PER UNA CHIAMATA DI FUNZIONE:
+			-------------
+			.............
+			-------------
+ARG->	argument 0
+			------------
+			argument 1
+			------------
+			return add.
+			------------
+			LCL
+			------------
+			ARG
+			------------
+			THIS
+			------------
+			THAT
+			------------
+LCL->	local 0
+			------------
+			local 1
+			------------
+SP->
+			------------
+			............
+			------------

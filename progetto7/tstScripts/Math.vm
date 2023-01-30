@@ -1,0 +1,94 @@
+push constant 2500
+pop pointer 0
+push constant 3000
+pop pointer 1
+push constant 10
+push constant 20
+call Math.multiply 2
+
+function Math.multiply 5
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+gt
+and
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+lt
+and
+or
+pop local 4
+push argument 0
+push argument 1
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 0
+pop local 1
+push argument 1
+pop argument 0
+push local 1
+pop argument 1
+label IF_FALSE0
+label WHILE_EXP0
+push local 2
+push constant 1
+sub
+push argument 1
+push constant 1
+sub
+lt
+not
+if-goto WHILE_END0
+push local 3
+push static 0
+add
+pop pointer 1
+push that 0
+push argument 1
+and
+push constant 0
+eq
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push local 0
+push argument 0
+add
+pop local 0
+push local 2
+push local 3
+push static 0
+add
+pop pointer 1
+push that 0
+add
+pop local 2
+label IF_FALSE1
+push argument 0
+push argument 0
+add
+pop argument 0
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP0
+label WHILE_END0
+push local 4
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 0
+neg
+pop local 0
+label IF_FALSE2
+push local 0
+return
